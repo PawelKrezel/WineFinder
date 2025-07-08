@@ -1,0 +1,41 @@
+[
+  {
+    "id": "e206e3-a9d6-4b10-b2c9-e3430677a780",
+    "name": "Quinta De La Rosa",
+    "grape": "Tinto",
+    "region": "Douro",
+    "country": "Portugal",
+    "vintage": 2023,
+    "body": "medium-body",
+    "tannin": "medium-tannin",
+    "acidity": "medium-acidity",
+    "coravin": false,
+    "sommNotes": "Made exclusively for us in Portugal."
+  },
+  {
+    "id": "99bb34-256c-40af-a8ea-a9c3c498b617",
+    "name": "Hartenberg",
+    "grape": "Cabernet Sauvignon",
+    "region": "Stellenbosch",
+    "country": "South Africa",
+    "vintage": 2020,
+    "body": "full-body",
+    "tannin": "full-tannin",
+    "acidity": "medium-acidity",
+    "coravin": false,
+    "sommNotes": "Nice notes of tobacco on the nose. Medium to full bodied"
+  },
+  {
+    "id": "d0c7bc-9c95-4b35-8239-c6867f562f10",
+    "name": "C.V.N.E Imperial Gran Riserva",
+    "grape": "Tempranillo",
+    "region": "Haro, Rioja",
+    "country": "Spain",
+    "vintage": 2015,
+    "body": "full-body",
+    "tannin": "full-tannin",
+    "acidity": "medium-acidity",
+    "coravin": true,
+    "sommNotes": "Nice notes of red fruit on the nose. \"Jumps out of the glass\" delicious!!"
+  }
+]
