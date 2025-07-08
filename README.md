@@ -19,3 +19,13 @@ Uses Blob API and URL.createObjectURL to generate and download a complete JSON f
 Allows the manager to upload the current working JSON file. Newly added entries are appended to the parsed file data before export.
 
 
+# 🛠 Tech Stack
+HTML5
+
+Vanilla JavaScript (ES6+)
+
+CSS3 (eventually to be incorporated) 
+
+No build tools or external dependencies
+
+Runs on any static server (GitHub Pages recommended)
