@@ -1,5 +1,19 @@
 [
   {
+    "id": "8dfaf3-85b4-4f1b-82de-20f1844456a7",
+    "name": "Pulenta",
+    "grape": "Malbec",
+    "region": "Mendoza",
+    "country": "Argentina",
+    "vintage": 2023,
+    "body": "medium-body",
+    "tannin": "medium-tannin",
+    "acidity": "light-acidity",
+    "coravin": false,
+    "glass": "Standard",
+    "sommNotes": "crowd pleaser, kinda boring. Blend from various vineyards across Mendoza"
+  },
+  {
     "id": "e206e3-a9d6-4b10-b2c9-e3430677a780",
     "name": "Quinta De La Rosa",
     "grape": "Tinto",
@@ -36,6 +50,7 @@
     "tannin": "full-tannin",
     "acidity": "medium-acidity",
     "coravin": true,
-    "sommNotes": "Nice notes of red fruit on the nose. \"Jumps out of the glass\" delicious!!"
+    "sommNotes": "Nice notes of red fruit on the nose. \"Jumps out of the glass\" delicious!!",
+    "glass": "Bordeaux"
   }
 ]
