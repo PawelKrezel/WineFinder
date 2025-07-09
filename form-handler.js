@@ -43,71 +43,153 @@
     ).join("")}</select>`;
   }
 
-  function renderTable() {
-    if (wines.length === 0) {
-      tableContainer.innerHTML = "";
-      return;
-    }
+let sortKey = null;
+let sortDirection = 'asc';
 
-    let tableHTML = `<table border="1"><thead><tr>
-      <th>Name</th><th>Grape</th><th>Region</th><th>Country</th><th>Vintage</th>
-      <th>Body</th><th>Tannin</th><th>Acidity</th><th>Coravin</th><th>Glass</th><th>Somm Notes</th><th>Delete</th>
-    </tr></thead><tbody>`;
+function renderTable() {
+  if (wines.length === 0) {
+    tableContainer.innerHTML = "";
+    return;
+  }
 
-    wines.forEach((wine, index) => {
-      tableHTML += `<tr data-id="${wine.id}">
-        <td><input value="${wine.name}" data-key="name" /></td>
-        <td><input value="${wine.grape}" data-key="grape" /></td>
-        <td><input value="${wine.region}" data-key="region" /></td>
-        <td><input value="${wine.country}" data-key="country" /></td>
-        <td><input type="number" value="${wine.vintage}" data-key="vintage" /></td>
-        <td>${renderSelect("body", wine.body)}</td>
-        <td>${renderSelect("tannin", wine.tannin)}</td>
-        <td>${renderSelect("acidity", wine.acidity)}</td>
-        <td>${renderSelect("coravin", wine.coravin.toString())}</td>
-        <td>${renderSelect("glass", wine.glass)}</td>
-        <td><input value="${wine.sommNotes}" data-key="sommNotes" /></td>
-        <td><button data-index="${index}" class="deleteBtn">❌</button></td>
-      </tr>`;
-    });
+  const headers = [
+    { label: "Name", key: "name" },
+    { label: "Grape", key: "grape" },
+    { label: "Region", key: "region" },
+    { label: "Country", key: "country" },
+    { label: "Vintage", key: "vintage" },
+    { label: "Body", key: "body" },
+    { label: "Tannin", key: "tannin" },
+    { label: "Acidity", key: "acidity" },
+    { label: "Coravin", key: "coravin" },
+    { label: "Somm Notes", key: "sommNotes" },
+    { label: "Glass", key: "glass" },
+  ];
 
-    tableHTML += `</tbody></table><br>
-      <button id="exportJSON">Export JSON</button>`;
+  // Sort the wines array if a sort key is active
+  if (sortKey) {
+    wines.sort((a, b) => {
+      const valA = a[sortKey]?.toString().toLowerCase();
+      const valB = b[sortKey]?.toString().toLowerCase();
 
-    tableContainer.innerHTML = tableHTML;
-
-    // Delete
-    tableContainer.querySelectorAll(".deleteBtn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const index = parseInt(btn.getAttribute("data-index"), 10);
-        wines.splice(index, 1);
-        renderTable();
-      });
-    });
-
-    // Update input/select values
-    tableContainer.querySelectorAll("tbody input, tbody select").forEach(el => {
-      el.addEventListener("input", () => {
-        const row = el.closest("tr");
-        const wine = wines.find(w => w.id === row.dataset.id);
-        const key = el.dataset.key;
-        if (key === "vintage") wine[key] = parseInt(el.value, 10) || null;
-        else if (key === "coravin") wine[key] = el.value === "true";
-        else wine[key] = el.value;
-      });
-    });
-
-    // Export
-    document.getElementById("exportJSON").addEventListener("click", () => {
-      const blob = new Blob([JSON.stringify(wines, null, 2)], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "wines.json";
-      link.click();
-      URL.revokeObjectURL(url);
+      if (valA < valB) return sortDirection === 'asc' ? -1 : 1;
+      if (valA > valB) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
     });
   }
+
+  let tableHTML = `<table border="1"><thead><tr>`;
+
+  // Generate headers with sort buttons
+  headers.forEach(header => {
+    const directionSymbol = (sortKey === header.key)
+      ? (sortDirection === 'asc' ? ' 🔼' : ' 🔽')
+      : '';
+    tableHTML += `<th data-key="${header.key}" class="sortable">${header.label}${directionSymbol}</th>`;
+  });
+
+  tableHTML += `<th>Delete</th></tr></thead><tbody>`;
+
+  wines.forEach((wine, index) => {
+    tableHTML += `<tr data-id="${wine.id}">
+      <td><input value="${wine.name}" data-key="name" /></td>
+      <td><input value="${wine.grape}" data-key="grape" /></td>
+      <td><input value="${wine.region}" data-key="region" /></td>
+      <td><input value="${wine.country}" data-key="country" /></td>
+      <td><input type="number" value="${wine.vintage}" data-key="vintage" /></td>
+      <td>
+        <select data-key="body">
+          <option value="light-body" ${wine.body === "light-body" ? "selected" : ""}>Light</option>
+          <option value="medium-body" ${wine.body === "medium-body" ? "selected" : ""}>Medium</option>
+          <option value="full-body" ${wine.body === "full-body" ? "selected" : ""}>Full</option>
+        </select>
+      </td>
+      <td>
+        <select data-key="tannin">
+          <option value="light-tannin" ${wine.tannin === "light-tannin" ? "selected" : ""}>Light</option>
+          <option value="medium-tannin" ${wine.tannin === "medium-tannin" ? "selected" : ""}>Medium</option>
+          <option value="full-tannin" ${wine.tannin === "full-tannin" ? "selected" : ""}>Full</option>
+        </select>
+      </td>
+      <td>
+        <select data-key="acidity">
+          <option value="light-acidity" ${wine.acidity === "light-acidity" ? "selected" : ""}>Light</option>
+          <option value="medium-acidity" ${wine.acidity === "medium-acidity" ? "selected" : ""}>Medium</option>
+          <option value="full-acidity" ${wine.acidity === "full-acidity" ? "selected" : ""}>Full</option>
+        </select>
+      </td>
+      <td>
+        <select data-key="coravin">
+          <option value="true" ${wine.coravin ? "selected" : ""}>Yes</option>
+          <option value="false" ${!wine.coravin ? "selected" : ""}>No</option>
+        </select>
+      </td>
+      <td><input value="${wine.sommNotes}" data-key="sommNotes" /></td>
+      <td>
+        <select data-key="glass">
+          <option value="Standard" ${wine.glass === "Standard" ? "selected" : ""}>Standard</option>
+          <option value="Burgundy" ${wine.glass === "Burgundy" ? "selected" : ""}>Burgundy</option>
+          <option value="Bordeaux" ${wine.glass === "Bordeaux" ? "selected" : ""}>Bordeaux</option>
+          <option value="Flute" ${wine.glass === "Flute" ? "selected" : ""}>Flute</option>
+          <option value="Tst" ${wine.glass === "Tst" ? "selected" : ""}>Tst</option>
+        </select>
+      </td>
+      <td><button data-index="${index}" class="deleteBtn">❌</button></td>
+    </tr>`;
+  });
+
+  tableHTML += `</tbody></table><br>
+    <button id="exportJSON">Export JSON</button>`;
+
+  tableContainer.innerHTML = tableHTML;
+
+  // Handle sort header clicks
+  tableContainer.querySelectorAll("th.sortable").forEach(th => {
+    th.addEventListener("click", () => {
+      const key = th.getAttribute("data-key");
+      if (sortKey === key) {
+        sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortKey = key;
+        sortDirection = 'asc';
+      }
+      renderTable();
+    });
+  });
+
+  // Re-hook delete and input logic
+  tableContainer.querySelectorAll(".deleteBtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const index = parseInt(btn.getAttribute("data-index"), 10);
+      wines.splice(index, 1);
+      renderTable();
+    });
+  });
+
+  tableContainer.querySelectorAll("tbody input, tbody select").forEach(input => {
+    input.addEventListener("input", () => {
+      const row = input.closest("tr");
+      const wine = wines.find(w => w.id === row.dataset.id);
+      const key = input.dataset.key;
+
+      if (key === "vintage") wine[key] = parseInt(input.value, 10) || null;
+      else if (key === "coravin") wine[key] = input.value === "true";
+      else wine[key] = input.value;
+    });
+  });
+
+  // Re-hook export
+  document.getElementById("exportJSON").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify(wines, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "wines.json";
+    link.click();
+    URL.revokeObjectURL(url);
+  });
+}
+
 
   document.getElementById("addWineBtn").addEventListener("click", () => {
     const wine = getFormData();
