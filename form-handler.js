@@ -1,5 +1,5 @@
 // Dear wine manager, you may want to add a link to your wines.json file. 
-// Please navigate to line 191 in form-handler.js to find the publicJSONURL variable.
+// Please navigate to line 232 in form-handler.js to find the publicJSONURL variable.
 // If you need help with this, please contact Pawel Krezel.
 
 (function () {
@@ -37,114 +37,155 @@
     };
   }
 
-  // Render wines as editable HTML table
-  function renderTable() {
-    if (wines.length === 0) {
-      tableContainer.innerHTML = "";
-      return;
-    }
-    // Build table header
-    let tableHTML = `<table border="1"><thead><tr>
-      <th>Name</th><th>Grape</th><th>Region</th><th>Country</th><th>Vintage</th>
-      <th>Body</th><th>Tannin</th><th>Acidity</th><th>Coravin</th><th>Btl Only</th>
-      <th>Somm Notes</th><th>Image</th><th>Delete</th>
-    </tr></thead><tbody>`;
+// Render wines as editable HTML table
+// State for sorting
+let currentSortKey = null;
+let currentSortDir = 1; // 1 for ascending, -1 for descending
 
-    // Build each row with editable fields and controls
-    wines.forEach((wine, index) => {
-      tableHTML += `<tr data-id="${wine.id}">
-        <td><input value="${wine.name}" data-key="name" /></td>
-        <td><input value="${wine.grape}" data-key="grape" /></td>
-        <td><input value="${wine.region}" data-key="region" /></td>
-        <td><input value="${wine.country}" data-key="country" /></td>
-        <td><input type="number" value="${wine.vintage}" data-key="vintage" /></td>
+function renderTable() {
+  if (wines.length === 0) {
+    tableContainer.innerHTML = "";
+    return;
+  }
 
-        <td>
-          <select data-key="body">
-            <option value="light-body"${wine.body === "light-body" ? " selected" : ""}>Light</option>
-            <option value="medium-body"${wine.body === "medium-body" ? " selected" : ""}>Medium</option>
-            <option value="full-body"${wine.body === "full-body" ? " selected" : ""}>Full</option>
-          </select>
-        </td>
+  // Define sortable headers
+  const headers = [
+    { key: "name", label: "Name" },
+    { key: "grape", label: "Grape" },
+    { key: "region", label: "Region" },
+    { key: "country", label: "Country" },
+    { key: "vintage", label: "Vintage" },
+    { key: "body", label: "Body" },
+    { key: "tannin", label: "Tannin" },
+    { key: "acidity", label: "Acidity" },
+    { key: "coravin", label: "Coravin" },
+    { key: "btlOnly", label: "Btl Only" },
+    { key: "sommNotes", label: "Somm Notes" },
+    { key: "imageUrl", label: "Image" },
+    { key: "delete", label: "Delete" }
+  ];
 
-        <td>
-          <select data-key="tannin">
-            <option value="light-tannin"${wine.tannin === "light-tannin" ? " selected" : ""}>Light</option>
-            <option value="medium-tannin"${wine.tannin === "medium-tannin" ? " selected" : ""}>Medium</option>
-            <option value="full-tannin"${wine.tannin === "full-tannin" ? " selected" : ""}>Full</option>
-          </select>
-        </td>
-
-        <td>
-          <select data-key="acidity">
-            <option value="light-acidity"${wine.acidity === "light-acidity" ? " selected" : ""}>Light</option>
-            <option value="medium-acidity"${wine.acidity === "medium-acidity" ? " selected" : ""}>Medium</option>
-            <option value="full-acidity"${wine.acidity === "full-acidity" ? " selected" : ""}>Full</option>
-          </select>
-        </td>
-
-        <td>
-          <select data-key="coravin">
-            <option value="true"${wine.coravin ? " selected" : ""}>Yes</option>
-            <option value="false"${!wine.coravin ? " selected" : ""}>No</option>
-          </select>
-        </td>
-
-        <td>
-          <select data-key="btlOnly">
-            <option value="true"${wine.btlOnly ? " selected" : ""}>Yes</option>
-            <option value="false"${!wine.btlOnly ? " selected" : ""}>No</option>
-          </select>
-        </td>
-
-        <td><input value="${wine.sommNotes}" data-key="sommNotes" /></td>
-
-        <td>
-          ${wine.imageUrl ? `<img src="${wine.imageUrl}" alt="Wine Image" width="50"><br>` : ""}
-          <input type="url" value="${wine.imageUrl}" data-key="imageUrl" placeholder="Image URL" />
-        </td>
-
-        <td><button data-index="${index}" class="deleteBtn">❌</button></td>
-      </tr>`;
-    });
-
-    tableHTML += `</tbody></table><br><button id="exportJSON">Export JSON</button>`;
-    tableContainer.innerHTML = tableHTML;
-
-    // Delete wine from table and array
-    tableContainer.querySelectorAll(".deleteBtn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const index = parseInt(btn.getAttribute("data-index"), 10);
-        wines.splice(index, 1);
-        renderTable();
-      });
-    });
-
-    // Live update wine object when input/select changes
-    tableContainer.querySelectorAll("tbody input, tbody select").forEach(input => {
-      input.addEventListener("input", () => {
-        const row = input.closest("tr");
-        const wine = wines.find(w => w.id === row.dataset.id);
-        const key = input.dataset.key;
-        if (key === "vintage") wine[key] = parseInt(input.value, 10) || null;
-        else if (key === "coravin" || key === "btlOnly") wine[key] = input.value === "true";
-        else wine[key] = input.value;
-        renderTable(); // re-render to refresh image preview
-      });
-    });
-
-    // Export wines array to downloadable JSON file
-    document.getElementById("exportJSON").addEventListener("click", () => {
-      const blob = new Blob([JSON.stringify(wines, null, 2)], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "wines.json";
-      link.click();
-      URL.revokeObjectURL(url);
+  // Sort wines if applicable
+  if (currentSortKey && currentSortKey !== "delete") {
+    wines.sort((a, b) => {
+      const valA = a[currentSortKey];
+      const valB = b[currentSortKey];
+      if (typeof valA === "number" && typeof valB === "number") {
+        return (valA - valB) * currentSortDir;
+      }
+      return String(valA).localeCompare(String(valB)) * currentSortDir;
     });
   }
 
+  // Build table header
+  let tableHTML = `<table border="1"><thead><tr>`;
+  headers.forEach(header => {
+    if (header.key === "delete") {
+      tableHTML += `<th>${header.label}</th>`;
+    } else {
+      tableHTML += `<th data-key="${header.key}" style="cursor:pointer">${header.label}</th>`;
+    }
+  });
+  tableHTML += `</tr></thead><tbody>`;
+
+  // Build table body - each row with editable fields and controls
+  wines.forEach((wine, index) => {
+    tableHTML += `<tr data-id="${wine.id}">
+      <td><input value="${wine.name}" data-key="name" /></td>
+      <td><input value="${wine.grape}" data-key="grape" /></td>
+      <td><input value="${wine.region}" data-key="region" /></td>
+      <td><input value="${wine.country}" data-key="country" /></td>
+      <td><input type="number" value="${wine.vintage}" data-key="vintage" /></td>
+
+      <td><select data-key="body">
+        <option value="light-body"${wine.body === "light-body" ? " selected" : ""}>Light</option>
+        <option value="medium-body"${wine.body === "medium-body" ? " selected" : ""}>Medium</option>
+        <option value="full-body"${wine.body === "full-body" ? " selected" : ""}>Full</option>
+      </select></td>
+
+      <td><select data-key="tannin">
+        <option value="light-tannin"${wine.tannin === "light-tannin" ? " selected" : ""}>Light</option>
+        <option value="medium-tannin"${wine.tannin === "medium-tannin" ? " selected" : ""}>Medium</option>
+        <option value="full-tannin"${wine.tannin === "full-tannin" ? " selected" : ""}>Full</option>
+      </select></td>
+
+      <td><select data-key="acidity">
+        <option value="light-acidity"${wine.acidity === "light-acidity" ? " selected" : ""}>Light</option>
+        <option value="medium-acidity"${wine.acidity === "medium-acidity" ? " selected" : ""}>Medium</option>
+        <option value="full-acidity"${wine.acidity === "full-acidity" ? " selected" : ""}>Full</option>
+      </select></td>
+
+      <td><select data-key="coravin">
+        <option value="true"${wine.coravin ? " selected" : ""}>Yes</option>
+        <option value="false"${!wine.coravin ? " selected" : ""}>No</option>
+      </select></td>
+
+      <td><select data-key="btlOnly">
+        <option value="true"${wine.btlOnly ? " selected" : ""}>Yes</option>
+        <option value="false"${!wine.btlOnly ? " selected" : ""}>No</option>
+      </select></td>
+
+      <td><input value="${wine.sommNotes}" data-key="sommNotes" /></td>
+
+      <td>
+        ${wine.imageUrl ? `<img src="${wine.imageUrl}" alt="Wine Image" width="50"><br>` : ""}
+        <input type="url" value="${wine.imageUrl}" data-key="imageUrl" placeholder="Image URL" />
+      </td>
+
+      <td><button data-index="${index}" class="deleteBtn">❌</button></td>
+    </tr>`;
+  });
+
+  tableHTML += `</tbody></table><br><button id="exportJSON">Export JSON</button>`;
+  tableContainer.innerHTML = tableHTML;
+
+  // Sorting event listeners
+  tableContainer.querySelectorAll("thead th[data-key]").forEach(th => {
+    th.addEventListener("click", () => {
+      const key = th.getAttribute("data-key");
+      if (currentSortKey === key) {
+        currentSortDir *= -1; // Toggle direction
+      } else {
+        currentSortKey = key;
+        currentSortDir = 1;
+      }
+      renderTable();
+    });
+  });
+
+  // Delete wine
+  tableContainer.querySelectorAll(".deleteBtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const index = parseInt(btn.getAttribute("data-index"), 10);
+      wines.splice(index, 1);
+      renderTable();
+    });
+  });
+
+  // Live update wine object on input/select
+  tableContainer.querySelectorAll("tbody input, tbody select").forEach(input => {
+    input.addEventListener("input", () => {
+      const row = input.closest("tr");
+      const wine = wines.find(w => w.id === row.dataset.id);
+      const key = input.dataset.key;
+      if (key === "vintage") wine[key] = parseInt(input.value, 10) || null;
+      else if (key === "coravin" || key === "btlOnly") wine[key] = input.value === "true";
+      else wine[key] = input.value;
+      renderTable(); // refresh image
+    });
+  });
+
+  // Export button
+  document.getElementById("exportJSON").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify(wines, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "wines.json";
+    link.click();
+    URL.revokeObjectURL(url);
+  });
+}
   // Add new wine entry from form
   document.getElementById("addWineBtn").addEventListener("click", () => {
     const wine = getFormData();
