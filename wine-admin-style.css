@@ -43,6 +43,10 @@ input[value="false"] + label{
 input[type="radio"]:checked + label{
     background-color: aqua;
 }
+input[name="glass"] + label{
+    width: 18.42%;
+    overflow: hidden;
+}
 textarea[name="sommNotes"]{
     width: 97.5%;
     min-height: 5em;
@@ -56,9 +60,22 @@ form input[type="url"] + img{
     margin-top:10px;
     margin-left: auto;
     margin-right: auto;
-    transition-delay: 0.5s;
-    transition-duration: 1.25s;
+    transition-delay: 0.4s;
+    transition-duration: 0.55s;
 }
 form input[type="url"] + img:hover{
     max-height: 450px;
+}
+.img-parent img{
+    height: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    transition-delay: 0.4s;
+    transition-duration: 0.55s;
+}
+td.img-parent{
+    text-align: center;
+}
+td.img-parent:hover > img{
+    height: 250px;
 }

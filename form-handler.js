@@ -137,8 +137,8 @@ function renderTable() {
 
       <td><input value="${wine.sommNotes}" data-key="sommNotes" /></td>
 
-      <td>
-        ${wine.imageUrl ? `<img src="${wine.imageUrl}" alt="Wine Image" width="50"><br>` : ""}
+      <td class="img-parent">
+        ${wine.imageUrl ? `<img src="${wine.imageUrl}" alt="Wine Image"><br>` : ""}
         <input type="url" value="${wine.imageUrl}" data-key="imageUrl" placeholder="Image URL" />
       </td>
 
