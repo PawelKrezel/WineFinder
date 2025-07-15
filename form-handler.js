@@ -157,25 +157,25 @@
     reader.readAsText(file);
   });
 
-  // 🔥 Auto-load local wines.json (if available in same directory)
-  window.addEventListener("DOMContentLoaded", () => {
-    fetch('wines.json')
-      .then(response => {
-        if (!response.ok) throw new Error("wines.json not found");
-        return response.json();
-      })
-      .then(json => {
-        if (Array.isArray(json)) {
-          json.forEach(wine => {
-            if (!wine.id) wine.id = generateId();
-            wines.push(wine);
-          });
-          renderTable();
-        }
-      })
-      .catch(err => {
-        console.info("No local wines.json loaded:", err.message);
+  // Auto-load local wines.json 
+const publicJSONURL = 'https://pawelkrezel.github.io/WineFinder/wines.json';
+
+fetch(publicJSONURL)
+  .then(response => {
+    if (!response.ok) throw new Error('Failed to load remote wines.json');
+    return response.json();
+  })
+  .then(parsed => {
+    if (Array.isArray(parsed)) {
+      parsed.forEach(wine => {
+        if (!wine.id) wine.id = generateId();
+        wines.push(wine);
       });
+      renderTable();
+    }
+  })
+  .catch(err => {
+    console.info("No remote wines.json loaded:", err.message);
   });
 
 })();
