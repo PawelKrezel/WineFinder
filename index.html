@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <!-- External font CDN -->
+  <!-- CDN for GoogleFonts and FontAwesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/446539a77f.js" crossorigin="anonymous"></script>
   
   <!-- CSS -->
   <link rel="stylesheet" href="wine-admin-style.css">
@@ -17,12 +19,12 @@
 
 <!-- Form for adding new wine to the DB -->
 <form id="wineForm">
-  <h1>Add a new wine to the DB 👨‍💻</h1>
-  <input type="text" placeholder="Name" name="name" required>
-  <input type="text" placeholder="Grape" name="grape" required>
-  <input type="text" placeholder="Region" name="region" required>
-  <input type="text" placeholder="Country" name="country" required>
-  <input type="number" placeholder="Vintage" name="vintage" required>
+  <h1>Add a new wine to the DB  <i class="fa-solid fa-database fa-md"></i></h1>
+  <input type="text" placeholder="Name 🏷️" name="name" required>
+  <input type="text" placeholder="Grape 🍇" name="grape" required>
+  <input type="text" placeholder="Region 📌" name="region" required>
+  <input type="text" placeholder="Country 🗺️" name="country" required>
+  <input type="number" placeholder="Vintage 🗓️" name="vintage" required>
 
   <br>
 
@@ -51,6 +53,19 @@
   <label for="medium-acidity">Medium Acidity</label>
   <input type="radio" name="acidity" value="full-acidity" id="full-acidity">
   <label for="full-acidity">Full Acidity</label>
+
+  <br>
+
+  <input type="radio" name="glass" value="Tst" id="Tst">
+  <label for="Tst">Tasting Glass</label>
+  <input type="radio" name="glass" value="Flute" id="Flute">
+  <label for="Flute">Flute</label>
+  <input type="radio" name="glass" value="Burgundy" id="Burgundy">
+  <label for="Burgundy">Burgundy Glass</label>
+  <input type="radio" name="glass" value="Bordeaux" id="Bordeaux">
+  <label for="Bordeaux">Bordeaux Glass</label>
+  <input type="radio" name="glass" value="Standard" id="Standard">
+  <label for="Standard">Standard Glass</label>
 
   <br>
 

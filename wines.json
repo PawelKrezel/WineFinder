@@ -11,7 +11,8 @@
     "acidity": "light-acidity",
     "coravin": false,
     "glass": "Standard",
-    "sommNotes": "crowd pleaser, kinda boring. Blend from various vineyards across Mendoza"
+    "sommNotes": "crowd pleaser, kinda boring. Blend from various vineyards across Mendoza",
+    "imageUrl": "img/pulenta.png"
   },
   {
     "id": "e206e3-a9d6-4b10-b2c9-e3430677a780",
@@ -24,7 +25,9 @@
     "tannin": "medium-tannin",
     "acidity": "medium-acidity",
     "coravin": false,
-    "sommNotes": "Made exclusively for us in Portugal."
+    "sommNotes": "Made exclusively for us in Portugal.",
+    "imageUrl": "img/qldrblend.jpg",
+    "glass": "Flute"
   },
   {
     "id": "99bb34-256c-40af-a8ea-a9c3c498b617",
@@ -37,7 +40,9 @@
     "tannin": "full-tannin",
     "acidity": "medium-acidity",
     "coravin": false,
-    "sommNotes": "Nice notes of tobacco on the nose. Medium to full bodied"
+    "sommNotes": "Nice notes of tobacco on the nose. Medium to full bodied",
+    "imageUrl": "img/hartenberg.png",
+    "glass": "Bordeaux"
   },
   {
     "id": "d0c7bc-9c95-4b35-8239-c6867f562f10",
@@ -51,6 +56,7 @@
     "acidity": "medium-acidity",
     "coravin": true,
     "sommNotes": "Nice notes of red fruit on the nose. \"Jumps out of the glass\" delicious!!",
-    "glass": "Bordeaux"
+    "glass": "Bordeaux",
+    "imageUrl": "img/imperial.png"
   }
 ]

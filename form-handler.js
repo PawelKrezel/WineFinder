@@ -30,6 +30,7 @@
       body: formData.get("body"),
       tannin: formData.get("tannin"),
       acidity: formData.get("acidity"),
+      glass: formData.get("glass"),
       coravin: formData.get("coravin") === "true",
       btlOnly: formData.get("btlOnly") === "true",
       sommNotes: formData.get("sommNotes")?.trim() || "",
@@ -58,6 +59,7 @@ function renderTable() {
     { key: "body", label: "Body" },
     { key: "tannin", label: "Tannin" },
     { key: "acidity", label: "Acidity" },
+    { key: "glass", label: "Glass"},
     { key: "coravin", label: "Coravin" },
     { key: "btlOnly", label: "Btl Only" },
     { key: "sommNotes", label: "Somm Notes" },
@@ -113,6 +115,14 @@ function renderTable() {
         <option value="light-acidity"${wine.acidity === "light-acidity" ? " selected" : ""}>Light</option>
         <option value="medium-acidity"${wine.acidity === "medium-acidity" ? " selected" : ""}>Medium</option>
         <option value="full-acidity"${wine.acidity === "full-acidity" ? " selected" : ""}>Full</option>
+      </select></td>
+
+      <td><select data-key="glass">
+        <option value="Tst"${wine.glass === "Tst" ? " selected" : ""}>Tst Glass</option>
+        <option value="Flute"${wine.glass === "Flute" ? " selected" : ""}>Flute</option>
+        <option value="Burgundy"${wine.glass === "Burgundy" ? " selected" : ""}>Burgundy</option>
+        <option value="Bordeaux"${wine.glass === "Bordeaux" ? " selected" : ""}>Bordeaux</option>
+        <option value="Standard"${wine.glass === "Standard" ? " selected" : ""}>Standard</option>
       </select></td>
 
       <td><select data-key="coravin">
