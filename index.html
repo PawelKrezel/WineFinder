@@ -5,75 +5,71 @@
   <title>🍷 WineFinder KB</title>
 </head>
 <body>
-  <h1>Add a new wine to the DB</h1>
+<h1>Add a new wine to the DB</h1>
 
-  <form id="wineForm">
-    <input type="text" placeholder="Name" name="name" required>
-    <input type="text" placeholder="Grape" name="grape" required>
-    <input type="text" placeholder="Region" name="region" required>
-    <input type="text" placeholder="Country" name="country" required>
-    <input type="number" placeholder="Vintage" name="vintage" required>
-
-    <br>
-
-    <label>Body:</label>
-    <input type="radio" name="body" value="light-body" required>Light
-    <input type="radio" name="body" value="medium-body">Medium
-    <input type="radio" name="body" value="full-body">Full
-
-    <br>
-
-    <label>Tannin:</label>
-    <input type="radio" name="tannin" value="light-tannin" required>Light
-    <input type="radio" name="tannin" value="medium-tannin">Medium
-    <input type="radio" name="tannin" value="full-tannin">Full
-
-    <br>
-
-    <label>Acidity:</label>
-    <input type="radio" name="acidity" value="light-acidity" required>Light
-    <input type="radio" name="acidity" value="medium-acidity">Medium
-    <input type="radio" name="acidity" value="full-acidity">Full
-
-    <br>
-
-    <label>Coravin:</label>
-    <input type="radio" name="coravin" value="true">Yes
-    <input type="radio" name="coravin" value="false" checked>No
-
-    <br>
-
-    <label>Serve by btl only:</label>
-    <input type="radio" name="btlOnly" value="true">Yes
-    <input type="radio" name="btlOnly" value="false" checked>No
-
-    <br>
-
-    <label>Glass Type:</label>
-    <input type="radio" name="glass" value="Standard" checked>Standard
-    <input type="radio" name="glass" value="Burgundy">Burgundy
-    <input type="radio" name="glass" value="Bordeaux">Bordeaux
-    <input type="radio" name="glass" value="Flute">Flute
-    <input type="radio" name="glass" value="Tst">Tst
-
-    <br>
-
-    <textarea name="sommNotes" placeholder="Optional sommelier notes"></textarea>
-
-    <br><br>
-
-    <button type="button" id="addWineBtn">Add Wine</button>
-    <button type="reset">Reset Form</button>
-  </form>
+<form id="wineForm">
+  <input type="text" placeholder="Name" name="name" required>
+  <input type="text" placeholder="Grape" name="grape" required>
+  <input type="text" placeholder="Region" name="region" required>
+  <input type="text" placeholder="Country" name="country" required>
+  <input type="number" placeholder="Vintage" name="vintage" required>
 
   <br>
 
-  <label>Upload current wines.json:</label>
-  <input type="file" id="uploadJSON" accept=".json">
+  <label>Body:</label>
+  <input type="radio" name="body" value="light-body" required>Light
+  <input type="radio" name="body" value="medium-body">Medium
+  <input type="radio" name="body" value="full-body">Full
+
+  <br>
+
+  <label>Tannin:</label>
+  <input type="radio" name="tannin" value="light-tannin" required>Light
+  <input type="radio" name="tannin" value="medium-tannin">Medium
+  <input type="radio" name="tannin" value="full-tannin">Full
+
+  <br>
+
+  <label>Acidity:</label>
+  <input type="radio" name="acidity" value="light-acidity" required>Light
+  <input type="radio" name="acidity" value="medium-acidity">Medium
+  <input type="radio" name="acidity" value="full-acidity">Full
+
+  <br>
+
+  <label>Coravin:</label>
+  <input type="radio" name="coravin" value="true" required>Yes
+  <input type="radio" name="coravin" value="false">No
+
+  <br>
+
+  <label>Bottle Only:</label>
+  <input type="radio" name="btlOnly" value="true" required>Yes
+  <input type="radio" name="btlOnly" value="false">No
+
+  <br>
+
+  <textarea name="sommNotes" placeholder="Optional sommelier notes"></textarea>
+
+  <br>
+
+  <input type="url" placeholder="Image URL (optional)" name="imageUrl" id="imageUrlInput">
+  <img id="imagePreview" src="" alt="Image Preview" style="max-height:100px; display:none; margin-top:10px;">
 
   <br><br>
 
-  <div id="tableContainer"></div>
-  <script src="form-handler.js"></script>
+  <button type="button" id="addWineBtn">Add Wine</button>
+  <button type="reset">Reset Form</button>
+</form>
+
+<br>
+
+<label>Upload current wines.json:</label>
+<input type="file" id="uploadJSON" accept=".json">
+
+<br><br>
+
+<div id="tableContainer"></div>
+<script src="form-handler.js"></script>
 </body>
 </html>
