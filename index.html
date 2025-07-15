@@ -2,12 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- External font CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="wine-admin-style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🍷 WineFinder KB</title>
 </head>
 <body>
-<h1>Add a new wine to the DB</h1>
 
+
+<!-- Form for adding new wine to the DB -->
 <form id="wineForm">
+  <h1>Add a new wine to the DB 👨‍💻</h1>
   <input type="text" placeholder="Name" name="name" required>
   <input type="text" placeholder="Grape" name="grape" required>
   <input type="text" placeholder="Region" name="region" required>
@@ -16,45 +26,54 @@
 
   <br>
 
-  <label>Body:</label>
-  <input type="radio" name="body" value="light-body" required>Light
-  <input type="radio" name="body" value="medium-body">Medium
-  <input type="radio" name="body" value="full-body">Full
+  <input type="radio" name="body" value="light-body" id="light-body" required>
+  <label for="light-body">Light Body</label>
+  <input type="radio" name="body" value="medium-body"id="medium-body">
+  <label for="medium-body">Medium Body</label>
+  <input type="radio" name="body" value="full-body" id="full-body">
+  <label for="full-body">Full Body</label>
 
   <br>
 
-  <label>Tannin:</label>
-  <input type="radio" name="tannin" value="light-tannin" required>Light
-  <input type="radio" name="tannin" value="medium-tannin">Medium
-  <input type="radio" name="tannin" value="full-tannin">Full
+  <input type="radio" name="tannin" value="light-tannin" id="light-tannin" required>
+  <label for="light-tannin">Light Tannin</label>
+  <input type="radio" name="tannin" value="medium-tannin" id="medium-tannin">
+  <label for="medium-tannin">Medium Tannin</label>
+  <input type="radio" name="tannin" value="full-tannin" id="full-tannin">
+  <label for="full-tannin">Full Tannin</label>
 
   <br>
 
-  <label>Acidity:</label>
-  <input type="radio" name="acidity" value="light-acidity" required>Light
-  <input type="radio" name="acidity" value="medium-acidity">Medium
-  <input type="radio" name="acidity" value="full-acidity">Full
+
+  <input type="radio" name="acidity" value="light-acidity" id="light-acidity" required>
+  <label for="light-acidity">Light Acidity</label>
+  <input type="radio" name="acidity" value="medium-acidity" id="medium-acidity">
+  <label for="medium-acidity">Medium Acidity</label>
+  <input type="radio" name="acidity" value="full-acidity" id="full-acidity">
+  <label for="full-acidity">Full Acidity</label>
 
   <br>
 
-  <label>Coravin:</label>
-  <input type="radio" name="coravin" value="true">Yes
-  <input type="radio" name="coravin" value="false" checked>No
+  <input type="radio" name="coravin" value="true" id="coravin-yes">
+  <label for="coravin-yes">needs to be coravined</label>
+  <input type="radio" name="coravin" value="false" id="coravin-no" checked>
+  <label for="coravin-no">no need to coravin</label>
 
   <br>
 
-  <label>Bottle Only:</label>
-  <input type="radio" name="btlOnly" value="true">Yes
-  <input type="radio" name="btlOnly" value="false" checked>No
+  <input type="radio" name="btlOnly" value="true" id="btlOnly-yes">
+  <label for="btlOnly-yes">only by the bottle</label>
+  <input type="radio" name="btlOnly" value="false" id="btlOnly-no" checked>
+  <label for="btlOnly-no">available by the glass/carafe</label>
 
   <br>
 
-  <textarea name="sommNotes" placeholder="Optional sommelier notes"></textarea>
+  <textarea name="sommNotes" placeholder="Optional sommelier notes. Feel free to throw in any fun facts or additional info that you think the team should know about this wine"></textarea>
 
   <br>
 
-  <input type="url" placeholder="Image URL (optional)" name="imageUrl" id="imageUrlInput">
-  <img id="imagePreview" src="" alt="Image Preview" style="max-height:100px; display:none; margin-top:10px;">
+  <input type="url" placeholder="Image URL/Path (optional)" name="imageUrl" id="imageUrlInput">
+  <img id="imagePreview" src="" alt="Image Preview">
 
   <br><br>
 
@@ -64,12 +83,16 @@
 
 <br>
 
+<!-- upload other version of JSON DB -->
 <label>Upload current wines.json:</label>
 <input type="file" id="uploadJSON" accept=".json">
 
 <br><br>
 
+<!-- container for summary table -->
 <div id="tableContainer"></div>
+
+<!-- Vanila JS page controls -->
 <script src="form-handler.js"></script>
 </body>
 </html>

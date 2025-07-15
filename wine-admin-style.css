@@ -1,0 +1,64 @@
+*{
+    font-family: "Roboto", sans-serif;
+}
+form#wineForm{
+    text-align: center;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+        
+}
+form#wineForm h1{
+    font-size: large;
+    margin-bottom: -0.1em;
+}
+form#wineForm input[type="text"],
+form#wineForm input[type="number"],
+form#wineForm input[type="url"]{
+    height: 2em;
+    line-height: 2em;
+    margin-top: 0.5em;
+    width: 47%;
+}
+form#wineForm input[type="number"]{
+    width: 95.5%;
+    margin-bottom: 1em;
+}
+input[type="radio"]{
+    display: none;
+}
+input[type="radio"] + label{
+    border: 1px solid black;
+    display: inline-block;
+    padding: 0.35em 0.1em 0.35em ;
+    height: 1em; 
+    line-height: 1em;
+    width: 31.5%;
+    margin-bottom: 0.25em;
+}
+input[value="true"] + label,
+input[value="false"] + label{
+    width: 48%;
+}
+input[type="radio"]:checked + label{
+    background-color: aqua;
+}
+textarea[name="sommNotes"]{
+    width: 97.5%;
+    min-height: 5em;
+}
+input[type="url"]{
+    min-width: 97.5%;
+}
+form input[type="url"] + img{
+    max-height:200px; 
+    display:none;
+    margin-top:10px;
+    margin-left: auto;
+    margin-right: auto;
+    transition-delay: 0.5s;
+    transition-duration: 1.25s;
+}
+form input[type="url"] + img:hover{
+    max-height: 450px;
+}
