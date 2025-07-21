@@ -51,11 +51,11 @@ function renderTable() {
 
   // Define sortable headers
   const headers = [
-    { key: "name", label: "Name" },
-    { key: "grape", label: "Grape" },
-    { key: "region", label: "Region" },
-    { key: "country", label: "Country" },
-    { key: "vintage", label: "Vintage" },
+    { key: "name", label: "Name 🏷️" },
+    { key: "grape", label: "Grape 🍇" },
+    { key: "region", label: "Region 📌" },
+    { key: "country", label: "Country 🗺️" },
+    { key: "vintage", label: "Vintage 🗓️" },
     { key: "body", label: "Body" },
     { key: "tannin", label: "Tannin" },
     { key: "acidity", label: "Acidity" },
@@ -63,8 +63,8 @@ function renderTable() {
     { key: "coravin", label: "Coravin" },
     { key: "btlOnly", label: "Btl Only" },
     { key: "sommNotes", label: "Somm Notes" },
-    { key: "imageUrl", label: "Image" },
-    { key: "delete", label: "Delete" }
+    { key: "imageUrl", label: "Image 📸" },
+    { key: "delete", label: "Delete 🗑️" }
   ];
 
   // Sort wines if applicable
@@ -80,7 +80,7 @@ function renderTable() {
   }
 
   // Build table header
-  let tableHTML = `<table border="1"><thead><tr>`;
+  let tableHTML = `<table><thead><tr>`;
   headers.forEach(header => {
     if (header.key === "delete") {
       tableHTML += `<th>${header.label}</th>`;
@@ -93,31 +93,31 @@ function renderTable() {
   // Build table body - each row with editable fields and controls
   wines.forEach((wine, index) => {
     tableHTML += `<tr data-id="${wine.id}">
-      <td><input value="${wine.name}" data-key="name" /></td>
-      <td><input value="${wine.grape}" data-key="grape" /></td>
-      <td><input value="${wine.region}" data-key="region" /></td>
-      <td><input value="${wine.country}" data-key="country" /></td>
-      <td><input type="number" value="${wine.vintage}" data-key="vintage" /></td>
+      <td><input class="commonStyle" value="${wine.name}" data-key="name" /></td>
+      <td><input class="commonStyle" value="${wine.grape}" data-key="grape" /></td>
+      <td><input class="commonStyle" value="${wine.region}" data-key="region" /></td>
+      <td><input class="commonStyle" value="${wine.country}" data-key="country" /></td>
+      <td><input class="commonStyle" type="number" value="${wine.vintage}" data-key="vintage" /></td>
 
-      <td><select data-key="body">
+      <td><select data-key="body" class="commonStyle">
         <option value="light-body"${wine.body === "light-body" ? " selected" : ""}>Light</option>
         <option value="medium-body"${wine.body === "medium-body" ? " selected" : ""}>Medium</option>
         <option value="full-body"${wine.body === "full-body" ? " selected" : ""}>Full</option>
       </select></td>
 
-      <td><select data-key="tannin">
+      <td><select data-key="tannin" class="commonStyle">
         <option value="light-tannin"${wine.tannin === "light-tannin" ? " selected" : ""}>Light</option>
         <option value="medium-tannin"${wine.tannin === "medium-tannin" ? " selected" : ""}>Medium</option>
         <option value="full-tannin"${wine.tannin === "full-tannin" ? " selected" : ""}>Full</option>
       </select></td>
 
-      <td><select data-key="acidity">
+      <td><select data-key="acidity" class="commonStyle">
         <option value="light-acidity"${wine.acidity === "light-acidity" ? " selected" : ""}>Light</option>
         <option value="medium-acidity"${wine.acidity === "medium-acidity" ? " selected" : ""}>Medium</option>
         <option value="full-acidity"${wine.acidity === "full-acidity" ? " selected" : ""}>Full</option>
       </select></td>
 
-      <td><select data-key="glass">
+      <td><select data-key="glass" class="commonStyle">
         <option value="Tst"${wine.glass === "Tst" ? " selected" : ""}>Tst Glass</option>
         <option value="Flute"${wine.glass === "Flute" ? " selected" : ""}>Flute</option>
         <option value="Burgundy"${wine.glass === "Burgundy" ? " selected" : ""}>Burgundy</option>
@@ -125,21 +125,21 @@ function renderTable() {
         <option value="Standard"${wine.glass === "Standard" ? " selected" : ""}>Standard</option>
       </select></td>
 
-      <td><select data-key="coravin">
+      <td><select data-key="coravin" class="commonStyle">
         <option value="true"${wine.coravin ? " selected" : ""}>Yes</option>
         <option value="false"${!wine.coravin ? " selected" : ""}>No</option>
       </select></td>
 
-      <td><select data-key="btlOnly">
+      <td><select data-key="btlOnly" class="commonStyle">
         <option value="true"${wine.btlOnly ? " selected" : ""}>Yes</option>
         <option value="false"${!wine.btlOnly ? " selected" : ""}>No</option>
       </select></td>
 
-      <td><input value="${wine.sommNotes}" data-key="sommNotes" /></td>
+      <td><input value="${wine.sommNotes}" data-key="sommNotes" class="commonStyle"/></td>
 
       <td class="img-parent">
         ${wine.imageUrl ? `<img src="${wine.imageUrl}" alt="Wine Image"><br>` : ""}
-        <input type="url" value="${wine.imageUrl}" data-key="imageUrl" placeholder="Image URL" />
+        <input type="url" value="${wine.imageUrl}" data-key="imageUrl" placeholder="Image URL" class="commonStyle" />
       </td>
 
       <td><button data-index="${index}" class="deleteBtn">❌</button></td>

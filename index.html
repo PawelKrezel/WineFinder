@@ -15,85 +15,86 @@
   <title>🍷 WineFinder KB</title>
 </head>
 <body>
+  <div class="bg-image"></div>
 
 
 <!-- Form for adding new wine to the DB -->
 <form id="wineForm">
   <h1>Add a new wine to the DB  <i class="fa-solid fa-database fa-md"></i></h1>
-  <input type="text" placeholder="Name 🏷️" name="name" required>
-  <input type="text" placeholder="Grape 🍇" name="grape" required>
-  <input type="text" placeholder="Region 📌" name="region" required>
-  <input type="text" placeholder="Country 🗺️" name="country" required>
-  <input type="number" placeholder="Vintage 🗓️" name="vintage" required>
+  <input type="text" placeholder="Name 🏷️" name="name" class="commonStyle" required>
+  <input type="text" placeholder="Grape 🍇" name="grape" class="commonStyle" required>
+  <input type="text" placeholder="Region 📌" name="region" class="commonStyle" required>
+  <input type="text" placeholder="Country 🗺️" name="country" class="commonStyle" required>
+  <input type="number" placeholder="Vintage 🗓️" name="vintage" class="commonStyle" required>
 
   <br>
 
   <input type="radio" name="body" value="light-body" id="light-body" required>
-  <label for="light-body">Light Body</label>
+  <label for="light-body" class="commonStyle">Light Body</label>
   <input type="radio" name="body" value="medium-body"id="medium-body">
-  <label for="medium-body">Medium Body</label>
+  <label for="medium-body" class="commonStyle">Medium Body</label>
   <input type="radio" name="body" value="full-body" id="full-body">
-  <label for="full-body">Full Body</label>
+  <label for="full-body" class="commonStyle">Full Body</label>
 
   <br>
 
   <input type="radio" name="tannin" value="light-tannin" id="light-tannin" required>
-  <label for="light-tannin">Light Tannin</label>
+  <label for="light-tannin" class="commonStyle">Light Tannin</label>
   <input type="radio" name="tannin" value="medium-tannin" id="medium-tannin">
-  <label for="medium-tannin">Medium Tannin</label>
+  <label for="medium-tannin" class="commonStyle">Medium Tannin</label>
   <input type="radio" name="tannin" value="full-tannin" id="full-tannin">
-  <label for="full-tannin">Full Tannin</label>
+  <label for="full-tannin" class="commonStyle">Full Tannin</label>
 
   <br>
 
 
   <input type="radio" name="acidity" value="light-acidity" id="light-acidity" required>
-  <label for="light-acidity">Light Acidity</label>
+  <label for="light-acidity" class="commonStyle">Light Acidity</label>
   <input type="radio" name="acidity" value="medium-acidity" id="medium-acidity">
-  <label for="medium-acidity">Medium Acidity</label>
+  <label for="medium-acidity" class="commonStyle">Medium Acidity</label>
   <input type="radio" name="acidity" value="full-acidity" id="full-acidity">
-  <label for="full-acidity">Full Acidity</label>
+  <label for="full-acidity" class="commonStyle">Full Acidity</label>
 
   <br>
 
   <input type="radio" name="glass" value="Tst" id="Tst">
-  <label for="Tst">Tasting Glass</label>
+  <label for="Tst" class="commonStyle">Tasting Gls</label>
   <input type="radio" name="glass" value="Flute" id="Flute">
-  <label for="Flute">Flute</label>
+  <label for="Flute" class="commonStyle">Flute</label>
   <input type="radio" name="glass" value="Burgundy" id="Burgundy">
-  <label for="Burgundy">Burgundy Glass</label>
+  <label for="Burgundy" class="commonStyle">Burgundy Gls</label>
   <input type="radio" name="glass" value="Bordeaux" id="Bordeaux">
-  <label for="Bordeaux">Bordeaux Glass</label>
+  <label for="Bordeaux" class="commonStyle">Bordeaux Gls</label>
   <input type="radio" name="glass" value="Standard" id="Standard" checked>
-  <label for="Standard">Standard Glass</label>
+  <label for="Standard" class="commonStyle">Standard Gls</label>
 
   <br>
 
   <input type="radio" name="coravin" value="true" id="coravin-yes">
-  <label for="coravin-yes">needs to be coravined</label>
+  <label for="coravin-yes" class="commonStyle">needs to be coravined</label>
   <input type="radio" name="coravin" value="false" id="coravin-no" checked>
-  <label for="coravin-no">no need to coravin</label>
+  <label for="coravin-no" class="commonStyle">no need to coravin</label>
 
   <br>
 
   <input type="radio" name="btlOnly" value="true" id="btlOnly-yes">
-  <label for="btlOnly-yes">only by the bottle</label>
+  <label for="btlOnly-yes" class="commonStyle">only by the bottle</label>
   <input type="radio" name="btlOnly" value="false" id="btlOnly-no" checked>
-  <label for="btlOnly-no">available by the glass/carafe</label>
+  <label for="btlOnly-no" class="commonStyle">available by the glass/carafe</label>
 
   <br>
 
-  <textarea name="sommNotes" placeholder="Optional sommelier notes. Feel free to throw in any fun facts or additional info that you think the team should know about this wine"></textarea>
+  <textarea name="sommNotes" class="commonStyle" placeholder="Optional sommelier notes. Feel free to throw in any fun facts or additional info that you think the team should know about this wine"></textarea>
 
   <br>
 
-  <input type="url" placeholder="Image URL/Path (optional)" name="imageUrl" id="imageUrlInput">
+  <input type="url" placeholder="Image URL/Path (optional)" name="imageUrl" id="imageUrlInput" class="commonStyle">
   <img id="imagePreview" src="" alt="Image Preview">
 
   <br><br>
-
-  <button type="button" id="addWineBtn">Add Wine</button>
-  <button type="reset">Reset Form</button>
+  <button type="reset" class="commonStyle">‼️ Reset Form ‼️</button>
+  <button type="button" id="addWineBtn" class="commonStyle">Add Wine ✅</button>
+  
 </form>
 
 <br>
