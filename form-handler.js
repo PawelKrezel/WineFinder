@@ -146,7 +146,7 @@ function renderTable() {
     </tr>`;
   });
 
-  tableHTML += `</tbody></table><br><button id="exportJSON">Export JSON</button>`;
+  tableHTML += `</tbody></table><br><button id="exportJSON">Export JSON <i class="fa-solid fa-download"></i></button>`;
   tableContainer.innerHTML = tableHTML;
 
   // Sorting event listeners
@@ -276,3 +276,33 @@ fetch(publicJSONURL)
   }
 });
 })();
+
+function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=true){
+  let htmlCode = `<table id="${shelfID}">`;
+  if(addHeader){
+    htmlCode += `<thead><tr><th colspan="${width}">${headerContent}</th></tr></thead>`;
+  } htmlCode += `<tbody>`;
+  for (let y=1; y<=height; y++){
+    htmlCode += `<tr>`;
+    for (let x=1; x<=width; x++){
+      htmlCode += `<td class="shelfSlot" id="${x}-${y}-${shelfID}" value="${x}-${y}-${shelfID}" title="${x}-${y}-${shelfID}"></td>`;
+    }
+    htmlCode += `</tr>`;
+  }
+  htmlCode += `</tbody></table>`;
+
+  return htmlCode;
+}
+
+document.getElementById("s1-container").innerHTML = drawShelf(9, 25, "s1", "First shelf from the entrance");
+document.getElementById("s2-container").innerHTML = drawShelf(9, 25, "s2", "Second shelf from the entrance");
+document.getElementById("s3-container").innerHTML = drawShelf(9, 25, "s3", "Third shelf from the entrance");
+document.getElementById("s4-container").innerHTML = drawShelf(7, 25, "s4", "Fourth shelf from the entrance");
+document.getElementById("s5-container").innerHTML = drawShelf(9, 25, "s5", "Fifth shelf from the entrance<br>Second shelf from the bar");
+document.getElementById("s6-container").innerHTML = drawShelf(9, 25, "s6", "Sixth shelf from the entrance<br>First shelf from the bar");
+
+document.getElementById("g1-container").innerHTML = drawShelf(1, 25, "g1");
+document.getElementById("g2-container").innerHTML = drawShelf(1, 25, "g2");
+document.getElementById("g3-container").innerHTML = drawShelf(5, 25, "g3");
+document.getElementById("g4-container").innerHTML = drawShelf(8, 25, "g4", "Curve Leading to the bar");
+document.getElementById("g5-container").innerHTML = drawShelf(1, 25, "g5");

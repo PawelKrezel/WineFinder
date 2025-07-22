@@ -1,6 +1,12 @@
 *{
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+body::-webkit-scrollbar{
+    display: none;
+}
+#mapContainer::-webkit-scrollbar{
+    display: visible;
+}
 html{
     background-image: url('img/bg-2.jpg');
     background-position: center;
@@ -18,7 +24,7 @@ form#wineForm{
     margin-right: auto;
         
 }
-.commonStyle{
+.commonStyle, #exportJSON{
     background-color: #718c4ac3;
     border: 1px solid black;
     border-radius: 5px;
@@ -26,7 +32,7 @@ form#wineForm{
     color: rgb(242, 244, 246);
     text-align: center;
 }
-.commonStyle:hover{
+.commonStyle:hover,  #exportJSON:hover{
     background-color: #718c4a70;
     color: rgba(234, 238, 242, 0.928);
     border-radius: 15px;
@@ -106,7 +112,8 @@ form input[type="url"] + img{
     transition-duration: 0.55s;
 }
 form input[type="url"] + img:hover{
-    max-height: 450px;
+    max-height: 600px;
+    border-radius: 10px;
 }
 form button{
     width: 48%;
@@ -120,35 +127,100 @@ form button{
     transition-delay: 0.4s;
     transition-duration: 0.55s;
 }
-td.img-parent{
+#tableContainer td.img-parent{
     text-align: center;
 }
-td.img-parent:hover > img{
+#tableContainer td.img-parent:hover > img{
     height: 250px;
 }
-table{
+#tableContainer table, td, th{
+    border-collapse: collapse;
+    padding: 2px;
+    border: none;
+    text-align: center;
+}
+#tableContainer table{
     margin-left: auto;
     margin-right: auto;
     background-image: linear-gradient(51deg,#73695684, #261c14ac);
 }
-
-table, td, th{
-    border-collapse: collapse;
-    padding: 5px;
-    border: none;
-    text-align: center;
-}
-th{
+#tableContainer th{
     padding: 1em;
     color: aliceblue;
 }
-td .commonStyle{
-    font-size: xx-small;
-    height: 6.5em;
+#tableContainer tr:has(th){
+    position: sticky;
+    top: 0px;
+    background-image: linear-gradient(51deg,#736956a5, #261c14d5);
 }
-td select.commonStyle{
+#tableContainer td .commonStyle{
+    font-size: x-small;
+    height: 6em;
+}
+#tableContainer td select.commonStyle{
     width: 95%;
 }
-td input[type="url"].commonStyle{
+#tableContainer td input[type="url"].commonStyle{
     height: 1.5em;
+}
+/*
+accessibility setting. JS controls need to be implemented
+td input:focus{
+    transition-delay: 0.7;
+    transition-duration: 0.9s;
+    font-size: x-large;
+    overflow: visible;
+    padding: 2px;
+    height: 3em;
+    width: 30em;
+}
+*/
+.uploadJSON{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: aliceblue;
+    background-image: linear-gradient(51deg,#73695684, #261c14ac);
+    width: fit-content;
+    padding: 1em;
+    margin-top: 1em;
+}
+
+#exportJSON{
+    padding: 1em;
+    font-size: larger;
+    text-align: center;
+    width: 91vw;
+    margin-left: 4vw;
+}
+form #imagePreview, #mapContainer{
+    background-image: linear-gradient(51deg,#73695684, #261c14ac);
+}
+#mapContainer{
+    margin-top: 2em;
+    overflow-x: scroll;
+    min-width: 91vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 1em;
+    color: antiquewhite;
+}
+#mapContainer div, #mapContainer table{
+    display: table-cell;
+}
+#mapContainer td{
+    border: solid black 1px;
+    min-width: 3vh;
+    height: 3vh;
+    padding: 0;
+
+}
+.gap table{
+    background: black;
+}
+
+.miniMapLegend{
+    text-align: center;
+    vertical-align: middle;
+    min-width: 15em;
 }

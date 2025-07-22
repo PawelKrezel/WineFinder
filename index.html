@@ -99,16 +99,42 @@
 
 <br>
 
-<!-- upload other version of JSON DB -->
-<label>Upload current wines.json:</label>
-<input type="file" id="uploadJSON" accept=".json">
+  <!-- upload other version of JSON DB -->
+   <div class="uploadJSON">
+    <label><i class="fa-solid fa-upload"></i> Upload current "wines.json" file: </label>
+    <input type="file" id="uploadJSON" accept=".json">
+   </div>
+
 
 <br><br>
 
 <!-- container for summary table -->
 <div id="tableContainer"></div>
 
+<!-- Mini map of the wine cellar -->
+<div id="mapContainer">
+  <div class="miniMapLegend">
+    <i class="fa-solid fa-door-open fa-2xl"></i><br><br>
+    Entrance to the Cellar<br><br>
+    <i class="fa-solid fa-arrow-left fa-beat-fade"></i> restaurant/barback
+  </div>
+  <div id="s1-container"></div>
+  <div id="g1-container" class="gap"></div>
+  <div id="s2-container"></div>
+  <div id="g2-container" class="gap"></div>
+  <div id="s3-container"></div>
+  <div id="g3-container" class="gap">Big Gap</div>
+  <div id="s4-container"></div>
+  <div id="g4-container" class="gap">Curve to the Cellar</div>
+  <div id="s5-container"></div>
+  <div id="g5-container" class="gap"></div>
+  <div id="s6-container"></div>
+  <div class="miniMapLegend">
+    <i class="fa-solid fa-martini-glass-citrus fa-flip fa-2xl"></i><br><br>
+    To the bar <i class="fa-solid fa-arrow-right"></i></div>
+</div>
 <!-- Vanila JS page controls -->
 <script src="form-handler.js"></script>
+
 </body>
 </html>
