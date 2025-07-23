@@ -213,10 +213,12 @@ form #imagePreview, #mapContainer{
     min-width: 3vh;
     height: 3vh;
     padding: 0;
-
 }
 .gap table{
-    background: black;
+    background: rgba(0, 0, 0, 0.868);
+}
+.gap td{
+    font-size: x-small;
 }
 
 .miniMapLegend{
