@@ -190,7 +190,7 @@ td input:focus{
     margin-top: 1em;
 }
 
-#exportJSON{
+#exportJSON, #wineDropDownSelection{
     padding: 1em;
     font-size: larger;
     text-align: center;

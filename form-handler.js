@@ -91,6 +91,8 @@ function renderTable() {
   tableHTML += `</tr></thead><tbody>`;
 
   // Build table body - each row with editable fields and controls
+  // Will also add those wines to the dropdown list underneath the cellar
+  let dropDownHTMLs = []; // array of HTML snippets to be sorted later
   wines.forEach((wine, index) => {
     tableHTML += `<tr data-id="${wine.id}">
       <td><input class="commonStyle" value="${wine.name}" data-key="name" /></td>
@@ -144,10 +146,20 @@ function renderTable() {
 
       <td><button data-index="${index}" class="deleteBtn">❌</button></td>
     </tr>`;
+
+    dropDownHTMLs.push(`<option title="(${wine.name}) ${wine.id}">${wine.name} - ${wine.vintage} ${wine.grape} from ${wine.region}</option>`);
   });
 
   tableHTML += `</tbody></table><br><button id="exportJSON">Export JSON <i class="fa-solid fa-download"></i></button>`;
   tableContainer.innerHTML = tableHTML;
+
+  dropDownHTMLs.sort();
+  let dropDownHTML = "";
+  dropDownHTMLs.forEach((snippet) => {
+    dropDownHTML += snippet;
+  });
+  document.getElementById("wineDropDownSelection").innerHTML = dropDownHTML;
+  
 
   // Sorting event listeners
   tableContainer.querySelectorAll("thead th[data-key]").forEach(th => {
