@@ -1,6 +1,6 @@
 // Dear wine manager, you may want to add a link to your wines.json file. 
 // Please navigate to line 232 in form-handler.js to find the publicJSONURL variable.
-// If you need help with this, please contact Pawel Krezel.
+// If you need help with this, please contact the author at https://github.com/PawelKrezel
 
 (function () {
   // Get references to form and table container
@@ -22,6 +22,7 @@
     const formData = new FormData(form);
     return {
       id: generateId(),
+      shelves:[],
       name: formData.get("name").trim(),
       grape: formData.get("grape").trim(),
       region: formData.get("region").trim(),
@@ -34,7 +35,7 @@
       coravin: formData.get("coravin") === "true",
       btlOnly: formData.get("btlOnly") === "true",
       sommNotes: formData.get("sommNotes")?.trim() || "",
-      imageUrl: formData.get("imageUrl")?.trim() || ""
+      imageUrl: formData.get("imageUrl")?.trim() || "",
     };
   }
 

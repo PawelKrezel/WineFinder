@@ -1,6 +1,7 @@
 [
   {
-    "id": "8dfaf3-85b4-4f1b-82de-20f1844456a7",
+    "id": "ae61a7-89ea-4f24-ae3c-9f2b74d73ccd",
+    "shelves": [],
     "name": "Pulenta",
     "grape": "Malbec",
     "region": "Mendoza",
@@ -8,14 +9,16 @@
     "vintage": 2023,
     "body": "medium-body",
     "tannin": "medium-tannin",
-    "acidity": "light-acidity",
-    "coravin": false,
+    "acidity": "medium-acidity",
     "glass": "Standard",
-    "sommNotes": "crowd pleaser, kinda boring. Blend from various vineyards across Mendoza",
+    "coravin": false,
+    "btlOnly": false,
+    "sommNotes": "crowd pleaser, kinda boring. Blend from various vineyards across Mendoza\"",
     "imageUrl": "img/pulenta.png"
   },
   {
-    "id": "e206e3-a9d6-4b10-b2c9-e3430677a780",
+    "id": "66e7f2-2d12-4d31-8ba3-42fdfaa06413",
+    "shelves": [],
     "name": "Quinta De La Rosa",
     "grape": "Tinto",
     "region": "Douro",
@@ -24,13 +27,15 @@
     "body": "medium-body",
     "tannin": "medium-tannin",
     "acidity": "medium-acidity",
+    "glass": "Standard",
     "coravin": false,
+    "btlOnly": false,
     "sommNotes": "Made exclusively for us in Portugal.",
-    "imageUrl": "img/qldrblend.jpg",
-    "glass": "Flute"
+    "imageUrl": "img/qldrblend.jpg"
   },
   {
-    "id": "99bb34-256c-40af-a8ea-a9c3c498b617",
+    "id": "9f1b0e-bcb1-413d-a7cb-91a9823cd304",
+    "shelves": [],
     "name": "Hartenberg",
     "grape": "Cabernet Sauvignon",
     "region": "Stellenbosch",
@@ -39,24 +44,10 @@
     "body": "full-body",
     "tannin": "full-tannin",
     "acidity": "medium-acidity",
-    "coravin": false,
-    "sommNotes": "Nice notes of tobacco on the nose. Medium to full bodied",
-    "imageUrl": "img/hartenberg.png",
-    "glass": "Bordeaux"
-  },
-  {
-    "id": "d0c7bc-9c95-4b35-8239-c6867f562f10",
-    "name": "C.V.N.E Imperial Gran Riserva",
-    "grape": "Tempranillo",
-    "region": "Haro, Rioja",
-    "country": "Spain",
-    "vintage": 2015,
-    "body": "full-body",
-    "tannin": "full-tannin",
-    "acidity": "medium-acidity",
-    "coravin": true,
-    "sommNotes": "Nice notes of red fruits on the nose. \"Jumps out of the glass\" delicious!!",
     "glass": "Bordeaux",
-    "imageUrl": "img/imperial.png"
+    "coravin": false,
+    "btlOnly": false,
+    "sommNotes": "Nice notes of tobacco on the nose. Medium to full bodied",
+    "imageUrl": "img/hartenberg.png"
   }
 ]
