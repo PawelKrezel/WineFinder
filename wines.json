@@ -49,5 +49,21 @@
     "btlOnly": false,
     "sommNotes": "Nice notes of tobacco on the nose. Medium to full bodied",
     "imageUrl": "img/hartenberg.png"
+  },
+  {
+    "id": "d0c7bc-9c95-4b35-8239-c6867f562f10",
+    "shelves": [],
+    "name": "C.V.N.E Imperial Gran Riserva",
+    "grape": "Tempranillo",
+    "region": "Haro, Rioja",
+    "country": "Spain",
+    "vintage": 2015,
+    "body": "full-body",
+    "tannin": "full-tannin",
+    "acidity": "medium-acidity",
+    "coravin": true,
+    "sommNotes": "Nice notes of red fruits on the nose. \"Jumps out of the glass\" delicious!!",
+    "glass": "Bordeaux",
+    "imageUrl": "img/imperial.png"
   }
 ]
