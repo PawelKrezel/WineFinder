@@ -11,6 +11,7 @@ html{
     background-image: url('img/bg-2.jpg');
     background-position: center;
     background-attachment: fixed;
+    background-repeat: no-repeat;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -209,13 +210,13 @@ form #imagePreview, #mapContainer{
     display: table-cell;
 }
 #mapContainer td{
-    border: solid black 1px;
+    border: solid rgb(0, 0, 0) 1px;
     min-width: 3vh;
     height: 3vh;
     padding: 0;
 }
 .gap table{
-    background: rgba(0, 0, 0, 0.868);
+    background: rgba(0, 0, 0, 0.966);
 }
 .gap td{
     font-size: x-small;
