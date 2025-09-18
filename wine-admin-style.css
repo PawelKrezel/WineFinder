@@ -4,7 +4,7 @@
 body::-webkit-scrollbar{
     display: none;
 }
-#mapContainer::-webkit-scrollbar{
+#mapContainer::-webkit-scrollbar, #tableContainer::-webkit-scrollbar{
     display: visible;
 }
 html{
@@ -127,6 +127,9 @@ form button{
     margin-right: auto;
     transition-delay: 0.4s;
     transition-duration: 0.55s;
+}
+#tableContainer{
+    overflow-x: scroll;
 }
 #tableContainer td.img-parent{
     text-align: center;
