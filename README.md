@@ -1,6 +1,10 @@
 # WineFinder 🍷
 
 [![Demo](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://pawelkrezel.github.io/WineFinder/)  
+
+At the moment this is an unfinished project. The idea for this app arose around July 2025 when I was discussing the flow of service with one of the ARMs at Hawksmoor in Knightsbridge. I might use this as inspiration for my Final Year Project module at the University of Westminster.
+
+
 A lightweight, static web app running on vanilla JavaScript and using JSON for a makeshift, low-cost DBMS. No backend needed - designed to run fully on GitHub pages for free because my cheapskate AGM would never pay to host a propper secure backend server running Django.
 Project is meant help outsiders cover a wine shift at Hawksmoor Knightsbridge
 
