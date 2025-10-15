@@ -56,12 +56,11 @@ This payment grants **one-time, unlimited usage rights** for the current version
 
 ### 3.3
 
-Any future improvements, updates, or support provided by **Pawel Krezel** may require an additional fee,  
-with a **minimum charge equivalent to 10 working hours**, subject to mutual agreement.
+Any future improvements, updates, or support provided by **Pawel Krezel** may require an additional fee, with a **minimum charge equivalent to 10 working hours**, subject to mutual agreement.
 
 ### 3.4
 
-No other Hawksmoor branches or businesses may use this software without the author’s **written permission**.
+No other Hawksmoor branches nor other businesses may use this software without the author’s **written permission**.
 
 ---
 
