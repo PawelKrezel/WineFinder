@@ -7,7 +7,7 @@ body::-webkit-scrollbar{
 #mapContainer::-webkit-scrollbar, #tableContainer::-webkit-scrollbar{
     display: visible;
 }
-html{
+html, body{
     background-image: url('img/bg-2.jpg');
     background-position: center;
     background-attachment: fixed;
