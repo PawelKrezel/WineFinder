@@ -148,7 +148,7 @@ function renderTable() {
       <td><button data-index="${index}" class="deleteBtn">❌</button></td>
     </tr>`;
 
-    dropDownHTMLs.push(`<option title="(${wine.name}) ${wine.id}">${wine.name} - ${wine.vintage} ${wine.grape} from ${wine.region}</option>`);
+    dropDownHTMLs.push(`<option title="(${wine.name}) ${wine.id}" id="map-to-cellar-${wine.id}">${wine.name} - ${wine.vintage} ${wine.grape} from ${wine.region}</option>`);
   });
 
   tableHTML += `</tbody></table><br><button id="exportJSON">Export JSON <i class="fa-solid fa-download"></i></button>`;
