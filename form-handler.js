@@ -6,7 +6,7 @@
   // Get references to form and table container
   const form = document.getElementById('wineForm');
   const tableContainer = document.getElementById('tableContainer');
-  const wines = []; // Main array storing wine entries
+  window.wines = []; // Main array storing wine entries
 
   // UUID-like ID generator for uniquely identifying each wine
   function generateId() {
@@ -148,7 +148,7 @@ function renderTable() {
       <td><button data-index="${index}" class="deleteBtn">❌</button></td>
     </tr>`;
 
-    dropDownHTMLs.push(`<option title="(${wine.name}) ${wine.id}" id="map-to-cellar-${wine.id}">${wine.name} - ${wine.vintage} ${wine.grape} from ${wine.region}</option>`);
+    dropDownHTMLs.push(`<option value="${wine.id}" title="(${wine.name}) ${wine.id}" id="map-to-cellar-${wine.id}">${wine.name} - ${wine.vintage} ${wine.grape} from ${wine.region}</option>`);
   });
 
   tableHTML += `</tbody></table><br><button id="exportJSON">Export JSON <i class="fa-solid fa-download"></i></button>`;
@@ -325,3 +325,91 @@ document.getElementById("g2-container").innerHTML = drawShelf(1, 25, "g2", "<br>
 document.getElementById("g3-container").innerHTML = drawShelf(7, 25, "g3", "<br>", true, true);
 document.getElementById("g4-container").innerHTML = drawShelf(13, 25, "g4", "Curve Leading to the bar", true, true);
 document.getElementById("g5-container").innerHTML = drawShelf(1, 25, "g5", "<br>", true, true);
+
+
+// --- Wine-to-Cellar Mapping Feature ---
+
+// Get dropdown and create the Confirm button next to it
+const wineDropdown = document.getElementById("wineDropDownSelection");
+const confirmBtn = document.createElement("button");
+confirmBtn.textContent = "Confirm Allocation";
+confirmBtn.id = "confirmAllocationBtn";
+confirmBtn.style.marginLeft = "10px";
+wineDropdown.insertAdjacentElement("afterend", confirmBtn);
+
+// Track currently selected wine ID and selected cells
+let currentWineId = null;
+let selectedCells = new Set();
+
+// When wine is selected, clear highlights and tracking
+wineDropdown.addEventListener("change", (e) => {
+  currentWineId = e.target.value;
+  selectedCells.clear();
+
+  // Reset any existing highlights
+  document.querySelectorAll(".shelfSlot").forEach(cell => {
+    cell.style.backgroundColor = "";
+  });
+
+  // Highlight any existing allocations for this wine (if any)
+  if (currentWineId && typeof wines !== "undefined") {
+    const wine = wines.find(w => w.id === currentWineId);
+    if (wine && Array.isArray(wine.shelves)) {
+      wine.shelves.forEach(id => {
+        const cell = document.getElementById(id);
+        if (cell) cell.style.backgroundColor = "red";
+        selectedCells.add(id);
+      });
+    }
+  }
+});
+
+// Add click handler to toggle cell selection
+document.querySelectorAll(".shelfSlot").forEach(cell => {
+  cell.addEventListener("click", () => {
+    if (!currentWineId) {
+      alert("Please select a wine from the dropdown first.");
+      return;
+    }
+
+    const cellId = cell.id;
+
+    // Toggle highlight and tracking
+    if (selectedCells.has(cellId)) {
+      selectedCells.delete(cellId);
+      cell.style.backgroundColor = "";
+    } else {
+      selectedCells.add(cellId);
+      cell.style.backgroundColor = "red";
+    }
+  });
+});
+
+// Confirm allocation and export updated JSON
+confirmBtn.addEventListener("click", () => {
+  if (!currentWineId) {
+    alert("Please select a wine first.");
+    return;
+  }
+
+  const wine = wines.find(w => w.id === currentWineId);
+  if (!wine) {
+    alert("Selected wine not found in the list.");
+    return;
+  }
+
+  // Save shelves array for selected wine
+  wine.shelves = Array.from(selectedCells);
+
+  // Regenerate JSON export
+  const blob = new Blob([JSON.stringify(wines, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "wines.json";
+  link.click();
+  URL.revokeObjectURL(url);
+
+  alert(`Allocation saved for ${wine.name} (${wine.shelves.length} cells).`);
+});
+
