@@ -209,6 +209,7 @@ function renderTable() {
     link.click();
     URL.revokeObjectURL(url);
   });
+  drawCellar();
 }
   // Add new wine entry from form
   document.getElementById("addWineBtn").addEventListener("click", () => {
@@ -346,6 +347,7 @@ function drawCellar(){
   document.getElementById("g3-container").innerHTML = drawShelf(7, 25, "g3", "<br>", true, true);
   document.getElementById("g4-container").innerHTML = drawShelf(13, 25, "g4", "Curve Leading to the bar", true, true);
   document.getElementById("g5-container").innerHTML = drawShelf(1, 25, "g5", "<br>", true, true);
+  setEventListenersForAllCells()
 }
 drawCellar();
 
@@ -363,6 +365,7 @@ let selectedCells = new Set();
 wineDropdown.addEventListener("change", (e) => {
   currentWineId = e.target.value;
   selectedCells.clear();
+  drawCellar();
 
   // Reset any existing highlights
   document.querySelectorAll(".shelfSlot").forEach(cell => {
@@ -382,26 +385,30 @@ wineDropdown.addEventListener("change", (e) => {
   }
 });
 
-// Add click handler to toggle cell selection
-document.querySelectorAll(".shelfSlot").forEach(cell => {
-  cell.addEventListener("click", () => {
-    if (!currentWineId) {
-      alert("Please select a wine from the dropdown first.");
-      return;
-    }
+function setEventListenersForAllCells(){
+    // Add click handler to toggle cell selection
+  document.querySelectorAll(".shelfSlot").forEach(cell => {
+    cell.addEventListener("click", () => {
+      if (!currentWineId) {
+        alert("Please select a wine from the dropdown first.");
+        return;
+      }
 
-    const cellId = cell.id;
+      const cellId = cell.id;
 
-    // Toggle highlight and tracking
-    if (selectedCells.has(cellId)) {
-      selectedCells.delete(cellId);
-      cell.style.backgroundColor = "";
-    } else {
-      selectedCells.add(cellId);
-      cell.style.backgroundColor = "red";
-    }
+      // Toggle highlight and tracking
+      if (selectedCells.has(cellId)) {
+        selectedCells.delete(cellId);
+        cell.style.backgroundColor = "";
+      } else {
+        selectedCells.add(cellId);
+        cell.style.backgroundColor = "red";
+      }
+    });
   });
-});
+}
+
+
 
 // Confirm allocation and export updated JSON
 confirmBtn.addEventListener("click", () => {
