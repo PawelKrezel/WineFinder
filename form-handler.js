@@ -7,6 +7,7 @@
   const form = document.getElementById('wineForm');
   const tableContainer = document.getElementById('tableContainer');
   window.wines = []; // Main array storing wine entries
+  window.occupiedCells = []; // array which will store coordinates for occupied shelves
 
   // UUID-like ID generator for uniquely identifying each wine
   function generateId() {
@@ -147,7 +148,7 @@ function renderTable() {
 
       <td><button data-index="${index}" class="deleteBtn">❌</button></td>
     </tr>`;
-
+    occupiedCells.push([wine.shelves, `${wine.vintage} ${wine.name} (${wine.id})`]);
     dropDownHTMLs.push(`<option value="${wine.id}" title="(${wine.name}) ${wine.id}" id="map-to-cellar-${wine.id}">${wine.name} - ${wine.vintage} ${wine.grape} from ${wine.region}</option>`);
   });
 
@@ -155,7 +156,7 @@ function renderTable() {
   tableContainer.innerHTML = tableHTML;
 
   dropDownHTMLs.sort();
-  let dropDownHTML = "";
+  let dropDownHTML = `<option selected>Please select a wine</option>`;
   dropDownHTMLs.forEach((snippet) => {
     dropDownHTML += snippet;
   });
@@ -239,6 +240,7 @@ function renderTable() {
             wines.push(wine);
           });
           renderTable();
+          drawCellar();
         } else {
           alert("Invalid JSON format. Must be an array.");
         }
@@ -290,9 +292,11 @@ fetch(publicJSONURL)
 });
 })();
 
+//render a minimap of the winecellar
 function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=true, addRowNo=false){
   let htmlCode = `<table id="${shelfID}">`;
   let msg = "";
+  let cellID = "";
   if(addHeader){
     htmlCode += `<thead><tr><th colspan="${width}">${headerContent}</th></tr></thead>`;
   } htmlCode += `<tbody>`;
@@ -304,7 +308,12 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
           msg = y;
         }else{msg=""}
       }
-      htmlCode += `<td class="shelfSlot" id="${x}-${y}-${shelfID}" value="${x}-${y}-${shelfID}" title="${x}-${y}-${shelfID}">${msg}</td>`;
+      cellID = `${x}-${y}-${shelfID}`;
+      htmlCode += `<td class="shelfSlot" id="${cellID}" value="${cellID}" 
+      title="${cellID}">
+      ${msg}
+      ${isOccupied(cellID) ? "X":""}
+      </td>`;
     }
     htmlCode += `</tr>`;
   }
@@ -313,30 +322,39 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
   return htmlCode;
 }
 
-document.getElementById("s1-container").innerHTML = drawShelf(9, 25, "s1", "First shelf");
-document.getElementById("s2-container").innerHTML = drawShelf(9, 25, "s2", "Second shelf");
-document.getElementById("s3-container").innerHTML = drawShelf(9, 25, "s3", "Third shelf");
-document.getElementById("s4-container").innerHTML = drawShelf(7, 25, "s4", "Fourth shelf");
-document.getElementById("s5-container").innerHTML = drawShelf(9, 25, "s5", "Fifth shelf from the entrance<br>Second shelf from the bar");
-document.getElementById("s6-container").innerHTML = drawShelf(8, 25, "s6", "Sixth shelf from the entrance<br>First shelf from the bar");
+// will be used by the drawShelf function to flag a shelf as already occupied
+function isOccupied(cellID){
+  let occupied = false;
+  occupiedCells.forEach(element => {
+    element[0].forEach(cell => {
+      cell==cellID ? occupied=true : NaN;
+    })
+  });
+  return occupied;
+}
 
-document.getElementById("g1-container").innerHTML = drawShelf(1, 25, "g1", "<br>", true, true);
-document.getElementById("g2-container").innerHTML = drawShelf(1, 25, "g2", "<br>", true, true);
-document.getElementById("g3-container").innerHTML = drawShelf(7, 25, "g3", "<br>", true, true);
-document.getElementById("g4-container").innerHTML = drawShelf(13, 25, "g4", "Curve Leading to the bar", true, true);
-document.getElementById("g5-container").innerHTML = drawShelf(1, 25, "g5", "<br>", true, true);
+function drawCellar(){
+  document.getElementById("s1-container").innerHTML = drawShelf(9, 25, "s1", "First shelf");
+  document.getElementById("s2-container").innerHTML = drawShelf(9, 25, "s2", "Second shelf");
+  document.getElementById("s3-container").innerHTML = drawShelf(9, 25, "s3", "Third shelf");
+  document.getElementById("s4-container").innerHTML = drawShelf(7, 25, "s4", "Fourth shelf");
+  document.getElementById("s5-container").innerHTML = drawShelf(9, 25, "s5", "Fifth shelf from the entrance<br>Second shelf from the bar");
+  document.getElementById("s6-container").innerHTML = drawShelf(8, 25, "s6", "Sixth shelf from the entrance<br>First shelf from the bar");
+
+  document.getElementById("g1-container").innerHTML = drawShelf(1, 25, "g1", "<br>", true, true);
+  document.getElementById("g2-container").innerHTML = drawShelf(1, 25, "g2", "<br>", true, true);
+  document.getElementById("g3-container").innerHTML = drawShelf(7, 25, "g3", "<br>", true, true);
+  document.getElementById("g4-container").innerHTML = drawShelf(13, 25, "g4", "Curve Leading to the bar", true, true);
+  document.getElementById("g5-container").innerHTML = drawShelf(1, 25, "g5", "<br>", true, true);
+}
+drawCellar();
+
 
 
 // --- Wine-to-Cellar Mapping Feature ---
 
-// Get dropdown and create the Confirm button next to it
 const wineDropdown = document.getElementById("wineDropDownSelection");
-const confirmBtn = document.createElement("button");
-confirmBtn.textContent = "Confirm Allocation";
-confirmBtn.id = "confirmAllocationBtn";
-confirmBtn.style.marginLeft = "10px";
-wineDropdown.insertAdjacentElement("afterend", confirmBtn);
-
+const confirmBtn = document.getElementById("confirmAllocationBtn");
 // Track currently selected wine ID and selected cells
 let currentWineId = null;
 let selectedCells = new Set();
@@ -391,6 +409,16 @@ confirmBtn.addEventListener("click", () => {
     alert("Please select a wine first.");
     return;
   }
+  // Allow user to export all mappings after multiple allocations
+document.getElementById('exportJsonBtn').addEventListener('click', () => {
+  const updatedJson = JSON.stringify(window.wines, null, 2);
+  const blob = new Blob([updatedJson], { type: 'application/json' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'wines.json';
+  link.click();
+});
+
 
   const wine = wines.find(w => w.id === currentWineId);
   if (!wine) {
