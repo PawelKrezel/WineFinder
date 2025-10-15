@@ -1,7 +1,13 @@
 [
   {
     "id": "ae61a7-89ea-4f24-ae3c-9f2b74d73ccd",
-    "shelves": [],
+    "shelves": [
+      "6-1-s1",
+      "6-2-s1",
+      "6-3-s1",
+      "6-4-s1",
+      "6-5-s1"
+    ],
     "name": "Pulenta",
     "grape": "Malbec",
     "region": "Mendoza",
@@ -18,7 +24,14 @@
   },
   {
     "id": "66e7f2-2d12-4d31-8ba3-42fdfaa06413",
-    "shelves": [],
+    "shelves": [
+      "1-1-s1",
+      "1-2-s1",
+      "1-3-s1",
+      "1-4-s1",
+      "1-5-s1",
+      "1-6-s1"
+    ],
     "name": "Quinta De La Rosa",
     "grape": "Tinto",
     "region": "Douro",
@@ -35,7 +48,12 @@
   },
   {
     "id": "9f1b0e-bcb1-413d-a7cb-91a9823cd304",
-    "shelves": [],
+    "shelves": [
+      "3-1-s1",
+      "3-2-s1",
+      "3-3-s1",
+      "3-4-s1"
+    ],
     "name": "Hartenberg",
     "grape": "Cabernet Sauvignon",
     "region": "Stellenbosch",
@@ -52,7 +70,19 @@
   },
   {
     "id": "d0c7bc-9c95-4b35-8239-c6867f562f10",
-    "shelves": [],
+    "shelves": [
+      "9-1-s1",
+      "9-2-s1",
+      "9-25-s1",
+      "9-24-s1",
+      "9-23-s1",
+      "9-22-s1",
+      "9-21-s1",
+      "9-20-s1",
+      "9-19-s1",
+      "5-21-s1",
+      "5-22-s1"
+    ],
     "name": "C.V.N.E Imperial Gran Riserva",
     "grape": "Tempranillo",
     "region": "Haro, Rioja",
