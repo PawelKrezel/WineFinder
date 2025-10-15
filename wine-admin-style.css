@@ -190,12 +190,17 @@ td input:focus{
     margin-top: 1em;
 }
 
-#exportJSON, #wineDropDownSelection{
+#exportJSON, #wineDropDownSelection, #confirmAllocationBtn{
     padding: 1em;
     font-size: larger;
     text-align: center;
     width: 91vw;
     margin-left: 4vw;
+    margin-top: 0.5em;
+}
+#exportJSON{
+    position: sticky;
+    top: 5px;
 }
 form #imagePreview, #mapContainer{
     background-image: linear-gradient(51deg,#73695684, #261c14ac);

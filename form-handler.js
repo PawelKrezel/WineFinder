@@ -152,7 +152,7 @@ function renderTable() {
     dropDownHTMLs.push(`<option value="${wine.id}" title="(${wine.name}) ${wine.id}" id="map-to-cellar-${wine.id}">${wine.name} - ${wine.vintage} ${wine.grape} from ${wine.region}</option>`);
   });
 
-  tableHTML += `</tbody></table><br><button id="exportJSON">Export JSON <i class="fa-solid fa-download"></i></button>`;
+  tableHTML += `</tbody></table><br>`;
   tableContainer.innerHTML = tableHTML;
 
   dropDownHTMLs.sort();
@@ -409,15 +409,6 @@ confirmBtn.addEventListener("click", () => {
     alert("Please select a wine first.");
     return;
   }
-  // Allow user to export all mappings after multiple allocations
-document.getElementById('exportJsonBtn').addEventListener('click', () => {
-  const updatedJson = JSON.stringify(window.wines, null, 2);
-  const blob = new Blob([updatedJson], { type: 'application/json' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'wines.json';
-  link.click();
-});
 
 
   const wine = wines.find(w => w.id === currentWineId);
@@ -429,15 +420,5 @@ document.getElementById('exportJsonBtn').addEventListener('click', () => {
   // Save shelves array for selected wine
   wine.shelves = Array.from(selectedCells);
 
-  // Regenerate JSON export
-  const blob = new Blob([JSON.stringify(wines, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "wines.json";
-  link.click();
-  URL.revokeObjectURL(url);
-
   alert(`Allocation saved for ${wine.name} (${wine.shelves.length} cells).`);
 });
-
