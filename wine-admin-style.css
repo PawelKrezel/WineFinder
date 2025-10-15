@@ -194,13 +194,15 @@ td input:focus{
     padding: 1em;
     font-size: larger;
     text-align: center;
-    width: 91vw;
-    margin-left: 4vw;
+    width: 95vw;
+    margin-left: 2vw;
     margin-top: 0.5em;
+
 }
-#exportJSON{
+div.controls{
     position: sticky;
-    top: 5px;
+    top: 3px;
+    margin-bottom: 5em;
 }
 form #imagePreview, #mapContainer{
     background-image: linear-gradient(51deg,#73695684, #261c14ac);

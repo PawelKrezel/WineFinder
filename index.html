@@ -110,7 +110,14 @@
 
 <!-- container for summary table -->
 <div id="tableContainer"></div>
-<button id="exportJSON">Export JSON <i class="fa-solid fa-download"></i></button>
+
+<!-- container for essential JSON controls -->
+<div class="controls">
+  <button id="exportJSON">Export JSON <i class="fa-solid fa-download"></i></button>
+  <select id="wineDropDownSelection" class="commonStyle"></select>
+  <button id="confirmAllocationBtn" class="commonStyle">Confirm Allocation</button>
+</div>
+
 
 <!-- Mini map of the wine cellar -->
 <div id="mapContainer">
@@ -133,12 +140,6 @@
   <div class="miniMapLegend">
     <i class="fa-solid fa-martini-glass-citrus fa-flip fa-2xl"></i><br><br>
     To the bar <i class="fa-solid fa-arrow-right"></i></div>
-</div>
-
-<div>
-  <select id="wineDropDownSelection" class="commonStyle">
-  </select>
-  <button id="confirmAllocationBtn" class="commonStyle">Confirm Allocation</button>
 </div>
 
 <!-- Vanila JS page controls -->
