@@ -129,7 +129,12 @@ form button{
     transition-duration: 0.55s;
 }
 #tableContainer{
+    width: 95vw;
+    max-height: 75vh;
+    overflow-y: scroll;
     overflow-x: scroll;
+    margin-left: auto;
+    margin-right: auto;
 }
 #tableContainer td.img-parent{
     text-align: center;
