@@ -1,0 +1,79 @@
+I will upload a pdf file containing a wine list. Go through all the wines and populate a JSON file with correct information about each of the wines listed there.
+
+
+Here is template for the JSON file structure with some dummy data below. I will give you more explanation for each field below the example
+[
+  {
+    "id": "9f1b0e-bcb1-413d-a7cb-91a9823cd304",
+    "shelves": [],
+    "name": "Hartenberg",
+    "grape": "Cabernet Sauvignon",
+    "region": "Stellenbosch",
+    "country": "South Africa",
+    "vintage": 2020,
+    "body": "full-body",
+    "tannin": "light-tannin",
+    "acidity": "medium-acidity",
+    "glass": "Bordeaux",
+    "coravin": false,
+    "btlOnly": false,
+    "sommNotes": "",
+    "imageUrl": ""
+  },
+  {
+    "id": "d0c7bc-9c95-4b35-8239-c6867f562f10",
+    "shelves": [
+      "9-1-s1",
+      "9-2-s1",
+      "9-25-s1",
+      "9-24-s1",
+      "9-23-s1",
+      "9-22-s1",
+      "9-21-s1",
+      "9-20-s1",
+      "9-19-s1",
+      "5-21-s1",
+      "5-22-s1"
+    ],
+    "name": "C.V.N.E Imperial Gran Riserva",
+    "grape": "Tempranillo",
+    "region": "Haro, Rioja",
+    "country": "Spain",
+    "vintage": 2015,
+    "body": "full-body",
+    "tannin": "full-tannin",
+    "acidity": "medium-acidity",
+    "coravin": true,
+    "sommNotes": "Nice notes of red fruits on the nose. \"Jumps out of the glass\" delicious!!",
+    "glass": "Bordeaux",
+    "imageUrl": "img/imperial.png"
+  }
+]
+
+Further instructions for populating the JSON file 
+field called „id” will store a UUID, generate the UUID for each of the wines added to the file,
+field called „shelves” will be populated by a human later, leave it as an empty list [],
+
+For the fields below, you can get this information directly from the wine menu. Should the information be not available, leave „⚠️LLM COULDN’T FIND⚠️”:
+field called „name” would contain the name of the vineyard/producer of the wine/brand,
+field called „grape” would contain the name of the particular grape variety that was used to produce the wine. In the event that one wine is made up of various grape varieties, have them listed in a single string with varieties separated by a comma (eg „Malbec, Tempranillo, Cabernet Sauvignon”),
+field called „region” would be the name of the region where the wine was produced (eg „Mendoza” which is a region in Argentina),
+field called „country” would be the name of the country from which the wine is from (eg „Argentina”),
+field called „vintage” would describe the year from which the wine comes,
+
+For the fields below, the information will not be available in the menu. Your job for those fields will be to deduce what the answer would be. (For example if you’re populating an entry for a Bordeaux wine from 2018, it is quite obvious that the body of the wine would be „full-body”. Apply commonly known WSET knowledge base to deduce the answers. Should you be unable to deduce accurately, leave „⚠️LLM COULD NOT DEDUCE ⚠️”:
+field called „body” can be either set to „light-body”, „medium-body” or „full-body”
+field called „tannin” can be either set to „light-tannin”, „medium-tannin” or „full-tannin”
+field called „acidity” can be either set to „light-acidity”, „medium-acidity” or „full-acidity”
+field called „coravin” can be either true or false. True if the wine is available by the glass and price per glass is more than £25. Set to false otherwise,
+field called „sommNotes” leave blank unless you can come up with a short description of the wine (tasting notes, notes on the nose, etc)
+field called „glass” can be either „Tst”, „Flute”, „Burgundy”, „Bordeaux”, „Standard”. Rules for glass allocation: „Flute” for sparkling wines, otherwise „Tst” for dessert wines/ports/sherrys, otherwise „Standard” if the cost of wine by the bottle is less than £85 and the wine is not sparkling nor dessert wine/port/sherry, otherwise „Burgundy” for delicate and light wines which cost more than £85 by the bottle, otherwise „Bordeaux”
+field called „imageUrl” leave as an empty string „”
+
+Further information:
+Where applicable, PDF file lists prices by the bottle, and by the glass (either 175ml or 125ml or 75ml) and by carafe (500ml);
+Sparkling and Dessert wines are clearly marked;
+Normalise the capitalisation (eg. „Cabernet sauvignon” -> „Cabernet Sauvignon”)
+
+There is a separate section for wines by the glass - that’s where the price for the glass as well s by the carafe and by the bottle will be shown. There is also a separate section with wines by their colour and those wines will only have price by the bottle. Some wines are available only by the bottle and will only be listed in the accurate colour section, other wines are also available by the glass and those wines will be listed in the wine by the colour section as well as in the wine by the glass section. This may cause potential duplicates. Make sure this does not get confused
+ 
