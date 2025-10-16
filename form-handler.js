@@ -228,6 +228,8 @@ function renderTable() {
 
   // Handle uploaded JSON file from input
   document.getElementById("uploadJSON").addEventListener("change", (event) => {
+    wines = []
+    occupiedCells = []
     const file = event.target.files[0];
     if (!file) return;
 

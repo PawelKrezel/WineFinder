@@ -189,28 +189,32 @@ td input:focus{
     padding: 1em;
     margin-top: 1em;
 }
-
+div.controls{
+    position: sticky;
+    top: 2px;
+    margin-bottom: 5em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95vw;
+}
 #exportJSON, #wineDropDownSelection, #confirmAllocationBtn{
     padding: 1em;
     font-size: larger;
     text-align: center;
-    width: 95vw;
-    margin-left: 2vw;
-    margin-top: 0.5em;
+    margin-top: 3px;
+    width: 100%;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
 
-}
-div.controls{
-    position: sticky;
-    top: 3px;
-    margin-bottom: 5em;
 }
 form #imagePreview, #mapContainer{
     background-image: linear-gradient(51deg,#73695684, #261c14ac);
 }
 #mapContainer{
     margin-top: 2em;
+    width: 95vw;
     overflow-x: scroll;
-    min-width: 91vw;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 1em;
