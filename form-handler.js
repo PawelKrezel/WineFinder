@@ -174,6 +174,7 @@ function renderTable() {
         currentSortDir = 1;
       }
       renderTable();
+      drawCellar();
     });
   });
 
@@ -183,6 +184,7 @@ function renderTable() {
       const index = parseInt(btn.getAttribute("data-index"), 10);
       wines.splice(index, 1);
       renderTable();
+      drawCellar();
     });
   });
 
@@ -196,6 +198,7 @@ function renderTable() {
       else if (key === "coravin" || key === "btlOnly") wine[key] = input.value === "true";
       else wine[key] = input.value;
       renderTable(); // refresh image
+      drawCellar();
     });
   });
 
@@ -228,11 +231,11 @@ function renderTable() {
 
   // Handle uploaded JSON file from input
   document.getElementById("uploadJSON").addEventListener("change", (event) => {
-    wines = []
-    occupiedCells = []
     const file = event.target.files[0];
     if (!file) return;
 
+    occupiedCells = [];
+    wines = [];
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
@@ -253,6 +256,7 @@ function renderTable() {
     };
     reader.readAsText(file);
   });
+
 
   // Auto-load wines.json 
 
@@ -428,6 +432,7 @@ confirmBtn.addEventListener("click", () => {
 
   // Save shelves array for selected wine
   wine.shelves = Array.from(selectedCells);
+  occupiedCells.push([Array.from(selectedCells), `${wine.vintage} ${wine.name} (${wine.id})`]);
 
   alert(`Allocation saved for ${wine.name} (${wine.shelves.length} cells).`);
 });
