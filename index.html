@@ -99,8 +99,14 @@
 
   <!-- upload other version of JSON DB -->
     <div class="uploadJSON">
-    <label><i class="fa-solid fa-upload"></i> Upload current "wines.json" file: </label>
-    <input type="file" id="uploadJSON" accept=".json">
+    <label for="uploadJSON"><i class="fa-solid fa-upload"></i> Upload current "wines.json" file: </label>
+    <input type="file" id="uploadJSON" accept=".json" name="uploadJSON">
+
+    <input type="radio" name="uploadMode" id="uploadAppend" value="uploadAppend">
+    <label for="uploadAppend" class="commonStyle" title="Will keep all of the data you see on the screen and append data from the uploaded JSON file to the table you already have. Good for joining two databases together.">Upload and Append</label>
+
+    <input type="radio" name="uploadMode" id="uploadFresh" value="uploadFresh" checked>
+    <label for="uploadFresh" class="commonStyle" title="Will only display the data from the uploaded file. Good for editing seperate versions of the database.">Start Fresh</label>
     </div>
 
 

@@ -234,8 +234,12 @@ function renderTable() {
     const file = event.target.files[0];
     if (!file) return;
 
-    occupiedCells = [];
-    wines = [];
+    var uploadMode = document.querySelector('input[name="uploadMode"]:checked')?.value;
+    if (uploadMode == "uploadFresh"){
+      occupiedCells = [];
+      wines = [];
+    }
+
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
