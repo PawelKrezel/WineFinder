@@ -51,7 +51,7 @@ Codebase for v1 is kept in the "main" branch of this repository.
 
 ## Regarding license
 
-## License for this repository applies to all versions of the WineFinder. It applies to all branches of this repository
+License for this repository applies to all versions of the WineFinder. It applies to all branches of this repository
 
 ---
 
@@ -86,4 +86,4 @@ git clone -b v2-django-branch --single-branch https://github.com/PawelKrezel/Win
 cd WineFinder
 ```
 
-The proceed with best practices recommended for Django development and run server locally.
+Then proceed with best practices recommended for Django development and run server locally.
