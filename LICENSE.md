@@ -1,4 +1,4 @@
-# WineFinder Custom License v1.0
+# WineFinder Custom License v1.1
 
 **© 2025 Pawel Krezel**
 
@@ -13,8 +13,9 @@ Student at the: **University of Westminster**, BSc Computer Science
 
 ## 1. License Name and Scope
 
-This document constitutes the **WineFinder Custom License v1.0**.  
+This document constitutes the **WineFinder Custom License v1.1**.  
 It governs all current and future versions of the software held in this repository known as **“WineFinder”**, unless explicitly stated otherwise by the copyright holder.
+This applies to the WineFinder v1 stored on the branch called "main" as well as to the WineFinder v2 stored on the branch called "v2-django-branch"
 
 ---
 
@@ -111,7 +112,7 @@ For permissions, licensing, or commercial use inquiries, please contact:
 
 ## 8. AI Usage Acknowledgment
 
-Parts of this software, including some JavaScript functions and portions of this license text, were drafted or assisted using an AI system  
+Parts of this software for WineFinder v1, such as JavaScript functions responsible for handling the JSON file and portions of this license text, were drafted or assisted using an AI system  
 (**ChatGPT, GPT-5-mini, OpenAI**).
 
 By using, modifying, or redistributing this software, you acknowledge that **AI-assisted work** contributed to its development.
