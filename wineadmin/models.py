@@ -50,12 +50,22 @@ class Wine(models.Model):
         ('Flute', 'Flute'),
         ('Tst', 'Tasting glass')
     ]
+    CORAVIN_CHOICES = [
+        ('Yes', 'Needs to be Coravined'),
+        ('No', 'No Need to Coravin')
+    ]
+    BTL_ONLY_CHOICES = [
+        ('Yes', 'Only by the Bottle'),
+        ('No', 'Available by the Glass/Carafe')
+    ]
+    
     body = models.CharField(max_length=15,choices=BODY_CHOICES)
     tannin = models.CharField(max_length=15, choices=TANNIN_CHOICES)
     acidity = models.CharField(max_length=15, choices=ACIDITY_CHOICES)
     glass = models.CharField(max_length=15, choices=GLASS_CHOICES)
+    coravin = models.CharField(max_length=15, choices=CORAVIN_CHOICES)
+    btl_only = models.CharField(max_length=15, choices=BTL_ONLY_CHOICES)
 
-    coravin = models.BooleanField(default=False)
     sommNotes = models.TextField(blank=True)
     imageUrl = models.URLField(blank=True)
 
