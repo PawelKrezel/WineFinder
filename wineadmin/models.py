@@ -67,7 +67,7 @@ class Wine(models.Model):
     btl_only = models.CharField(max_length=15, choices=BTL_ONLY_CHOICES)
 
     sommNotes = models.TextField(blank=True)
-    imageUrl = models.URLField(blank=True)
+    image = models.ImageField(upload_to="wine_images/", blank=True)
 
     shelves = models.ManyToManyField(
         Slot,
