@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os 
+import firebase_admin
+from firebase_admin import credentials, storage
+import json
 import dj_database_url # type: ignore
 from dotenv import load_dotenv # type: ignore
 
@@ -89,6 +92,12 @@ DATABASES = {
 database_url = os.environ.get("DATABASE_URL")
 DATABASES['default'] = dj_database_url.parse(database_url)
 
+# Firebase (used for image storage)
+cred_json = json.loads(os.environ.get('FIREBASE'))
+cred = credentials.Certificate(cred_json)
+
+firebase_admin.initialize_app(cred, {'storageBucket':'winefinder-kb.firebasestorage.app'})
+bucket = storage.bucket()
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
