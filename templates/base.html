@@ -1,0 +1,16 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="🍷">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <title>{% block title %} 🍷 WineFinder KB {% endblock %}</title>
+    </head>
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
