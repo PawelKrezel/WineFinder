@@ -1,9 +1,9 @@
 <!-- Form for adding new wine to the DB -->
-<form id="wineForm" method="POST">
+<form id="wineForm" method="POST" enctype="multipart/form-data" action="{% url 'add_new_wine' %}">
     {% csrf_token %}
     <h1>Add a new wine to the DB  <i class="fa-solid fa-database fa-md"></i></h1>
     
     {{ form_new_wine.as_div }}
 
-    
+    <button type="submit">Jazda kurwa</button>
 </form>

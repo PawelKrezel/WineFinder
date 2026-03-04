@@ -2,6 +2,7 @@ from django import forms
 from .models import Wine
 
 class new_wine_form(forms.ModelForm):
+    image = forms.ImageField(required=False)
     class Meta:
         model = Wine
         fields = ["name", "grape", "region", "country", "vintage", "body", 
