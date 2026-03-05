@@ -3,6 +3,9 @@ from django.template import loader
 from .forms import new_wine_form
 from django.shortcuts import redirect
 from .firebase_storage import upload_image
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def wineadmin(request):
     form_new_wine = new_wine_form()
     template = loader.get_template('wineadmin/admin-panel.html')
@@ -16,6 +19,7 @@ def workInProgress(request):
     template = loader.get_template("wineadmin/production-temp.html")
     return HttpResponse(template.render())
 
+@login_required
 def add_new_wine(request):
     if request.method == "POST":
         form_new_wine = new_wine_form(request.POST, request.FILES)
@@ -26,7 +30,7 @@ def add_new_wine(request):
             if request.FILES.get("image"):
                 image_url = upload_image(request.FILES["image"])
                 wine.imageURL = image_url
-                
+
             wine.save()
             return redirect("wineadmin")
             
