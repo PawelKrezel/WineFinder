@@ -23,6 +23,9 @@
         <title>{% block title %} 🍷 WineFinder KB {% endblock %}</title>
     </head>
     <body>
+        <header>
+            {% include "header.html" %}
+        </header>
         {% block content %}
         {% endblock %}
     </body>
