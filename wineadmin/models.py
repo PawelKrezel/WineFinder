@@ -77,5 +77,5 @@ class Wine(models.Model):
     )
 
     def __str__(self):
-        return f"{self.name} ({self.vintage or 'NV'})"
+        return f"{self.wine_name} ({self.vintage or 'NV'})"
     
