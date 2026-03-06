@@ -1,14 +1,50 @@
+/* parts of the CSS code were from the original prototype (WineFinder v1) were reused here
+source: https://github.com/PawelKrezel/WineFinder/blob/v1-partially-vibe-coded-with-GPT/wine-admin-style.css
+
+*/
+
 *{
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-html, body{
-    background-image: url('/img/bg-2.jpg');
+body::-webkit-scrollbar{
+    display: none;
+}
+html{
+    background-image: url('../img/bg-2.jpg');
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    background-size: cover;
+
     width: 100%;
     padding: 0;
     margin: 0;
     border: 0;
 
 }
+
+.commonStyle{
+    background-color: #718c4ac3;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition-duration: 0.5s;
+    color: rgb(242, 244, 246);
+    text-align: center;
+    display: inline-block;
+}
+.commonStyle:hover{
+    background-color: #718c4a70;
+    color: rgba(234, 238, 242, 0.928);
+    border-radius: 15px;
+}
+.commonStyle::placeholder{
+    color: rgba(234, 238, 242, 0.707);
+}
+
+.commonTxtInputStyle{
+    height: 2em;
+    line-height: 2em;
+    font-size: medium;
+    padding: 0.35em 0.1em 0.35em;
+}
+

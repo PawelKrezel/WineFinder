@@ -1,9 +1,141 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'wineadmin/css/new-wine-form.css' %}">
+
 <!-- Form for adding new wine to the DB -->
-<form id="wineForm" method="POST" enctype="multipart/form-data" action="{% url 'add_new_wine' %}">
+<form id="new-wine-form" method="POST" enctype="multipart/form-data" action="{% url 'add_new_wine' %}">
     {% csrf_token %}
     <h1>Add a new wine to the DB  <i class="fa-solid fa-database fa-md"></i></h1>
-    
-    {{ form_new_wine.as_div }}
 
-    <button type="submit">Jazda kurwa</button>
+    <!-- Basic information about wine -->
+
+    <!-- Name and Grape verity -->
+    <div class="formInputRow grid-2-options">
+        {{ form_new_wine.wine_name }}
+        {{ form_new_wine.grape }}
+    </div>
+
+    <!-- Region, country and vintage -->
+    <div class="formInputRow grid-3-options">
+        {{ form_new_wine.region }}
+        {{ form_new_wine.country_of_origin }}
+        {{ form_new_wine.vintage }}
+    </div>
+    <br>
+    
+    <!-- WSET level 2 details about wine -->
+
+    <!-- Wine Body -->
+    <div class="formInputRow grid-3-options">
+        <input type="radio" name="body" value="light-body" id="light-body">
+        <label for="light-body" class="commonStyle">Light Body</label>
+
+        <input type="radio" name="body" value="medium-body" id="medium-body">
+        <label for="medium-body" class="commonStyle">Medium Body</label>
+
+        <input type="radio" name="body" value="full-body" id="full-body">
+        <label for="full-body" class="commonStyle">Full Body</label>
+    </div>
+
+    <!-- Wine Tannins -->
+    <div class="formInputRow grid-3-options">
+        <input type="radio" name="tannin" value="light-tannin" id="light-tannin" required>
+        <label for="light-tannin" class="commonStyle">Light Tannin</label>
+
+        <input type="radio" name="tannin" value="medium-tannin" id="medium-tannin">
+        <label for="medium-tannin" class="commonStyle">Medium Tannin</label>
+
+        <input type="radio" name="tannin" value="full-tannin" id="full-tannin">
+        <label for="full-tannin" class="commonStyle">Full Tannin</label>
+    </div>
+
+    <!-- Wine Acidity -->
+    <div class="formInputRow grid-3-options">
+        <input type="radio" name="acidity" value="light-acidity" id="light-acidity" required>
+        <label for="light-acidity" class="commonStyle">Light Acidity</label>
+
+        <input type="radio" name="acidity" value="medium-acidity" id="medium-acidity">
+        <label for="medium-acidity" class="commonStyle">Medium Acidity</label>
+
+        <input type="radio" name="acidity" value="full-acidity" id="full-acidity">
+        <label for="full-acidity" class="commonStyle">Full Acidity</label>
+    </div>
+    <br>
+
+    <!-- Wine Glass -->
+    <div class="formInputRow grid-5-options">
+        <input type="radio" name="glass" value="Tst" id="Tst">
+        <label for="Tst" class="commonStyle">Tasting Gls</label>
+
+        <input type="radio" name="glass" value="Flute" id="Flute">
+        <label for="Flute" class="commonStyle">Flute</label>
+
+        <input type="radio" name="glass" value="Burgundy" id="Burgundy">
+        <label for="Burgundy" class="commonStyle">Burgundy Gls</label>
+
+        <input type="radio" name="glass" value="Bordeaux" id="Bordeaux">
+        <label for="Bordeaux" class="commonStyle">Bordeaux Gls</label>
+
+        <input type="radio" name="glass" value="Standard" id="Standard" checked>
+        <label for="Standard" class="commonStyle">Standard Gls</label>        
+    </div>
+
+    <!-- Coravin -->
+    <div class="formInputRow grid-2-options">
+        <input type="radio" name="coravin" value="Yes" id="coravin-yes">
+        <label for="coravin-yes" class="commonStyle">needs to be coravined</label>
+
+        <input type="radio" name="coravin" value="No" id="coravin-no" checked>
+        <label for="coravin-no" class="commonStyle">no need to coravin</label>
+    </div>
+
+    <!-- Availability by the glass -->
+    <div class="formInputRow grid-2-options">
+        <input type="radio" name="btlOnly" value="Yes" id="btlOnly-yes">
+        <label for="btlOnly-yes" class="commonStyle">only by the bottle</label>
+
+        <input type="radio" name="btlOnly" value="No" id="btlOnly-no" checked>
+        <label for="btlOnly-no" class="commonStyle">available by the glass/carafe</label>
+    </div>
+    <br>
+
+    <!-- Optional Extra Information  -->
+    <textarea 
+    name="sommNotes" 
+    class="commonStyle commonTxtInputStyle" 
+    placeholder="Optional sommelier notes. Feel free to throw in any fun facts or additional info that you think the team should know about this wine"></textarea>
+    <br>
+
+    <!-- MISC -->
+    <div class="formInputRow grid-2-options">
+        <label for="id_image" class="commonStyle commonTxtInputStyle">
+            <span id="new-wine-form-image-upload-label">📷 Upload bottle image</span>
+            <span id="new-wine-form-image-preview"></span>
+            <span id="new-wine-form-image-file-name"></span>
+        </label>
+
+        <button type="submit" class="commonStyle">Save Wine ✅</button>
+    </div>
+        <!-- service elements for image upload that ruin my UI -->
+        <section style="display: none;">
+            <input type="file" name="image" accept="image/*" id="id_image">
+            <script>
+                document.getElementById("id_image").addEventListener("change", function() {
+                    const file = this.files[0];
+
+                    document.getElementById("new-wine-form-image-upload-label").textContent = "📸 Uploaded bottle image: ";
+                    document.getElementById("new-wine-form-image-file-name").textContent = file ? file.name : "";
+
+                    if(file){
+                        const reader = new FileReader();
+                        reader.onload = function(e){
+                            document.getElementById("new-wine-form-image-preview").innerHTML = '<img src="' + e.target.result + '" style="max-height:1em;">';
+                        };
+                        reader.readAsDataURL(file);
+                    }
+            });
+            </script>
+        </section>
+
+
+    
 </form>

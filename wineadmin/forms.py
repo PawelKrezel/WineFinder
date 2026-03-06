@@ -5,43 +5,43 @@ class new_wine_form(forms.ModelForm):
     image = forms.ImageField(required=False)
     class Meta:
         model = Wine
-        fields = ["name", "grape", "region", "country", "vintage", "body", 
+        fields = ["wine_name", "grape", "region", "country_of_origin", "vintage", "body", 
                 "tannin", "acidity", "glass", "coravin", "btl_only", "sommNotes"]
         
         #attributes for the form elements
         widgets = {
-            "name": forms.TextInput(
+            "wine_name": forms.TextInput(
                 attrs={
                     "placeholder":"Name 🏷️",
-                    "class":"commonStyle",
+                    "class":"commonStyle commonTxtInputStyle",
                     "required":True
                 }
             ),
             "grape": forms.TextInput(
                 attrs={
                     "placeholder":"Grape 🍇",
-                    "class":"commonStyle",
+                    "class":"commonStyle commonTxtInputStyle",
                     "required":True
                 }
             ),
             "region": forms.TextInput(
                 attrs={
                     "placeholder":"Region 📌",
-                    "class":"commonStyle",
+                    "class":"commonStyle commonTxtInputStyle",
                     "required":True
                 }
             ),
-            "country": forms.TextInput(
+            "country_of_origin": forms.TextInput(
                 attrs={
                     "placeholder":"Country 🗺️",
-                    "class":"commonStyle",
+                    "class":"commonStyle commonTxtInputStyle",
                     "required":True
                 }
             ),
             "vintage": forms.NumberInput(
                 attrs={
                     "placeholder":"Vintage 🗓️",
-                    "class":"commonStyle",
+                    "class":"commonStyle commonTxtInputStyle",
                     "required":True
                 }
             ),

@@ -22,10 +22,10 @@ class Wine(models.Model):
         editable=False
     )
 
-    name = models.CharField(max_length=255)
+    wine_name = models.CharField(max_length=255)
     grape = models.CharField(max_length=100)
     region = models.CharField(max_length=100)
-    country = models.CharField(max_length=100)
+    country_of_origin = models.CharField(max_length=100)
     vintage = models.PositiveIntegerField(null=False, default=2020)
 
     BODY_CHOICES = [

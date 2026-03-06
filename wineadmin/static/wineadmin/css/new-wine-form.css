@@ -1,0 +1,66 @@
+form h1{
+    font-size: larger;
+    color:rgba(234, 238, 242, 0.928);
+}
+
+form#new-wine-form{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    text-align: center;
+}
+
+form > *{
+    margin-bottom: 0.5em;
+}
+
+
+/*radio buttons within the form*/
+input[type="radio"], input[type="file"]{
+    display: none;
+}
+
+input[type="radio"] + label{
+    display: inline-block;
+    padding: 0.35em 0.1em 0.35em;
+    height: 2em;
+    line-height: 2em;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+input[type="radio"]:checked + label{
+    background-color: #8c08089c;
+    color: rgba(222, 227, 232, 0.886);
+    font-weight: bold;
+}
+
+input[type="radio"]:checked + label:hover{
+    background-color: #8c0808f3;
+}
+
+/* layout for radio buttons */
+
+.formInputRow{
+    display: grid;
+    column-gap: 0.25em;
+}
+
+.grid-2-options{
+    grid-template-columns: auto auto;
+}
+
+.grid-3-options{
+    grid-template-columns: auto auto auto;
+}
+
+.grid-5-options{
+    grid-template-columns: auto auto auto auto auto;
+}
+
+form#new-wine-form > textarea{
+    width: 100%;
+    min-height: 5em;
+}
+
+
