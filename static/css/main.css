@@ -10,7 +10,7 @@ source: https://github.com/PawelKrezel/WineFinder/blob/v1-partially-vibe-coded-w
 body::-webkit-scrollbar{
     display: none;
 }
-html{
+html, body{
     background-image: url('../img/bg-2.jpg');
     background-position: center;
     background-attachment: fixed;
@@ -98,4 +98,14 @@ commonStyle defines the overall colour scheme and borders of an element
 
 .commonGradientBackground{
     background-image: linear-gradient(51deg,#73695684, #261c14ac);
+}
+
+@media only screen and (max-width: 690px){
+    .row-1-entity, 
+    .row-2-entities, 
+    .row-3-entities, 
+    .row-4-entities, 
+    .row-5-entities{
+        grid-template-columns: auto;
+    }
 }
