@@ -8,4 +8,5 @@ urlpatterns = [
     path('add-new-wine/', views.add_new_wine, name='add_new_wine'),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path('update-wines/', views.update_wines, name='update_wines'),
 ]

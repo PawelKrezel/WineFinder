@@ -1,7 +1,8 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'wineadmin/css/table-of-wines.css' %}">
 
-<form method="POST" action="TO BE IMPLEMENTED SOON">
+<form method="POST" action="{% url 'update_wines' %}" enctype="multipart/form-data" autocomplete="off">
+    {% csrf_token %}
     <table>
         <thead>
             <tr>
