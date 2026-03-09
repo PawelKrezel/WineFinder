@@ -29,20 +29,22 @@ input[type="radio"] + label{
     overflow: hidden;
 }
 
+/* highlight selected radio button */
 input[type="radio"]:checked + label{
     background-color: #8c08089c;
     color: rgba(222, 227, 232, 0.886);
     font-weight: bold;
 }
-
 input[type="radio"]:checked + label:hover{
     background-color: #8c0808f3;
 }
 
+/* make the txt area look bigger than other fields */
 form#new-wine-form textarea{
     min-height: 5em;
 }
 
+/*Label behavior for txt fields - visible when filled */
 .dsp-grid > .dsp-grid > label{
     display: inline-block;
     transition-duration: 0.6s;
@@ -53,7 +55,6 @@ form#new-wine-form textarea{
     opacity: 0%;
 
 }
-
 .dsp-grid > .dsp-grid:has(input:not(:placeholder-shown)) > label{
     opacity: 100%;
 } 
