@@ -13,35 +13,35 @@ class new_wine_form(forms.ModelForm):
             "wine_name": forms.TextInput(
                 attrs={
                     "placeholder":"Name 🏷️",
-                    "class":"commonStyle commonTxtInputStyle",
+                    "class":"commonStyle commonStyleAsBlock",
                     "required":True
                 }
             ),
             "grape": forms.TextInput(
                 attrs={
                     "placeholder":"Grape 🍇",
-                    "class":"commonStyle commonTxtInputStyle",
+                    "class":"commonStyle commonStyleAsBlock",
                     "required":True
                 }
             ),
             "region": forms.TextInput(
                 attrs={
                     "placeholder":"Region 📌",
-                    "class":"commonStyle commonTxtInputStyle",
+                    "class":"commonStyle commonStyleAsBlock",
                     "required":True
                 }
             ),
             "country_of_origin": forms.TextInput(
                 attrs={
                     "placeholder":"Country 🗺️",
-                    "class":"commonStyle commonTxtInputStyle",
+                    "class":"commonStyle commonStyleAsBlock",
                     "required":True
                 }
             ),
             "vintage": forms.NumberInput(
                 attrs={
                     "placeholder":"Vintage 🗓️",
-                    "class":"commonStyle commonTxtInputStyle",
+                    "class":"commonStyle commonStyleAsBlock",
                     "required":True
                 }
             ),

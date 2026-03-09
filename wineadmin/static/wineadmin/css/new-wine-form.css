@@ -40,7 +40,6 @@ input[type="radio"]:checked + label:hover{
 }
 
 /* layout for radio buttons */
-
 .formInputRow{
     display: grid;
     column-gap: 0.25em;

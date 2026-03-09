@@ -23,6 +23,9 @@ html{
 
 }
 
+/*
+commonStyle defines the overall colour scheme and borders of an element
+*/
 .commonStyle{
     background-color: #718c4ac3;
     border: 1px solid black;
@@ -30,7 +33,6 @@ html{
     transition-duration: 0.5s;
     color: rgb(242, 244, 246);
     text-align: center;
-    display: inline-block;
 }
 .commonStyle:hover{
     background-color: #718c4a70;
@@ -41,10 +43,14 @@ html{
     color: rgba(234, 238, 242, 0.707);
 }
 
-.commonTxtInputStyle{
+/* blocky dimensions of an element*/
+.commonStyleAsBlock{
+    display: inline-block;
+    font-size: medium;
+    box-sizing: content-box; /* fixed issue with buttons appearing short */
     height: 2em;
     line-height: 2em;
-    font-size: medium;
     padding: 0.35em 0.1em 0.35em;
+    
 }
 
