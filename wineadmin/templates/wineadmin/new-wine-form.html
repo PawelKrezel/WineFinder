@@ -7,23 +7,40 @@
     <h1>Add a new wine to the DB  <i class="fa-solid fa-database fa-md"></i></h1>
 
     <!-- Basic information about wine -->
-
     <!-- Name and Grape verity -->
     <div class="dsp-grid row-2-entities">
-        {{ form_new_wine.wine_name }}
-        {{ form_new_wine.grape }}
+        <div class="dsp-grid row-1-entity">
+            <label for="id_wine_name">&nbsp; Name 🏷️</label>
+            {{ form_new_wine.wine_name }}
+        </div>
+
+        <div class="dsp-grid row-1-entity">
+            <label for="id_wine_name">&nbsp; Grape 🍇</label>
+            {{ form_new_wine.grape }}
+        </div>      
     </div>
 
     <!-- Region, country and vintage -->
     <div class="dsp-grid row-3-entities">
-        {{ form_new_wine.region }}
-        {{ form_new_wine.country_of_origin }}
-        {{ form_new_wine.vintage }}
+        <div class="dsp-grid row-1-entity">
+            {{ form_new_wine.region }}
+            <label for="id_region">&nbsp; Region 📌</label>
+        </div>
+        
+        <div class="dsp-grid row-1-entity">
+            {{ form_new_wine.country_of_origin }}
+            <label for="id_country_of_origin">&nbsp; Country 🗺️</label>
+        </div>
+        
+        <div class="dsp-grid row-1-entity">
+            {{ form_new_wine.vintage }}
+            <label for="id_vintage">&nbsp; Vintage 🗓️</label>
+        </div>
+        
     </div>
     <br>
     
     <!-- WSET level 2 details about wine -->
-
     <!-- Wine Body -->
     <div class="dsp-grid row-3-entities">
         <input type="radio" name="body" value="light-body" id="light-body">
@@ -61,6 +78,7 @@
     </div>
     <br>
 
+    <!-- How to serve the wine-->
     <!-- Wine Glass -->
     <div class="dsp-grid row-5-entities">
         <input type="radio" name="glass" value="Tst" id="Tst">
@@ -99,10 +117,13 @@
     <br>
 
     <!-- Optional Extra Information  -->
-    <textarea 
-    name="sommNotes" 
-    class="commonStyle commonStyleAsBlock" 
-    placeholder="Optional sommelier notes. Feel free to throw in any fun facts or additional info that you think the team should know about this wine"></textarea>
+    <div class="dsp-grid row-1-entity">
+        <textarea 
+        name="sommNotes" 
+        class="commonStyle commonStyleAsBlock" 
+        placeholder="Optional sommelier notes. Feel free to throw in any fun facts or additional info that you think the team should know about this wine"></textarea>
+    </div>
+    
     <br>
 
     <!-- MISC -->
@@ -114,7 +135,7 @@
         </label>
 
         <button type="submit" class="commonStyle commonStyleAsBlock">Save Wine ✅</button>
-    </div>
+        
         <!-- service elements for image upload that ruin my UI -->
         <section style="display: none;">
             <input type="file" name="image" accept="image/*" id="id_image">
@@ -135,6 +156,9 @@
             });
             </script>
         </section>
+
+    </div>
+
 
 
     

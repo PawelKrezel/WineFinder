@@ -39,9 +39,21 @@ input[type="radio"]:checked + label:hover{
     background-color: #8c0808f3;
 }
 
-form#new-wine-form > textarea{
-    width: 100%;
+form#new-wine-form textarea{
     min-height: 5em;
 }
 
+.dsp-grid > .dsp-grid > label{
+    display: inline-block;
+    transition-duration: 0.6s;
+    text-align: left;
+    font-size: small;
+}
+.dsp-grid > .dsp-grid:has(input:placeholder-shown) > label{
+    opacity: 0%;
 
+}
+
+.dsp-grid > .dsp-grid:has(input:not(:placeholder-shown)) > label{
+    opacity: 100%;
+} 
