@@ -5,6 +5,7 @@ source: https://github.com/PawelKrezel/WineFinder/blob/v1-partially-vibe-coded-w
 
 *{
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #fff;
 }
 body::-webkit-scrollbar{
     display: none;
@@ -50,7 +51,32 @@ commonStyle defines the overall colour scheme and borders of an element
     box-sizing: content-box; /* fixed issue with buttons appearing short */
     height: 2em;
     line-height: 2em;
-    padding: 0.35em 0.1em 0.35em;
+    padding: 0.35em 0.3em 0.35em;
     
 }
 
+/* layout helper classes */
+.dsp-grid{
+    display: grid;
+    column-gap: 0.25em;
+}
+
+.row-1-entity{
+    grid-template-columns: auto;
+}
+
+.row-2-entities{
+    grid-template-columns: auto auto;
+}
+
+.row-3-entities{
+    grid-template-columns: auto auto auto;
+}
+
+.row-4-entities{
+    grid-template-columns: auto auto auto auto;
+}
+
+.row-5-entities{
+    grid-template-columns: auto auto auto auto auto;
+}

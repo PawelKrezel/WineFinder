@@ -11,8 +11,9 @@
     {{ form.username }}
     {{ form.password }}
 
-    <button type="submit">Login</button>
-    <button type="reset">Clear</button>
+    <button type="submit" class="commonStyle commonStyleAsBlock">Login</button>
+    <button type="reset" class="commonStyle commonStyleAsBlock">Clear</button>
 </form>
-
+{% load static %}
+<link rel="stylesheet" href="{% static 'wineadmin/css/login.css' %}">
 {% endblock %}

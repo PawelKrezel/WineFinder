@@ -2,6 +2,6 @@
 <p>Hello, {{request.user}}</p>
 <form method="POST" action="{%url 'logout' %}">
     {% csrf_token %}
-    <button type="submit">Logout</button>
+    <button type="submit" class="commonStyle">Logout</button>
 </form>
 {% endif %}

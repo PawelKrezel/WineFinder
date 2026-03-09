@@ -39,24 +39,6 @@ input[type="radio"]:checked + label:hover{
     background-color: #8c0808f3;
 }
 
-/* layout for radio buttons */
-.formInputRow{
-    display: grid;
-    column-gap: 0.25em;
-}
-
-.grid-2-options{
-    grid-template-columns: auto auto;
-}
-
-.grid-3-options{
-    grid-template-columns: auto auto auto;
-}
-
-.grid-5-options{
-    grid-template-columns: auto auto auto auto auto;
-}
-
 form#new-wine-form > textarea{
     width: 100%;
     min-height: 5em;

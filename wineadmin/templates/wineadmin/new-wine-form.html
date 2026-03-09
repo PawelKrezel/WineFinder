@@ -9,13 +9,13 @@
     <!-- Basic information about wine -->
 
     <!-- Name and Grape verity -->
-    <div class="formInputRow grid-2-options">
+    <div class="dsp-grid row-2-entities">
         {{ form_new_wine.wine_name }}
         {{ form_new_wine.grape }}
     </div>
 
     <!-- Region, country and vintage -->
-    <div class="formInputRow grid-3-options">
+    <div class="dsp-grid row-3-entities">
         {{ form_new_wine.region }}
         {{ form_new_wine.country_of_origin }}
         {{ form_new_wine.vintage }}
@@ -25,7 +25,7 @@
     <!-- WSET level 2 details about wine -->
 
     <!-- Wine Body -->
-    <div class="formInputRow grid-3-options">
+    <div class="dsp-grid row-3-entities">
         <input type="radio" name="body" value="light-body" id="light-body">
         <label for="light-body" class="commonStyle">Light Body</label>
 
@@ -37,7 +37,7 @@
     </div>
 
     <!-- Wine Tannins -->
-    <div class="formInputRow grid-3-options">
+    <div class="dsp-grid row-3-entities">
         <input type="radio" name="tannin" value="light-tannin" id="light-tannin" required>
         <label for="light-tannin" class="commonStyle">Light Tannin</label>
 
@@ -49,7 +49,7 @@
     </div>
 
     <!-- Wine Acidity -->
-    <div class="formInputRow grid-3-options">
+    <div class="dsp-grid row-3-entities">
         <input type="radio" name="acidity" value="light-acidity" id="light-acidity" required>
         <label for="light-acidity" class="commonStyle">Light Acidity</label>
 
@@ -62,7 +62,7 @@
     <br>
 
     <!-- Wine Glass -->
-    <div class="formInputRow grid-5-options">
+    <div class="dsp-grid row-5-entities">
         <input type="radio" name="glass" value="Tst" id="Tst">
         <label for="Tst" class="commonStyle">Tasting Gls</label>
 
@@ -80,7 +80,7 @@
     </div>
 
     <!-- Coravin -->
-    <div class="formInputRow grid-2-options">
+    <div class="dsp-grid row-2-entities">
         <input type="radio" name="coravin" value="Yes" id="coravin-yes">
         <label for="coravin-yes" class="commonStyle">needs to be coravined</label>
 
@@ -89,7 +89,7 @@
     </div>
 
     <!-- Availability by the glass -->
-    <div class="formInputRow grid-2-options">
+    <div class="dsp-grid row-2-entities">
         <input type="radio" name="btlOnly" value="Yes" id="btlOnly-yes">
         <label for="btlOnly-yes" class="commonStyle">only by the bottle</label>
 
@@ -106,7 +106,7 @@
     <br>
 
     <!-- MISC -->
-    <div class="formInputRow grid-2-options">
+    <div class="dsp-grid row-2-entities">
         <label for="id_image" class="commonStyle commonStyleAsBlock">
             <span id="new-wine-form-image-upload-label">📷 Upload bottle image</span>
             <span id="new-wine-form-image-preview"></span>
