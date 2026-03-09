@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'wineadmin/css/new-wine-form.css' %}">
 
 <!-- Form for adding new wine to the DB -->
-<form id="new-wine-form" method="POST" enctype="multipart/form-data" action="{% url 'add_new_wine' %}">
+<form id="new-wine-form" method="POST" enctype="multipart/form-data" action="{% url 'add_new_wine' %}" autocomplete="off">
     {% csrf_token %}
     <h1>Add a new wine to the DB  <i class="fa-solid fa-database fa-md"></i></h1>
 

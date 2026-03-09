@@ -13,6 +13,7 @@ class new_wine_form(forms.ModelForm):
             "wine_name": forms.TextInput(
                 attrs={
                     "placeholder":"Name 🏷️",
+                    "autocomplete":"wine-name",
                     "class":"commonStyle commonStyleAsBlock",
                     "required":True
                 }
@@ -20,6 +21,7 @@ class new_wine_form(forms.ModelForm):
             "grape": forms.TextInput(
                 attrs={
                     "placeholder":"Grape 🍇",
+                    "autocomplete":"wines-grape-variety",
                     "class":"commonStyle commonStyleAsBlock",
                     "required":True
                 }
@@ -27,6 +29,7 @@ class new_wine_form(forms.ModelForm):
             "region": forms.TextInput(
                 attrs={
                     "placeholder":"Region 📌",
+                    "autocomplete":"wines-region",
                     "class":"commonStyle commonStyleAsBlock",
                     "required":True
                 }
@@ -34,6 +37,7 @@ class new_wine_form(forms.ModelForm):
             "country_of_origin": forms.TextInput(
                 attrs={
                     "placeholder":"Country 🗺️",
+                    "autocomplete":"wines-country-of-origin",
                     "class":"commonStyle commonStyleAsBlock",
                     "required":True
                 }
@@ -41,6 +45,7 @@ class new_wine_form(forms.ModelForm):
             "vintage": forms.NumberInput(
                 attrs={
                     "placeholder":"Vintage 🗓️",
+                    "autocomplete":"wines-vintage",
                     "class":"commonStyle commonStyleAsBlock",
                     "required":True
                 }
