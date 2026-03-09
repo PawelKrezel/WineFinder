@@ -1,0 +1,23 @@
+.row-2-entities{
+    margin-top: 1em;
+}
+
+/* slight modification to standard behavior and style if labels */
+.dsp-grid > .dsp-grid:has(input:placeholder-shown) > label{
+    font-size: 0;
+
+}
+.dsp-grid > .dsp-grid:has(input:not(:placeholder-shown)) > label{
+    font-size: small;
+}
+
+form{
+    width: 40%;
+    margin-top: 30vh;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5em 6em 2em;
+}
+form h1{
+    text-align: center;
+}

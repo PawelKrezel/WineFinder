@@ -4,16 +4,30 @@
 
 {% block content %}
 
-<h1>login</h1>
-<form method="POST">
+
+<form method="POST" class="commonGradientBackground">
+    <h1>login</h1>
     {% csrf_token %}
 
-    {{ form.username }}
-    {{ form.password }}
+    <div class="dsp-grid row-1-entity">
+        <div class="dsp-grid row-1-entity">
+            <label for="id_username">&nbsp; username 👤 </label>
+            {{ form.username }}
+        </div>
 
-    <button type="submit" class="commonStyle commonStyleAsBlock">Login</button>
-    <button type="reset" class="commonStyle commonStyleAsBlock">Clear</button>
+        <div class="dsp-grid row-1-entity">
+            <label for="id_password">&nbsp; password 🔑 </label>
+            {{ form.password }} 
+        </div>
+        
+        <div class="dsp-grid row-2-entities">
+            <button type="reset" class="commonStyle commonStyleAsBlock">Clear</button>
+            <button type="submit" class="commonStyle commonStyleAsBlock">Login</button>
+        </div>
+    </div>
 </form>
+
 {% load static %}
 <link rel="stylesheet" href="{% static 'wineadmin/css/login.css' %}">
+<script src="{% static 'wineadmin/js/login_helper_script.js' %}"></script>
 {% endblock %}
