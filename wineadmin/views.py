@@ -4,14 +4,18 @@ from .forms import new_wine_form
 from django.shortcuts import redirect
 from .firebase_storage import upload_image
 from django.contrib.auth.decorators import login_required
+from .models import Wine
 
 @login_required
 def wineadmin(request):
     form_new_wine = new_wine_form()
+    wines = Wine.objects.all()
+
     template = loader.get_template('wineadmin/admin-panel.html')
 
     context = {
-        "form_new_wine":form_new_wine
+        "form_new_wine":form_new_wine,
+        "wines":wines
     }
     return HttpResponse(template.render(context, request))
 

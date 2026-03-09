@@ -1,0 +1,151 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'wineadmin/css/table-of-wines.css' %}">
+
+<form method="POST" action="TO BE IMPLEMENTED SOON">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Grape</th>
+                <th>Region</th>
+                <th>Country</th>
+                <th>Vintage</th>
+                <th>Body</th>
+                <th>Tannins</th>
+                <th>Acidity</th>
+                <th>Glass</th>
+                <th>Coravin</th>
+                <th>Btl Only</th>
+                <th>Somm Notes</th>
+                <th>Image</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for wine in wines %}
+            <tr>
+                <td>
+                    {{ wine.id }}
+                    <input type="hidden" name="wine_id_{{ wine.id }}" value="{{ wine.id }}">
+                </td>
+                <td>
+                    <input type="text"
+                    name="wine_name_{{ wine.id }}" 
+                    placeholder="Name 🏷️" 
+                    autocomplete="wine-name" 
+                    class="commonStyle commonStyleAsBlock" 
+                    required 
+                    maxlength="255" 
+                    id="editable_id_wine_name_{{ wine.id }}"
+                    value="{{ wine.wine_name }}">
+                </td>
+                <td>
+                    <input 
+                    type="text" 
+                    name="grape_{{ wine.id }}" 
+                    placeholder="Grape 🍇" 
+                    autocomplete="wines-grape-variety" 
+                    class="commonStyle commonStyleAsBlock" 
+                    required 
+                    maxlength="100"
+                    id="editable_id_grape_{{ wine.id }}"
+                    value="{{ wine.grape }}">
+                </td>
+                <td>
+                    <input type="text" 
+                    name="region_{{ wine.id }}" 
+                    placeholder="Region 📌" 
+                    autocomplete="wines-region" 
+                    class="commonStyle commonStyleAsBlock" 
+                    required 
+                    maxlength="100" 
+                    id="editable_id_region_{{ wine.id }}"
+                    value="{{ wine.region }}">
+                </td>
+                <td>
+                    <input type="text"
+                    name="country_of_origin_{{ wine.id }}" 
+                    placeholder="Country 🗺️" 
+                    autocomplete="wines-country-of-origin" 
+                    class="commonStyle commonStyleAsBlock" 
+                    required 
+                    maxlength="100" 
+                    id="editable_id_country_of_origin_{{ wine.id }}"
+                    value="{{ wine.country_of_origin }}">
+                </td>
+                <td>
+                    <input type="number" 
+                    name="vintage_{{ wine.id }}" 
+                    value="2020" 
+                    placeholder="Vintage 🗓️" 
+                    autocomplete="wines-vintage" 
+                    class="commonStyle commonStyleAsBlock" 
+                    required 
+                    min="0" 
+                    id="editable_id_vintage_{{ wine.id }}"
+                    value="{{ wine.vintage }}">
+                </td>
+                <td>
+                    <select name="body_{{ wine.id }}" class="commonStyle commonStyleAsBlock">
+                        <option value="light-body" {% if wine.body == "light-body" %}selected{% endif %}>Light Body</option>
+                        <option value="medium-body" {% if wine.body == "medium-body" %}selected{% endif %}>Medium Body</option>
+                        <option value="full-body" {% if wine.body == "full-body" %}selected{% endif %}>Full Body</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="tannin_{{ wine.id }}" class="commonStyle commonStyleAsBlock">
+                    <option value="light-tannin" {% if wine.tannin == "light-tannin" %}selected{% endif %}>Light Tannin</option>
+                    <option value="medium-tannin" {% if wine.tannin == "medium-tannin" %}selected{% endif %}>Medium Tannin</option>
+                    <option value="full-tannin" {% if wine.tannin == "full-tannin" %}selected{% endif %}>Full Tannin</option>
+                </select>
+                </td>
+                <td>
+                    <select name="acidity_{{ wine.id }}" class="commonStyle commonStyleAsBlock">
+                        <option value="low-acidity" {% if wine.acidity == "low-acidity" %}selected{% endif %}>Low Acidity</option>
+                        <option value="medium-acidity" {% if wine.acidity == "medium-acidity" %}selected{% endif %}>Medium Acidity</option>
+                        <option value="high-acidity" {% if wine.acidity == "high-acidity" %}selected{% endif %}>High Acidity</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="glass_{{ wine.id }}" class="commonStyle commonStyleAsBlock">
+                        <option value="Tst" {% if wine.glass == "Tst" %}selected{% endif %}>Tasting Gls</option>
+                        <option value="Flute" {% if wine.glass == "Flute" %}selected{% endif %}>Flute</option>
+                        <option value="Burgundy" {% if wine.glass == "Burgundy" %}selected{% endif %}>Burgundy Gls</option>
+                        <option value="Bordeaux" {% if wine.glass == "Bordeaux" %}selected{% endif %}>Bordeaux Gls</option>
+                        <option value="Standard" {% if wine.glass == "Standard" %}selected{% endif %}>Standard Gls</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="coravin_{{ wine.id }}" class="commonStyle commonStyleAsBlock">
+                        <option value="Yes" {% if wine.coravin == "Yes" %}selected{% endif %}>Needs Coravin</option>
+                        <option value="No" {% if wine.coravin == "No" %}selected{% endif %}>No Coravin</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="btl_only_{{ wine.id }}" class="commonStyle commonStyleAsBlock">
+                        <option value="Yes" {% if wine.btl_only == "Yes" %}selected{% endif %}>Bottle Only</option>
+                        <option value="No" {% if wine.btl_only == "No" %}selected{% endif %}>Glass/Carafe</option>
+                    </select>
+                </td>
+                <td>
+                    <textarea name="sommNotes_{{ wine.id }}" class="commonStyle commonStyleAsBlock" placeholder="Notes about wine">{{ wine.sommNotes }}</textarea>
+                </td>
+                <td>
+                    <img src="{{ wine.imageURL }}" alt="No image">
+                    <input type="file" name="image_{{ wine.id }}" accept="image/*" id="id_image_{{ wine.id }}" style="display: inline-block;">
+                </td>
+                <td title="to be implemented later, IGNORE FOR NOW">🗑️</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td><button type="submit" class="commonStyle commonStyleAsBlock">Save Changes 💾</button></td>
+            </tr>
+        </tfoot>
+    </table>
+
+</form>
+
+
