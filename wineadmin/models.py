@@ -66,8 +66,8 @@ class Wine(models.Model):
     coravin = models.CharField(max_length=15, choices=CORAVIN_CHOICES)
     btl_only = models.CharField(max_length=15, choices=BTL_ONLY_CHOICES)
 
-    sommNotes = models.TextField(blank=True)
-    imageURL = models.URLField(blank=True)
+    sommNotes = models.TextField(blank=True, null=True)
+    imageURL = models.URLField(blank=True, null=True)
 
     shelves = models.ManyToManyField(
         Slot,
@@ -77,5 +77,5 @@ class Wine(models.Model):
     )
 
     def __str__(self):
-        return f"{self.wine_name} ({self.vintage or 'NV'})"
+        return f"{self.wine_name} {self.grape} ({self.vintage})"
     
