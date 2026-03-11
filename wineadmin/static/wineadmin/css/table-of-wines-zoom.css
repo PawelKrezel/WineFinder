@@ -1,0 +1,83 @@
+/* foundation for zooming behavior */
+.row-editable-wine-table:has(div:hover){
+    overflow: visible;
+    z-index: 0;
+}
+
+html:has(#editable-wine-table-name:hover) .editable-wine-table-name,
+html:has(#editable-wine-table-grape:hover) .editable-wine-table-grape,
+html:has(#editable-wine-table-region:hover) .editable-wine-table-region,
+html:has(#editable-wine-table-country:hover) .editable-wine-table-country,
+html:has(#editable-wine-table-vintage:hover) .editable-wine-table-vintage,
+html:has(#editable-wine-table-body:hover) .editable-wine-table-body,
+html:has(#editable-wine-table-tannin:hover) .editable-wine-table-tannin,
+html:has(#editable-wine-table-acidity:hover) .editable-wine-table-acidity,
+html:has(#editable-wine-table-glass:hover) .editable-wine-table-glass,
+html:has(#editable-wine-table-coravin:hover) .editable-wine-table-coravin,
+html:has(#editable-wine-table-btl-only:hover) .editable-wine-table-btl-only,
+html:has(#editable-wine-table-somm-notes:hover) .editable-wine-table-somm-notes,
+html:has(#editable-wine-table-image:hover) .editable-wine-table-image,
+.row-editable-wine-table div:hover *{
+    position: relative;
+    z-index: 2;
+}
+html:has(#headers-editable-wine-table:hover) *{
+    overflow: visible;
+}
+
+/* zooming style for type-in fields */
+html:has(#editable-wine-table-name:hover) .editable-wine-table-name,
+html:has(#editable-wine-table-grape:hover) .editable-wine-table-grape,
+html:has(#editable-wine-table-region:hover) .editable-wine-table-region,
+html:has(#editable-wine-table-country:hover) .editable-wine-table-country,
+html:has(#editable-wine-table-vintage:hover) .editable-wine-table-vintage,
+.row-editable-wine-table div:hover input[type="text"],
+.row-editable-wine-table div:hover input[type="number"],
+.row-editable-wine-table div:hover textarea{
+    width: 25vw;
+    right: 10vw;
+    font-size: large;
+    background-color: #718c4a;
+}
+
+/* zooming style for select fields */
+html:has(#editable-wine-table-body:hover) .editable-wine-table-body,
+html:has(#editable-wine-table-tannin:hover) .editable-wine-table-tannin,
+html:has(#editable-wine-table-acidity:hover) .editable-wine-table-acidity,
+html:has(#editable-wine-table-glass:hover) .editable-wine-table-glass,
+html:has(#editable-wine-table-coravin:hover) .editable-wine-table-coravin,
+html:has(#editable-wine-table-btl-only:hover) .editable-wine-table-btl-only,
+.row-editable-wine-table div:hover select{
+    font-size: large;
+    width: fit-content;
+    background-color: #718c4a
+}
+
+html:has(#editable-wine-table-somm-notes:hover) .editable-wine-table-somm-notes,
+.row-editable-wine-table div:hover textarea{
+    min-height: 4em;
+    font-size: medium;
+    line-height: normal;
+}
+html:has(#editable-wine-table-somm-notes:hover) .editable-wine-table-somm-notes{
+    right: 15vw;
+    width: 25vw;
+}
+/* zooming for images */
+.row-editable-wine-table div:hover img{
+    width: 35vw;
+    height: auto;
+    right: 35vw;
+    bottom: 20vw;
+}
+html:has(#editable-wine-table-image:hover) .editable-wine-table-image{
+        width: 35vw;
+        height: auto;
+        right: 18vw;
+}
+.row-editable-wine-table div:hover:has(img){
+    transition-duration: 0.6s;
+    background-color: #8c0808f3;
+    height: 3em;
+}
+

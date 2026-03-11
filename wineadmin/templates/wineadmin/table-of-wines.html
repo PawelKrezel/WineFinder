@@ -1,26 +1,43 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'wineadmin/css/table-of-wines.css' %}">
+<link rel="stylesheet" href="{% static 'wineadmin/css/table-of-wines-zoom.css' %}" id="zoomStyles" disabled="true">
 
-{% include "toggle-switch.html" with id="zoom-toggle"%}
+
 <form method="POST" action="{% url 'update_wines' %}" enctype="multipart/form-data" autocomplete="off" id="update-wines-form">
     {% csrf_token %}
-    <!-- headers -->
-    <div class="dsp-grid row-editable-wine-table" id="headers-editable-wine-table">
-        <h4 id="editable-wine-table-name">Name</h4>
-        <h4>Grape</h4>
-        <h4>Region</h4>
-        <h4>Country</h4>
-        <h4>Vintage</h4>
-        <h4>Body</h4>
-        <h4>Tannins</h4>
-        <h4>Acidity</h4>
-        <h4>Glass</h4>
-        <h4>Coravin</h4>
-        <h4>Btl Only</h4>
-        <h4>Somm Notes</h4>
-        <h4>Image</h4>
-        <h4>Delete</h4>
-    </div>
+    
+    <header>
+
+        <!-- extra controls -->
+        <div class="editable-wine-table-controls">
+
+            <!-- zoom setting -->
+            <div>
+                <span>Zoom:</span>
+                {% include "toggle-switch.html" with id="zoom-toggle" jsFunction="toggleZoom()" %}
+                <script src="{% static 'wineadmin/js/toggle-zoom.js' %}"></script>
+            </div>
+
+            <!-- to be implemented: safety on the delete button -->
+        </div>
+        <!-- headers -->
+        <div class="dsp-grid row-editable-wine-table" id="headers-editable-wine-table">
+            <h4 id="editable-wine-table-name">Name</h4>
+            <h4 id="editable-wine-table-grape">Grape</h4>
+            <h4 id="editable-wine-table-region">Region</h4>
+            <h4 id="editable-wine-table-country">Country</h4>
+            <h4 id="editable-wine-table-vintage">Vintage</h4>
+            <h4 id="editable-wine-table-body">Body</h4>
+            <h4 id="editable-wine-table-tannin">Tannins</h4>
+            <h4 id="editable-wine-table-acidity">Acidity</h4>
+            <h4 id="editable-wine-table-glass">Glass</h4>
+            <h4 id="editable-wine-table-coravin">Coravin</h4>
+            <h4 id="editable-wine-table-btl-only">Btl Only</h4>
+            <h4 id="editable-wine-table-somm-notes">Somm Notes</h4>
+            <h4 id="editable-wine-table-image">Image</h4>
+            <h4>Delete</h4>
+        </div>
+    </header>
     <hr>
 
     <!-- 'table' content -->
@@ -44,7 +61,7 @@
             name="grape_{{ wine.id }}" 
             placeholder="Grape 🍇" 
             autocomplete="wines-grape-variety" 
-            class="commonStyle commonStyleAsBlock" 
+            class="commonStyle commonStyleAsBlock editable-wine-table-grape" 
             required 
             maxlength="100"
             id="editable_id_grape_{{ wine.id }}"
@@ -55,7 +72,7 @@
             name="region_{{ wine.id }}" 
             placeholder="Region 📌" 
             autocomplete="wines-region" 
-            class="commonStyle commonStyleAsBlock" 
+            class="commonStyle commonStyleAsBlock editable-wine-table-region" 
             required 
             maxlength="100" 
             id="editable_id_region_{{ wine.id }}"
@@ -66,7 +83,7 @@
             name="country_of_origin_{{ wine.id }}" 
             placeholder="Country 🗺️" 
             autocomplete="wines-country-of-origin" 
-            class="commonStyle commonStyleAsBlock" 
+            class="commonStyle commonStyleAsBlock editable-wine-table-country" 
             required 
             maxlength="100" 
             id="editable_id_country_of_origin_{{ wine.id }}"
@@ -78,35 +95,35 @@
             value="2020" 
             placeholder="Vintage 🗓️" 
             autocomplete="wines-vintage" 
-            class="commonStyle commonStyleAsBlock" 
+            class="commonStyle commonStyleAsBlock editable-wine-table-vintage" 
             required 
             min="0" 
             id="editable_id_vintage_{{ wine.id }}"
             value="{{ wine.vintage }}">
         </div>
         <div>
-            <select name="body_{{ wine.id }}" class="commonStyle commonStyleAsBlock">
+            <select name="body_{{ wine.id }}" class="commonStyle commonStyleAsBlock editable-wine-table-body">
                 <option value="light-body" {% if wine.body == "light-body" %}selected{% endif %}>Light Body</option>
                 <option value="medium-body" {% if wine.body == "medium-body" %}selected{% endif %}>Medium Body</option>
                 <option value="full-body" {% if wine.body == "full-body" %}selected{% endif %}>Full Body</option>
             </select>
         </div>
         <div>
-            <select name="tannin_{{ wine.id }}" class="commonStyle commonStyleAsBlock">
+            <select name="tannin_{{ wine.id }}" class="commonStyle commonStyleAsBlock editable-wine-table-tannin">
             <option value="light-tannin" {% if wine.tannin == "light-tannin" %}selected{% endif %}>Light Tannin</option>
             <option value="medium-tannin" {% if wine.tannin == "medium-tannin" %}selected{% endif %}>Medium Tannin</option>
             <option value="full-tannin" {% if wine.tannin == "full-tannin" %}selected{% endif %}>Full Tannin</option>
         </select>
         </div>
         <div>
-            <select name="acidity_{{ wine.id }}" class="commonStyle commonStyleAsBlock">
+            <select name="acidity_{{ wine.id }}" class="commonStyle commonStyleAsBlock editable-wine-table-acidity">
                 <option value="low-acidity" {% if wine.acidity == "low-acidity" %}selected{% endif %}>Low Acidity</option>
                 <option value="medium-acidity" {% if wine.acidity == "medium-acidity" %}selected{% endif %}>Medium Acidity</option>
                 <option value="high-acidity" {% if wine.acidity == "high-acidity" %}selected{% endif %}>High Acidity</option>
             </select>
         </div>
         <div>
-            <select name="glass_{{ wine.id }}" class="commonStyle commonStyleAsBlock">
+            <select name="glass_{{ wine.id }}" class="commonStyle commonStyleAsBlock editable-wine-table-glass">
                 <option value="Tst" {% if wine.glass == "Tst" %}selected{% endif %}>Tasting Gls</option>
                 <option value="Flute" {% if wine.glass == "Flute" %}selected{% endif %}>Flute</option>
                 <option value="Burgundy" {% if wine.glass == "Burgundy" %}selected{% endif %}>Burgundy Gls</option>
@@ -115,22 +132,22 @@
             </select>
         </div>
         <div>
-            <select name="coravin_{{ wine.id }}" class="commonStyle commonStyleAsBlock">
+            <select name="coravin_{{ wine.id }}" class="commonStyle commonStyleAsBlock editable-wine-table-coravin">
                 <option value="Yes" {% if wine.coravin == "Yes" %}selected{% endif %}>Needs Coravin</option>
                 <option value="No" {% if wine.coravin == "No" %}selected{% endif %}>No Coravin</option>
             </select>
         </div>
         <div>
-            <select name="btl_only_{{ wine.id }}" class="commonStyle commonStyleAsBlock">
+            <select name="btl_only_{{ wine.id }}" class="commonStyle commonStyleAsBlock editable-wine-table-btl-only">
                 <option value="Yes" {% if wine.btl_only == "Yes" %}selected{% endif %}>Bottle Only</option>
                 <option value="No" {% if wine.btl_only == "No" %}selected{% endif %}>Glass/Carafe</option>
             </select>
         </div>
         <div>
-            <textarea name="sommNotes_{{ wine.id }}" class="commonStyle commonStyleAsBlock" placeholder="Notes about wine">{{ wine.sommNotes }}</textarea>
+            <textarea name="sommNotes_{{ wine.id }}" class="commonStyle commonStyleAsBlock editable-wine-table-somm-notes" placeholder="Notes about wine">{{ wine.sommNotes }}</textarea>
         </div>
         <div>
-            <img src="{{ wine.imageURL }}" alt="No image">
+            <img src="{{ wine.imageURL }}" alt="No image" class="editable-wine-table-image">
             <!--<input type="file" name="image_{{ wine.id }}" accept="image/*" id="id_image_{{ wine.id }}" style="display: inline-block;">-->
         </div>
         <div  title="to be implemented later, IGNORE FOR NOW">🗑️</div>
