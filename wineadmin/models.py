@@ -2,18 +2,6 @@ from django.db import models
 import uuid
 
 # Create your models here.
-class Slot(models.Model):
-    id = models.CharField(
-        max_length=20,
-        primary_key=True,
-        help_text="follows column-row-shelf format, for example 2-1-s1 means column 2, row 1, first shelf"
-    )
-    occupied = models.BooleanField(
-        default=False
-    )
-
-    def __str__(self):
-        return f"{self.id} occupied:{self.occupied}"
 
 class Wine(models.Model):
     id = models.UUIDField(
@@ -69,13 +57,24 @@ class Wine(models.Model):
     sommNotes = models.TextField(blank=True, null=True)
     imageURL = models.URLField(blank=True, null=True)
 
-    shelves = models.ManyToManyField(
-        Slot,
-        related_name="wines",
-        blank=True,
-        help_text="Slots where this wine is stored."
-    )
-
     def __str__(self):
         return f"{self.wine_name} {self.grape} ({self.vintage})"
     
+class Slot(models.Model):
+    id = models.CharField(
+        max_length=20,
+        primary_key=True,
+        help_text="follows column-row-shelf format, for example c2-r1-s1 means column 2, row 1, first shelf"
+    )
+    wine = models.ForeignKey(
+        Wine,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="slots"
+    )
+
+    def __str__(self):
+        if self.wine:
+            return f"{self.id} -> {self.wine}"
+        return f"{self.id} [unallocated]"

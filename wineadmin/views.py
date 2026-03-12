@@ -4,18 +4,27 @@ from .forms import new_wine_form
 from django.shortcuts import redirect
 from .firebase_storage import upload_image
 from django.contrib.auth.decorators import login_required
-from .models import Wine
+from .models import Wine, Slot
 
 @login_required
 def wineadmin(request):
     form_new_wine = new_wine_form()
     wines = Wine.objects.all()
+    slots = Slot.objects.select_related("wine")
+
+    slot_map = {}
+
+    for slot in slots:
+        if slot.wine:
+            slot_map[slot.id] = str(slot.wine)
 
     template = loader.get_template('wineadmin/admin-panel.html')
 
     context = {
         "form_new_wine":form_new_wine,
-        "wines":wines
+        "wines":wines,
+        "slots":slots,
+        "slot_map":slot_map
     }
     return HttpResponse(template.render(context, request))
 
@@ -82,4 +91,21 @@ def update_wines(request):
                 wine.save()
 
     return redirect("wineadmin")
+
+@login_required
+def allocate_wine_slots(request):
     
+    if request.method == "POST":
+        wine_id = request.POST.get("wine_id")
+        slot_ids = request.POST.getlist("slots")
+
+        wine = Wine.objects.get(id=wine_id)
+
+        for slot_id in slot_ids:
+
+            slot = Slot.objects.get(id=slot_id)
+
+            slot.wine = wine
+            slot.save()
+
+    return redirect("wineadmin")

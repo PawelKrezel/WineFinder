@@ -14,8 +14,33 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
                     msg = y;
                 }else{msg=""}
             }
-        cellID = `${x}-${y}-${shelfID}`;
-        htmlCode += `<td class="shelfSlot" id="${cellID}" value="${cellID}" title="${cellID}">${msg}</td>`;
+        // follows the column-row-shelf pattern    
+        cellID = `c${x}-r${y}-${shelfID}`;
+        // html for actual slots will contain an input needed for wine allocation
+        if(shelfID.slice(0, 1) == "s"){
+            
+            var display = msg;
+            var title = cellID;
+
+            if(typeof slotMap !== "undefined"){
+                if(slotMap[cellID]){
+                    display = "X";
+                    title = slotMap[cellID];
+                }
+            }
+
+            htmlCode += `<td class="shelfSlot" id="${cellID}" title="${title}">
+            <label for="input-${cellID}" class="cellar-map-label">${display}</label>
+            <input type="checkbox" name="slots" value="${cellID}" id="input-${cellID}" class="cellar-map-input">
+            </td>`;
+
+
+        }// html for non-slot cells (walls of the cellar) needs to be more simple
+        else{
+            htmlCode += `<td class="shelfSlot" id="${cellID}" value="${cellID}" title="${cellID}">${msg}</td>`;
+        }
+
+        
         }
         htmlCode += `</tr>`;
     }
@@ -37,6 +62,27 @@ function drawCellar(){
     document.getElementById("g3-container").innerHTML = drawShelf(7, 25, "g3", "<br>", true, true);
     document.getElementById("g4-container").innerHTML = drawShelf(13, 25, "g4", "Curve Leading to the bar", true, true);
     document.getElementById("g5-container").innerHTML = drawShelf(1, 25, "g5", "<br>", true, true);
-    setEventListenersForAllCells()
+    setEventListenersForAllCells();
 }
 drawCellar();
+
+function setEventListenersForAllCells(){
+
+    var inputs = document.getElementsByClassName("cellar-map-input");
+    for (var i = 0; i < inputs.length; i++){
+
+        inputs[i].addEventListener("click", function(){
+
+            var cell = this.parentElement;
+
+            if(this.checked){
+                cell.style.backgroundColor = "#8c0808";
+            } else{
+                cell.style.backgroundColor = "";
+            }
+
+        });
+
+    }
+
+}
