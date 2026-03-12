@@ -1,0 +1,34 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'wineadmin/css/cellar-map.css' %}">
+<!-- This code comes from my FYP prototype that is no longer in use -->
+<!-- https://github.com/PawelKrezel/WineFinder/blob/v1-partially-vibe-coded-with-GPT/index.html -->
+
+
+<!-- Mini map of the wine cellar -->
+<div id="mapContainer">
+    <div class="miniMapLegend">
+        <i class="fa-solid fa-door-open fa-2xl"></i><br><br>
+        Entrance to the Cellar<br><br>
+        <i class="fa-solid fa-arrow-left fa-beat-fade"></i> restaurant/barback
+    </div>
+
+    <div id="s1-container"></div>
+    <div id="g1-container" class="gap"></div>
+    <div id="s2-container"></div>
+    <div id="g2-container" class="gap"></div>
+    <div id="s3-container"></div>
+    <div id="g3-container" class="gap">Big Gap</div>
+    <div id="s4-container"></div>
+    <div id="g4-container" class="gap">Curve to the Cellar</div>
+    <div id="s5-container"></div>
+    <div id="g5-container" class="gap"></div>
+    <div id="s6-container"></div>
+
+    <div class="miniMapLegend">
+        <i class="fa-solid fa-martini-glass-citrus fa-flip fa-2xl"></i><br><br>
+        To the bar <i class="fa-solid fa-arrow-right"></i>
+    </div>
+</div>
+
+
+<script src="{% static 'wineadmin/js/draw-cellar.js' %}"></script>
