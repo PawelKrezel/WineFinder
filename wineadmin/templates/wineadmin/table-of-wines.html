@@ -10,15 +10,23 @@
 
         <!-- extra controls -->
         <div class="editable-wine-table-controls">
-
-            <!-- zoom setting -->
             <div>
-                <span>Zoom:</span>
-                {% include "toggle-switch.html" with id="zoom-toggle" jsFunction="toggleZoom()" %}
-                <script src="{% static 'wineadmin/js/toggle-zoom.js' %}"></script>
+
+            </div>
+            <!-- zoom setting -->
+            <div title="hover your cursor over table items to make them bigger (disabled by default because its annoying)">
+                <span id="zoom-control-label">Zoom (disabled)</span>
+                {% include "toggle-switch.html" with id="zoom-toggle" jsFunction="toggleZoom()" checkStatus="unchecked" %}
             </div>
 
             <!-- to be implemented: safety on the delete button -->
+            <div title="safety switch for deleting">
+                <span id="delete-safety-control-label">Delete safety switch (enabled)</span>
+                {% include "toggle-switch.html" with id="delete-safety" jsFunction="toggleSafety()" checkStatus="checked" %}
+            </div>
+
+            <script src="{% static 'wineadmin/js/editable-wine-table-controls.js' %}"></script>
+            
         </div>
         <!-- headers -->
         <div class="dsp-grid row-editable-wine-table" id="headers-editable-wine-table">
@@ -150,12 +158,15 @@
             <img src="{{ wine.imageURL }}" alt="No image" class="editable-wine-table-image">
             <!--<input type="file" name="image_{{ wine.id }}" accept="image/*" id="id_image_{{ wine.id }}" style="display: inline-block;">-->
         </div>
-        <div  title="to be implemented later, IGNORE FOR NOW">
+        <div>
             <input 
             type="checkbox"
             name="delete_{{ wine.id }}"
             value="true"
-            class="editable-wine-table-delete">
+            class="editable-wine-table-delete-input"
+            id="delete_{{ wine.id }}"
+            disabled="true">
+            <label for="delete_{{ wine.id }}" class="editable-wine-table-delete-label" title="delete: {{ wine }}" style="opacity: 25%;">🗑️</label>
         </div>
     </div>
     <hr>

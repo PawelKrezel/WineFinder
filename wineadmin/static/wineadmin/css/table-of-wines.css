@@ -16,6 +16,7 @@ form#update-wines-form{
     appearance: none;
     text-align: center;
     text-align-last: center;
+    cursor: pointer;
 }
 .row-editable-wine-table div{
     width: 100%;
@@ -36,12 +37,12 @@ form#update-wines-form{
     transition-duration: 0.6s;
 }
 .editable-wine-table-controls{
-    width: 90%;
     margin-left: auto;
     margin-right: auto;
     height: 2em;
     line-height: 2em;
-    text-align: right;
+    display: grid;
+    grid-template-columns: 60% auto auto;
 }
 #update-wines-form header{
     position: sticky;
@@ -51,5 +52,15 @@ form#update-wines-form{
     padding-bottom: 1em;
     z-index: 4;
 }
-
+.editable-wine-table-delete-input{
+    display: none;
+}
+.editable-wine-table-delete-label{
+    cursor: pointer;
+    font-size: xx-large !important;
+}
+.row-editable-wine-table:has(.editable-wine-table-delete-input:checked),
+.row-editable-wine-table:has(.editable-wine-table-delete-input:checked) * {
+    background-image: linear-gradient(51deg,#8c08089c, #8c0808f3);
+}
 

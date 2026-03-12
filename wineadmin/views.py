@@ -54,30 +54,32 @@ def add_new_wine(request):
 def update_wines(request):
 
     if request.method == "POST":
-        wines = Wine.objects.all()
 
-        for wine in wines:
-            wine_id = str(wine.id)
+        for key in request.POST:
+            if key.startswith("wine_name_"):
+                wine_id = key.replace("wine_name_", "")
+                wine = Wine.objects.get(id=wine_id)
 
-            #delete logic
-            if request.POST.get(f"delete_{wine_id}"):
-                wine.delete()
-                continue
+                #delete logic
+                if request.POST.get(f"delete_{wine_id}"):
+                    wine.delete()
+                    continue
 
-            #update logic
-            wine.wine_name = request.POST.get(f"wine_name_{wine_id}")
-            wine.grape = request.POST.get(f"grape_{wine_id}")
-            wine.region = request.POST.get(f"region_{wine_id}")
-            wine.country_of_origin = request.POST.get(f"country_of_origin_{wine_id}")
-            wine.vintage = request.POST.get(f"vintage_{wine_id}")
-            wine.body = request.POST.get(f"body_{wine_id}")
-            wine.tannin = request.POST.get(f"tannin_{wine_id}")
-            wine.acidity = request.POST.get(f"acidity_{wine_id}")
-            wine.glass = request.POST.get(f"glass_{wine_id}")
-            wine.coravin = request.POST.get(f"coravin_{wine_id}")
-            wine.btl_only = request.POST.get(f"btl_only_{wine_id}")
-            wine.sommNotes = request.POST.get(f"sommNotes_{wine_id}")
+                #update logic
+                wine.wine_name = request.POST.get(f"wine_name_{wine_id}")
+                wine.grape = request.POST.get(f"grape_{wine_id}")
+                wine.region = request.POST.get(f"region_{wine_id}")
+                wine.country_of_origin = request.POST.get(f"country_of_origin_{wine_id}")
+                wine.vintage = request.POST.get(f"vintage_{wine_id}")
+                wine.body = request.POST.get(f"body_{wine_id}")
+                wine.tannin = request.POST.get(f"tannin_{wine_id}")
+                wine.acidity = request.POST.get(f"acidity_{wine_id}")
+                wine.glass = request.POST.get(f"glass_{wine_id}")
+                wine.coravin = request.POST.get(f"coravin_{wine_id}")
+                wine.btl_only = request.POST.get(f"btl_only_{wine_id}")
+                wine.sommNotes = request.POST.get(f"sommNotes_{wine_id}")
 
-            wine.save()
+                wine.save()
 
     return redirect("wineadmin")
+    
