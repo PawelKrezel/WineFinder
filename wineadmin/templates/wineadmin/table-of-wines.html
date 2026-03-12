@@ -170,6 +170,14 @@
         </div>
     </div>
     <hr>
+    {%empty%} 
+        <h1>No wines found in the DBMS.</h1>
+        <p>You can add new wines using the form above.</p>
+        <hr>
+        <p>If you suspect that you accidentally deleted all data:</p>
+            <p>1. Congratulations, you're an absolute muppet.</p>
+            <p>2. Call Pawel.</p>
+
     {% endfor %}
 
 <button type="submit" class="commonStyle commonStyleAsBlock">Save Changes 💾</button>
