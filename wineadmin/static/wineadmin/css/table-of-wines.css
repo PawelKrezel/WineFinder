@@ -49,6 +49,7 @@ form#update-wines-form{
     background-image: linear-gradient(51deg,#736956de, #261c14df);
     padding-top: 1em;
     padding-bottom: 1em;
+    z-index: 4;
 }
 
 

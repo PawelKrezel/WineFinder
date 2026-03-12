@@ -59,6 +59,12 @@ def update_wines(request):
         for wine in wines:
             wine_id = str(wine.id)
 
+            #delete logic
+            if request.POST.get(f"delete_{wine_id}"):
+                wine.delete()
+                continue
+
+            #update logic
             wine.wine_name = request.POST.get(f"wine_name_{wine_id}")
             wine.grape = request.POST.get(f"grape_{wine_id}")
             wine.region = request.POST.get(f"region_{wine_id}")

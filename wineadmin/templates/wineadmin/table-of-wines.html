@@ -33,7 +33,7 @@
             <h4 id="editable-wine-table-glass">Glass</h4>
             <h4 id="editable-wine-table-coravin">Coravin</h4>
             <h4 id="editable-wine-table-btl-only">Btl Only</h4>
-            <h4 id="editable-wine-table-somm-notes">Somm Notes</h4>
+            <h4 id="editable-wine-table-somm-notes">Notes</h4>
             <h4 id="editable-wine-table-image">Image</h4>
             <h4>Delete</h4>
         </div>
@@ -150,7 +150,13 @@
             <img src="{{ wine.imageURL }}" alt="No image" class="editable-wine-table-image">
             <!--<input type="file" name="image_{{ wine.id }}" accept="image/*" id="id_image_{{ wine.id }}" style="display: inline-block;">-->
         </div>
-        <div  title="to be implemented later, IGNORE FOR NOW">🗑️</div>
+        <div  title="to be implemented later, IGNORE FOR NOW">
+            <input 
+            type="checkbox"
+            name="delete_{{ wine.id }}"
+            value="true"
+            class="editable-wine-table-delete">
+        </div>
     </div>
     <hr>
     {% endfor %}
