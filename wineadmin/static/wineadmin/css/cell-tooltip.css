@@ -1,0 +1,25 @@
+.cellar-map-tooltip{
+    display:none;
+    position:absolute;
+    left:530%;
+    bottom:-120%;
+    transform:translateX(-50%);
+    background:#261c14f0;
+    padding:0.5em;
+    border:1px solid black;
+    border-radius:6px;
+    width:200px;
+    z-index:999;
+    font-size:small;
+}
+
+.shelfSlot:hover .cellar-map-tooltip{
+    display: block;
+}
+
+.cellar-map-tooltip-img{
+    width: 80%;
+    margin-top: 0.3em;
+    margin-left: auto;
+    margin-right: auto;
+}

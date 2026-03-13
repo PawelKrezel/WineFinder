@@ -8,13 +8,15 @@
     color: antiquewhite;
     background-image: linear-gradient(51deg,#73695684, #261c14ac);
 }
-#mapContainer div, #mapContainer table{
+#mapContainer > div,
+#mapContainer table{
     display: table-cell;
 }
 #mapContainer td{
     border: solid rgb(0, 0, 0) 1px;
     min-width: 3vh;
     height: 3vh;
+    line-height: 3vh;
     padding: 0;
     text-align: center;
 }
@@ -39,6 +41,21 @@
     display: block;
     width: 100%;
     height: 100%;
-    font-size: 1em;
-    line-height: 100%;
+    align-items: center;
+}
+
+#editable-map-controls{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.cellar-map-label{
+    position: relative;
+}
+
+.shelfSlot{
+    position: relative;
+    overflow: visible;
 }

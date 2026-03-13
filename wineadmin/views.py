@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from .firebase_storage import upload_image
 from django.contrib.auth.decorators import login_required
 from .models import Wine, Slot
+import json
 
 @login_required
 def wineadmin(request):
@@ -16,7 +17,14 @@ def wineadmin(request):
 
     for slot in slots:
         if slot.wine:
-            slot_map[slot.id] = str(slot.wine)
+            slot_map[slot.id] = {
+            "name": slot.wine.wine_name,
+            "grape": slot.wine.grape,
+            "vintage": slot.wine.vintage,
+            "region": slot.wine.region,
+            "country": slot.wine.country_of_origin,
+            "image": slot.wine.imageURL
+            }
 
     template = loader.get_template('wineadmin/admin-panel.html')
 
@@ -24,7 +32,7 @@ def wineadmin(request):
         "form_new_wine":form_new_wine,
         "wines":wines,
         "slots":slots,
-        "slot_map":slot_map
+        "slot_map": json.dumps(slot_map)
     }
     return HttpResponse(template.render(context, request))
 
@@ -51,11 +59,29 @@ def add_new_wine(request):
         form_new_wine = new_wine_form()
 
     wines = Wine.objects.all()
+    slots = Slot.objects.select_related("wine")
+
+    slot_map = {}
+
+    for slot in slots:
+        if slot.wine:
+            slot_map[slot.id] = {
+            "name": slot.wine.wine_name,
+            "grape": slot.wine.grape,
+            "vintage": slot.wine.vintage,
+            "region": slot.wine.region,
+            "country": slot.wine.country_of_origin,
+            "image": slot.wine.imageURL
+            }
+
+    wines = Wine.objects.all()
     template = loader.get_template('wineadmin/admin-panel.html')
 
     context = {
         "form_new_wine":form_new_wine,
-        "wines":wines
+        "wines":wines,
+        "slots":slots,
+        "slot_map": json.dumps(slot_map)
     }
     return HttpResponse(template.render(context, request))
 

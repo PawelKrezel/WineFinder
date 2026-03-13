@@ -1,5 +1,6 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'wineadmin/css/cellar-map.css' %}">
+<link rel="stylesheet" href="{% static 'wineadmin/css/cell-tooltip.css' %}" id="cell-tooltip-styles" disabled="true">
 <!-- This code comes from my FYP prototype that is no longer in use -->
 <!-- https://github.com/PawelKrezel/WineFinder/blob/v1-partially-vibe-coded-with-GPT/index.html -->
 
@@ -7,7 +8,7 @@
     {% csrf_token %}
 
     <!-- Map controls -->
-    <div>
+    <div id="editable-map-controls">
         <select name="wine_id" id="wine-selector" class="commonStyle commonStyleAsBlock" required>
             <option value=""> -- select wine -- </option>
             {% for wine in wines %}
@@ -17,9 +18,12 @@
             {% endfor %}
         </select>
 
-
-        
         <button class="commonStyle commonStyleAsBlock" type="submit">Save slot allocation</button>
+
+        <div title="enable/disable cell look up">
+            <span id="cell-tooltip-control-label">cell lookup (enabled)</span>
+            {% include "toggle-switch.html" with id="cell-tooltip-safety" jsFunction="toggleCellToolTip()" checkStatus="checked" %}
+        </div>
     </div>
 
     <!-- Mini map of the wine cellar -->
@@ -53,5 +57,4 @@
 <script>
     var slotMap = {{ slot_map|safe }};
 </script>
-
 <script src="{% static 'wineadmin/js/draw-cellar.js' %}"></script>

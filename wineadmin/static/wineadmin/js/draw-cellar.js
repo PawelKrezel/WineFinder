@@ -1,3 +1,7 @@
+if(typeof slotMap === "undefined"){
+    var slotMap = {};
+}
+
 function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=true, addRowNo=false){
     let htmlCode = `<table id="${shelfID}">`;
     let msg = "";
@@ -21,16 +25,33 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
             
             var display = msg;
             var title = cellID;
+            var tooltipHTML = "";
 
             if(typeof slotMap !== "undefined"){
                 if(slotMap[cellID]){
-                    display = "X";
-                    title = slotMap[cellID];
+
+                    var wine = slotMap[cellID];
+
+                    title = `${wine.name} @ ${cellID}`;
+                    display = title.slice(0, 2);
+                    
+                    tooltipHTML = `
+                    <div class="cellar-map-tooltip">
+                        <strong>${wine.name}</strong><br>
+                        ${wine.grape} (${wine.vintage})<br>
+                        ${wine.region}, ${wine.country}<br>`;
+
+                    if(wine.image){
+                    tooltipHTML += `<img src="${wine.image}" class="cellar-map-tooltip-img"></div>`;
+                    }else{tooltipHTML += `</div>`}
                 }
             }
 
             htmlCode += `<td class="shelfSlot" id="${cellID}" title="${title}">
-            <label for="input-${cellID}" class="cellar-map-label">${display}</label>
+            <label for="input-${cellID}" class="cellar-map-label">
+                ${display}
+                ${tooltipHTML}
+            </label>
             <input type="checkbox" name="slots" value="${cellID}" id="input-${cellID}" class="cellar-map-input">
             </td>`;
 
@@ -85,4 +106,18 @@ function setEventListenersForAllCells(){
 
     }
 
+}
+
+var tooltipEnabled = true;
+function toggleCellToolTip(){
+    // change the label next to the toggle button
+    var lbl = document.getElementById("cell-tooltip-control-label");
+    if(tooltipEnabled){
+        lbl.innerHTML = "Cell lookup (disabled)";
+    }else{
+        lbl.innerHTML = "Cell lookup (disabled) (enabled)";
+    }
+
+    tooltipEnabled = !tooltipEnabled;
+    document.getElementById("cell-tooltip-styles").setAttribute("disabled", )
 }
