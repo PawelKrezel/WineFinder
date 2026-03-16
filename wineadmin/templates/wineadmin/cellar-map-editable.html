@@ -1,6 +1,6 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'wineadmin/css/cellar-map.css' %}">
-<link rel="stylesheet" href="{% static 'wineadmin/css/cell-tooltip.css' %}" id="cell-tooltip-styles" disabled="true">
+<link rel="stylesheet" href="{% static 'wineadmin/css/cell-tooltip.css' %}" id="cell-tooltip-styles">
 <!-- This code comes from my FYP prototype that is no longer in use -->
 <!-- https://github.com/PawelKrezel/WineFinder/blob/v1-partially-vibe-coded-with-GPT/index.html -->
 
@@ -22,7 +22,7 @@
 
         <div title="enable/disable cell look up">
             <span id="cell-tooltip-control-label">cell lookup (enabled)</span>
-            {% include "toggle-switch.html" with id="cell-tooltip-safety" jsFunction="toggleCellToolTip()" checkStatus="checked" %}
+            {% include "toggle-switch.html" with id="cell-tooltip-toggle" jsFunction="toggleCellToolTip()" checkStatus="checked" %}
         </div>
     </div>
 

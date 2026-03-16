@@ -26,6 +26,7 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
             var display = msg;
             var title = cellID;
             var tooltipHTML = "";
+            var tooltipUpOrDown = "tooltip-down";
 
             if(typeof slotMap !== "undefined"){
                 if(slotMap[cellID]){
@@ -34,9 +35,10 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
 
                     title = `${wine.name} @ ${cellID}`;
                     display = title.slice(0, 2);
+                    if (y>height/2){tooltipUpOrDown="tooltip-up"}
                     
                     tooltipHTML = `
-                    <div class="cellar-map-tooltip">
+                    <div class="cellar-map-tooltip ${tooltipUpOrDown}">
                         <strong>${wine.name}</strong><br>
                         ${wine.grape} (${wine.vintage})<br>
                         ${wine.region}, ${wine.country}<br>`;
@@ -110,14 +112,15 @@ function setEventListenersForAllCells(){
 
 var tooltipEnabled = true;
 function toggleCellToolTip(){
+    tooltipEnabled = !tooltipEnabled;
+
     // change the label next to the toggle button
     var lbl = document.getElementById("cell-tooltip-control-label");
     if(tooltipEnabled){
-        lbl.innerHTML = "Cell lookup (disabled)";
+        lbl.innerHTML = "Cell lookup (enabled)";
+    document.getElementById("cell-tooltip-styles").removeAttribute("disabled");
     }else{
-        lbl.innerHTML = "Cell lookup (disabled) (enabled)";
-    }
-
-    tooltipEnabled = !tooltipEnabled;
-    document.getElementById("cell-tooltip-styles").setAttribute("disabled", )
+        lbl.innerHTML = "Cell lookup (disabled)";
+        document.getElementById("cell-tooltip-styles").setAttribute("disabled", "true");
+    } 
 }
