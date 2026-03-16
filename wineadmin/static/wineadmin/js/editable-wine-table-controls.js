@@ -1,17 +1,18 @@
 
-var disableZoom = false;
+var enableZoom = true;
 function toggleZoom(){
+    enableZoom = !enableZoom;
+
     // change the label next to the toggle button
     var lbl = document.getElementById("zoom-control-label");
-    if(!disableZoom){
+    if(enableZoom){
         lbl.innerHTML = "Zoom (enabled)";
     }else{
         lbl.innerHTML = "Zoom (disabled)";
     }
-
     // enable/disable css 
-    document.getElementById("zoomStyles").disabled = disableZoom;
-    disableZoom = !disableZoom;
+    document.getElementById("zoomStyles").disabled = !enableZoom;
+    
 }
 
 var disableSafety = true;

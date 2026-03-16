@@ -1,6 +1,6 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'wineadmin/css/table-of-wines.css' %}">
-<link rel="stylesheet" href="{% static 'wineadmin/css/table-of-wines-zoom.css' %}" id="zoomStyles" disabled="true">
+<link rel="stylesheet" href="{% static 'wineadmin/css/table-of-wines-zoom.css' %}" id="zoomStyles">
 
 
 <form method="POST" action="{% url 'update_wines' %}" enctype="multipart/form-data" autocomplete="off" id="update-wines-form">
@@ -15,8 +15,8 @@
             </div>
             <!-- zoom setting -->
             <div title="hover your cursor over table items to make them bigger (disabled by default because its annoying)">
-                <span id="zoom-control-label">Zoom (disabled)</span>
-                {% include "toggle-switch.html" with id="zoom-toggle" jsFunction="toggleZoom()" checkStatus="unchecked" %}
+                <span id="zoom-control-label">Zoom (enabled)</span>
+                {% include "toggle-switch.html" with id="zoom-toggle" jsFunction="toggleZoom()" checkStatus="checked" %}
             </div>
 
             <!-- safety on the delete button -->
