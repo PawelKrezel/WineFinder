@@ -64,20 +64,32 @@ html:has(#editable-wine-table-somm-notes:hover) .editable-wine-table-somm-notes{
     width: 25vw;
 }
 /* zooming for images */
-.row-editable-wine-table div:hover img{
-    width: 35vw;
-    height: auto;
-    right: 35vw;
-    bottom: 20vw;
-}
-html:has(#editable-wine-table-image:hover) .editable-wine-table-image{
-        width: 35vw;
-        height: auto;
-        right: 18vw;
-}
-.row-editable-wine-table div:hover:has(img){
-    transition-duration: 0.6s;
-    background-color: #8c0808f3;
-    height: 3em;
+
+.imgTooltip{
+    position: relative;
+    display: block;
+    text-align: center;
 }
 
+.imgTooltip:hover{
+    position: absolute;
+    width: 30%;
+    max-width: 30%;
+    right: 5vw;
+    z-index: 50;
+    background: #261c14f0;
+    padding: 0.5em;
+    border-radius: 5px;
+}
+.imgTooltip:hover img{
+    width: 80%;
+    height: auto;
+}
+.imgTooltip:hover input[type="file"]
+{
+    display: block;
+    width: 30%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}

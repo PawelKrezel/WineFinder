@@ -154,9 +154,9 @@
         <div>
             <textarea name="sommNotes_{{ wine.id }}" class="commonStyle commonStyleAsBlock editable-wine-table-somm-notes" placeholder="Notes about wine">{{ wine.sommNotes }}</textarea>
         </div>
-        <div>
+        <div class="imgTooltip">
             <img src="{{ wine.imageURL }}" alt="No image" class="editable-wine-table-image">
-            <!--<input type="file" name="image_{{ wine.id }}" accept="image/*" id="id_image_{{ wine.id }}" style="display: inline-block;">-->
+            <input type="file" name="image_{{ wine.id }}" accept="image/*" id="id_image_{{ wine.id }}">
         </div>
         <div>
             <input 
@@ -170,6 +170,7 @@
         </div>
     </div>
     <hr>
+
     {%empty%} 
         <h1>No wines found in the DBMS.</h1>
         <p>You can add new wines using the form above.</p>

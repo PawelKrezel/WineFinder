@@ -8,10 +8,12 @@
     color: antiquewhite;
     background-image: linear-gradient(51deg,#73695684, #261c14ac);
 }
+
 #mapContainer > div,
 #mapContainer table{
     display: table-cell;
 }
+
 #mapContainer td{
     border: solid rgb(0, 0, 0) 1px;
     min-width: 3vh;
@@ -20,9 +22,11 @@
     padding: 0;
     text-align: center;
 }
+
 .gap table{
     background: rgba(0, 0, 0, 0.966);
 }
+
 .gap td{
     font-size: x-small;
 }
@@ -32,6 +36,7 @@
     vertical-align: middle;
     min-width: 15em;
 }
+
 .cellar-map-input{
     display:none;
 }
@@ -49,7 +54,6 @@
     margin-left: auto;
     margin-right: auto;
 }
-
 
 .cellar-map-label{
     position: relative;

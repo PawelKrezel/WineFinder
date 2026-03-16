@@ -95,12 +95,13 @@ def update_wines(request):
                 wine_id = key.replace("wine_name_", "")
                 wine = Wine.objects.get(id=wine_id)
 
-                #delete logic
+                # delete logic
                 if request.POST.get(f"delete_{wine_id}"):
                     wine.delete()
                     continue
 
-                #update logic
+                # update logic
+                # text and select fields 
                 wine.wine_name = request.POST.get(f"wine_name_{wine_id}")
                 wine.grape = request.POST.get(f"grape_{wine_id}")
                 wine.region = request.POST.get(f"region_{wine_id}")
@@ -114,6 +115,10 @@ def update_wines(request):
                 wine.btl_only = request.POST.get(f"btl_only_{wine_id}")
                 wine.sommNotes = request.POST.get(f"sommNotes_{wine_id}")
 
+                # image field
+                if request.FILES.get(f"image_{wine_id}"):
+                    image_url = upload_image(request.FILES[f"image_{wine_id}"])
+                    wine.imageURL = image_url
                 wine.save()
 
     return redirect("wineadmin")
