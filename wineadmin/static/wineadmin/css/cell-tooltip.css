@@ -12,10 +12,10 @@
     font-size:small;
 }
 .tooltip-up{
-    bottom:-20%;
+    bottom:-15%;
 }
 .tooltip-down{
-    top:-20%;
+    top:-15%;
 }
 .cellar-map-tooltip-img{
     width: 80%;
