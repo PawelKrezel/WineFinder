@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.template import loader
 from .forms import new_wine_form
 from django.shortcuts import redirect
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 from .firebase_storage import upload_image
 from django.contrib.auth.decorators import login_required
 from .models import Wine, Slot
@@ -121,7 +123,7 @@ def update_wines(request):
                     wine.imageURL = image_url
                 wine.save()
 
-    return redirect("wineadmin")
+    return HttpResponseRedirect(reverse("wineadmin") + "#headers-editable-wine-table")
 
 @login_required
 def allocate_wine_slots(request):
@@ -129,14 +131,21 @@ def allocate_wine_slots(request):
     if request.method == "POST":
         wine_id = request.POST.get("wine_id")
         slot_ids = request.POST.getlist("slots")
+        empty_code = "empty-slots"
 
-        wine = Wine.objects.get(id=wine_id)
+        if wine_id != empty_code:
+            wine = Wine.objects.get(id=wine_id)
 
         for slot_id in slot_ids:
 
             slot = Slot.objects.get(id=slot_id)
 
-            slot.wine = wine
+            # Either assign wine to the slot or make it empty
+            if wine_id == empty_code:
+                slot.wine = None
+            else:
+                slot.wine = wine
+
             slot.save()
 
-    return redirect("wineadmin")
+    return HttpResponseRedirect(reverse("wineadmin") + "#mapContainer")

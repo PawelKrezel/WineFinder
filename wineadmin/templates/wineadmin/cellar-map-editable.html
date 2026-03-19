@@ -1,5 +1,5 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'wineadmin/css/cellar-map.css' %}">
+<link rel="stylesheet" href="{% static 'wineadmin/css/cellar-map-editable.css' %}">
 <link rel="stylesheet" href="{% static 'wineadmin/css/cell-tooltip.css' %}" id="cell-tooltip-styles">
 <!-- This code comes from my FYP prototype that is no longer in use -->
 <!-- https://github.com/PawelKrezel/WineFinder/blob/v1-partially-vibe-coded-with-GPT/index.html -->
@@ -10,7 +10,8 @@
     <!-- Map controls -->
     <div id="editable-map-controls">
         <select name="wine_id" id="wine-selector" class="commonStyle commonStyleAsBlock" required>
-            <option value=""> -- select wine -- </option>
+            <option value=""> -- Select Wine -- </option>
+            <option value="empty-slots"> -- Empty Selected Slots -- </option>
             {% for wine in wines %}
                 <option value="{{ wine.id }}">
                     {{ wine }}
@@ -57,4 +58,4 @@
 <script>
     var slotMap = {{ slot_map|safe }};
 </script>
-<script src="{% static 'wineadmin/js/draw-cellar.js' %}"></script>
+<script src="{% static 'wineadmin/js/cellar-map-editable.js' %}"></script>
