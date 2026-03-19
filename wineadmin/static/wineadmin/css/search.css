@@ -33,6 +33,9 @@ h3 .secondaryDetails{
 .secondaryDetails{
     font-size: x-small;
 }
+.mainDetails .from{
+    font-size: small;
+}
 .small-screen{
     display: none;
 }

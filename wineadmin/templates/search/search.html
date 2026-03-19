@@ -19,7 +19,12 @@
         <a href="{% url 'wine_detail' wine.id %}">
             <div class="searchResultCard">
                 <h3>{{ wine.wine_name }} <span class="secondaryDetails">({{ wine.vintage }})</span></h3>
-                <span class="mainDetails">{{ wine.grape }} from {{wine.region}} - {{wine.country_of_origin}}</span><br>
+                <span class="mainDetails">
+                    <span title="grape variety">{{ wine.grape }}</span>
+                    <span class="from">from</span> 
+                    <span title="region">{{wine.region}}</span> 
+                    <span title="country">- {{wine.country_of_origin}}</span>
+                </span><br>
                 <span class="secondaryDetails">{{ wine.body }} | {{ wine.tannin }} | {{ wine.acidity }}</span>
             </div>
         </a>
