@@ -149,3 +149,34 @@ def allocate_wine_slots(request):
             slot.save()
 
     return HttpResponseRedirect(reverse("wineadmin") + "#mapContainer")
+
+@login_required
+def import_wines(request):
+
+    if request.method == "POST" and request.FILES.get("wine_file"):
+        file = request.FILES["wine_file"]
+
+        try:
+            data = json.load(file)
+        except:
+            return redirect("wineadmin")
+        
+        for item in data:
+
+            Wine.objects.create(
+                wine_name = item.get("wine_name", "⚠️ FAILED"),
+                grape = item.get("grape", "⚠️ FAILED"),
+                region = item.get("region", "⚠️ FAILED"),
+                country_of_origin = item.get("country_of_origin", "⚠️ FAILED"),
+                vintage = int(item.get("vintage", 0000)),
+
+                body = item.get("body", "⚠️ FAILED"),
+                tannin = item.get("tannin", "⚠️ FAILED"),
+                acidity = item.get("acidity", "⚠️ FAILED"),
+                glass = item.get("glass", "⚠️ FAILED"),
+                coravin = item.get("coravin", "⚠️ FAILED"),
+                btl_only = item.get("btl_only", "⚠️ FAILED"),
+
+                sommNotes = item.get("sommNotes", "⚠️ FAILED")
+            )
+    return redirect("wineadmin")
