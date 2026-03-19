@@ -180,3 +180,55 @@ def import_wines(request):
                 sommNotes = item.get("sommNotes", "⚠️ FAILED")
             )
     return redirect("wineadmin")
+
+def search(request):
+    query = request.GET.get("query")
+
+    wines = Wine.objects.all()
+
+    if query:
+        wines = wines.filter(
+            wine_name__icontains=query
+        ) | wines.filter(
+            grape__icontains=query
+        ) | wines.filter(
+            region__icontains=query
+        ) | wines.filter(
+            country_of_origin__icontains=query
+        ) | wines.filter(
+            vintage__icontains=query
+        ) | wines.filter(
+            tannin__icontains=query
+        ) | wines.filter(
+            acidity__icontains=query
+        ) | wines.filter(
+            body__icontains=query
+        )
+
+    template = loader.get_template("search/search.html")
+
+    context = {
+        "wines":wines,
+        "query":query
+    }
+    
+    return HttpResponse(template.render(context, request))
+
+
+def wine_detail(request, wine_id):
+
+    wine = Wine.objects.get(id=wine_id)
+    slots = Slot.objects.filter(wine=wine)
+    slot_map = {}
+
+    for slot in slots:
+        slot_map[slot.id] = True  
+
+    template = loader.get_template("search/details.html")
+
+    context = {
+        "wine": wine,
+        "slot_map": json.dumps(slot_map)
+    }
+
+    return HttpResponse(template.render(context, request))
