@@ -1,0 +1,51 @@
+#main-container{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+form{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center
+}
+a{
+    text-decoration: none;
+}
+form > *{
+    margin-right: auto;
+    margin-left: auto;
+}
+input[type="text"]{
+    width: 80%;
+}
+button{
+    width: auto;
+}
+.searchResultCard{
+    background-image: linear-gradient(51deg,#261c14ac, #73695684);
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+h3 .secondaryDetails{
+    font-size: smaller;
+}
+.secondaryDetails{
+    font-size: x-small;
+}
+.small-screen{
+    display: none;
+}
+@media only screen and (max-width: 690px){
+    .small-screen{
+        display: inline-block;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+    .big-screen{
+        display: none;
+    }
+    #main-container{
+    width: 95%;
+}
+}

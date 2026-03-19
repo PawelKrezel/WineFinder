@@ -2,23 +2,33 @@
 
 
 {% block content %}
-<h2>SZNUPEJ</h2>
+{% load static %}
+<link rel="stylesheet" href="{% static 'wineadmin/css/search.css' %}">
 
-<form method="GET">
-    <input type="text" name="query" placeholder="Search wine, grape, region..." value="{{ query }}">
-    <button type="submit">Search</button>
-</form>
+<section id="main-container">
+    <h2>Search</h2>
 
-<hr>
-{% for wine in wines %}
-    <div>
+    <form method="GET">
+        <input type="text" name="query" placeholder="Search wine, grape, region..." value="{{ query|default:'' }}" class="commonStyle commonStyleAsBlock">
+        <button type="submit" class="commonStyle commonStyleAsBlock big-screen">Search</button>
+        <button type="submit" class="commonStyle commonStyleAsBlock small-screen">🔎</button>
+    </form>
+
+    <hr>
+    {% for wine in wines %}
         <a href="{% url 'wine_detail' wine.id %}">
-            {{ wine }}
+            <div class="searchResultCard">
+                <h3>{{ wine.wine_name }} <span class="secondaryDetails">({{ wine.vintage }})</span></h3>
+                <span class="mainDetails">{{ wine.grape }} from {{wine.region}} - {{wine.country_of_origin}}</span><br>
+                <span class="secondaryDetails">{{ wine.body }} | {{ wine.tannin }} | {{ wine.acidity }}</span>
+            </div>
         </a>
-    </div>
-{% empty %}
-    <p>No wines found.</p>
-{% endfor %}
+
+    {% empty %}
+        <p>No wines found.</p>
+    {% endfor %}
+</section>
+
 
 
 {% endblock %}
