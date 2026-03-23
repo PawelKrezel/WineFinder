@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{% static 'wineadmin/css/table-of-wines-zoom.css' %}" id="zoomStyles">
 
 
-<form method="POST" action="{% url 'update_wines' %}" enctype="multipart/form-data" autocomplete="off" id="update-wines-form">
+<form method="POST" action="{% url 'update_wines' %}" enctype="multipart/form-data" autocomplete="off" id="update-wines-form" class="tucked-in">
     {% csrf_token %}
     
     <header>

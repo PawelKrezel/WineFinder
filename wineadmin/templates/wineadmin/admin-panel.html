@@ -10,10 +10,9 @@
         {% include "wineadmin/new-wine-form.html" %}
     </div>
 
-    <div onclick="dropDown('table-of-wines-main-wrapper');" class="commonStyle commonStyleAsBlock toggleWrapper">Table of Wines</div>
-    <div id="table-of-wines-main-wrapper" class="tucked-in">
-        {% include "wineadmin/table-of-wines.html" %}
-    </div>    
+    <div onclick="dropDown('update-wines-form');" class="commonStyle commonStyleAsBlock toggleWrapper">Table of Wines</div>
+    <!-- slightly different structure to solve the UI glitch -->
+    {% include "wineadmin/table-of-wines.html" %}  
     
     <div onclick="dropDown('wine-cellar-map-main-wrapper');" class="commonStyle commonStyleAsBlock toggleWrapper">Wine Cellar Map</div>
     <div id="wine-cellar-map-main-wrapper" class="tucked-in">

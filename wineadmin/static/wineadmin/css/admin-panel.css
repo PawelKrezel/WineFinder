@@ -14,7 +14,3 @@
 .toggleWrapper:hover{
     background-color: #4a7e8c70;
 }
-#table-of-wines-main-wrapper{
-    height: 70vh;
-    overflow-y: scroll;
-}

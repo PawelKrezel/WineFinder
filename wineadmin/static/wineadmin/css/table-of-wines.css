@@ -1,9 +1,10 @@
 form#update-wines-form{
-    margin-top: 5vw;
     margin-left: auto;
     margin-right: auto;
     width: 90%;
     text-align: center;
+    height: 70vh;
+    overflow-y: scroll;
 }
 
 .row-editable-wine-table{
