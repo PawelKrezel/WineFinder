@@ -1,0 +1,20 @@
+.tucked-in{
+    transition-duration: 0.6;
+    display: none;
+}
+.toggleWrapper{
+    width: 90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    background-color: #4a7e8cc3;
+}
+.toggleWrapper:hover{
+    background-color: #4a7e8c70;
+}
+#table-of-wines-main-wrapper{
+    height: 70vh;
+    overflow-y: scroll;
+}

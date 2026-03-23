@@ -2,13 +2,29 @@
 {% block title %} 💼 Admin panel {% endblock %}
 
 {% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wineadmin/css/admin-panel.css' %}">
 
-    {% include "wineadmin/new-wine-form.html" %}
+    <div onclick="dropDown('toggle-new-wine-form-main-wrapper');" class="commonStyle commonStyleAsBlock toggleWrapper">New Wine Form</div>
+    <div id="toggle-new-wine-form-main-wrapper" class="tucked-in">
+        {% include "wineadmin/new-wine-form.html" %}
+    </div>
 
-    {% include "wineadmin/table-of-wines.html" %}
+    <div onclick="dropDown('table-of-wines-main-wrapper');" class="commonStyle commonStyleAsBlock toggleWrapper">Table of Wines</div>
+    <div id="table-of-wines-main-wrapper" class="tucked-in">
+        {% include "wineadmin/table-of-wines.html" %}
+    </div>    
+    
+    <div onclick="dropDown('wine-cellar-map-main-wrapper');" class="commonStyle commonStyleAsBlock toggleWrapper">Wine Cellar Map</div>
+    <div id="wine-cellar-map-main-wrapper" class="tucked-in">
+        {% include "wineadmin/cellar-map-editable.html" %}
+    </div>
 
-    {% include "wineadmin/cellar-map-editable.html" %}
-
-    {% include "wineadmin/dbms-extras.html" %}
+    <div onclick="dropDown('dbms-extras-main-wrapper');" class="commonStyle commonStyleAsBlock toggleWrapper">Miscellaneous DBMS tools</div>
+    <div id="dbms-extras-main-wrapper" class="tucked-in">
+        {% include "wineadmin/dbms-extras.html" %}
+    </div>
+    
+    <script src="{% static 'wineadmin/js/drop-down-sections.js'%}"></script>
 
 {% endblock %}
