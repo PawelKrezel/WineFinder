@@ -164,7 +164,7 @@ def import_wines(request):
         
         for item in data:
 
-            Wine.objects.create(
+            wine = Wine.objects.create(
                 wine_name = item.get("wine_name", "⚠️ FAILED"),
                 grape = item.get("grape", "⚠️ FAILED"),
                 region = item.get("region", "⚠️ FAILED"),
@@ -180,6 +180,17 @@ def import_wines(request):
 
                 sommNotes = item.get("sommNotes", "⚠️ FAILED")
             )
+
+            if "slots" in item:
+                slot_ids = item.get("slots", [])
+
+                for slot_id in slot_ids:
+                    try:
+                        slot = Slot.objects.get(id=slot_id)
+                        slot.wine = wine
+                        slot.save()
+                    except:
+                        pass
     return redirect("wineadmin")
 
 def search(request):
@@ -236,11 +247,27 @@ def wine_detail(request, wine_id):
 
 @login_required
 def export_wines(request):
+
+    include_slots = request.GET.get("include_slots") == "true"
     wines = Wine.objects.all()
     data = []
 
+    wine_slots_map = {}
+
+    if include_slots:
+        slots = Slot.objects.select_related("wine")
+
+        for slot in slots:
+            if slot.wine:
+                wine_id = slot.wine.id
+
+                if wine_id not in wine_slots_map:
+                    wine_slots_map[wine_id] = []
+
+                wine_slots_map[wine_id].append(slot.id)
+
     for wine in wines:
-        data.append({
+        wine_data = {
             "wine_name": wine.wine_name,
             "grape": wine.grape,
             "region": wine.region,
@@ -253,12 +280,20 @@ def export_wines(request):
             "coravin": wine.coravin,
             "btl_only": wine.btl_only,
             "sommNotes": wine.sommNotes or ""
-        })
+        }
+
+        if include_slots:
+            wine_data["slots"] = wine_slots_map.get(wine.id, [])
+
+        data.append(wine_data)
 
     response = HttpResponse(
     json.dumps(data, indent=4, ensure_ascii=False),
     content_type='application/json; charset=utf-8')
 
-    filename = f"wines_copy_as_of_{datetime.now().strftime('%Y-%m-%d_%H%M_no_slot_allocation')}.json"
+    if include_slots:
+        filename = f"wines_copy_as_of_{datetime.now().strftime('%Y-%m-%d_%H%M_WITH_slot_allocation')}.json"
+    else:
+        filename = f"wines_copy_as_of_{datetime.now().strftime('%Y-%m-%d_%H%M_no_slot_allocation')}.json"
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
     return response

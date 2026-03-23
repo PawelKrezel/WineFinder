@@ -41,8 +41,12 @@
         </div>
 
         <a href="{% url 'export_wines' %}" class="commonStyle commonStyleAsBlock">
-            Export wines
+            Export wines without slot allocation
         </a>
+
+    <a href="{% url 'export_wines' %}?include_slots=true" class="commonStyle commonStyleAsBlock">
+        Export wines + slots allocation data
+    </a>
 
     </form>
 
