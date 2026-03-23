@@ -12,5 +12,6 @@ urlpatterns = [
     path('allocate-wine-slots/', views.allocate_wine_slots, name='allocate_wine_slots'),
     path('import-wines/', views.import_wines, name='import_wines'),
     path('search/', views.search, name='search'),
-    path('wine/<uuid:wine_id>/', views.wine_detail, name='wine_detail')
+    path('wine/<uuid:wine_id>/', views.wine_detail, name='wine_detail'),
+    path('export-wines/', views.export_wines, name='export_wines'),
 ]

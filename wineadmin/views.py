@@ -8,6 +8,7 @@ from .firebase_storage import upload_image
 from django.contrib.auth.decorators import login_required
 from .models import Wine, Slot
 import json
+from datetime import datetime
 
 @login_required
 def wineadmin(request):
@@ -232,3 +233,32 @@ def wine_detail(request, wine_id):
     }
 
     return HttpResponse(template.render(context, request))
+
+@login_required
+def export_wines(request):
+    wines = Wine.objects.all()
+    data = []
+
+    for wine in wines:
+        data.append({
+            "wine_name": wine.wine_name,
+            "grape": wine.grape,
+            "region": wine.region,
+            "country_of_origin": wine.country_of_origin,
+            "vintage": wine.vintage,
+            "body": wine.body,
+            "tannin": wine.tannin,
+            "acidity": wine.acidity,
+            "glass": wine.glass,
+            "coravin": wine.coravin,
+            "btl_only": wine.btl_only,
+            "sommNotes": wine.sommNotes or ""
+        })
+
+    response = HttpResponse(
+    json.dumps(data, indent=4, ensure_ascii=False),
+    content_type='application/json; charset=utf-8')
+
+    filename = f"wines_copy_as_of_{datetime.now().strftime('%Y-%m-%d_%H%M_no_slot_allocation')}.json"
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    return response
