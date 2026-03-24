@@ -82,16 +82,21 @@
             </div>
         </div>
 
+        {% if wine.sommNotes %}
+        <div class="row row-1">
+            <div class="detail">
+                <label for="sommNotes">Extra notes</label>
+                <span id="sommNotes">{{ wine.sommNotes }}</span>
+            </div>
+        </div>
+        {% endif %}
 
+    <button onclick="history.back()" class="commonStyle commonStyleAsBlock row row-1">
+        Go Back
+    
+    </button>
     </div>
 
-        {% if wine.sommNotes %}
-        <!--
-        <div class="detail">
-            <label for="sommNotes">Extra Notes: </label>
-            <span id="sommNotes">{{ wine.sommNotes}}</span>
-        </div>-->
-        {% endif %}
 </div>
 
 

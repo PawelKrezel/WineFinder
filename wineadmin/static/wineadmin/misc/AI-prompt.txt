@@ -81,7 +81,7 @@ wine_name = producer or wine label (e.g. "Pulenta Estate")
 grape = grape variety (e.g. "Malbec", "Chardonnay")
 Do not combine them.
 
-sommNotes must be short (max 25 words) and based only on known wine characteristics.
+sommNotes must be at least 25 words long and based only on known wine characteristics.
 Do not invent complex tasting notes.
 
 Format the JSON output as human-readable (pretty-printed) with consistent indentation and line breaks. Do not compress it into a single line.

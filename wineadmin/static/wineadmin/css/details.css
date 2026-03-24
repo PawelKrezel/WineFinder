@@ -7,16 +7,21 @@
     display: block;
     text-align: center;
     padding: 1em;
+    border-radius: 6px;
+    margin-bottom: 1em;
 }
 .details-main-container img{
-    width: 40%;
+    width: 20%;
     height: auto;
     transition-duration: 1s;
     border: solid #261c14e2 1px;
+    background-color: #261c149c;
+    padding: 1em;
     border-radius: 6px;
+    margin-top: 0.75em;
 }
 .details-main-container img:hover{
-    width: 97.5%;
+    width: 50%;
 }
 .detail{
     margin-top: 0.75em;
@@ -58,4 +63,20 @@
 .row-3{
     grid-template-columns: 1fr 1fr 1fr;
 }
+#sommNotes{
+    font-weight: normal;
+}
+.detail:has(#sommNotes){
+    text-align: justify;
+    line-height: 1.4;
+}
 
+@media only screen and (max-width: 690px){
+    .details-main-container img{
+        width: 50%;
+    }
+    .details-main-container img:hover{
+        width: 97.5%;
+        padding: 0;
+    }
+}
