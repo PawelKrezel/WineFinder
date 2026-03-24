@@ -1,6 +1,98 @@
-<h2>{{ wine.wine_name }}</h2>
+{% extends "base.html" %}
 
-<p>{{ wine.grape }} | {{ wine.vintage }}</p>
-<p>{{ wine.region }}, {{ wine.country_of_origin }}</p>
-<p>{{ wine.sommNotes }}</p>
-<p>{{ wine.body }} | {{ wine.acidity }} | {{ wine.tannin }}  </p>
+{% block title %} Wine details for {{ wine }} {% endblock %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'wineadmin/css/details.css' %}">
+
+<div class="details-main-container">
+    <div class="row row-1">
+        <div class="detail">
+            <label for="name">Name</label>
+            <span id="name"><h1>"{{ wine.wine_name }}"</h1></span>
+        </div>
+    </div>
+
+    {% if wine.imageURL %} 
+        <img src="{{ wine.imageURL }}" alt="Image of {{ wine }} was not loaded correctly. Womp womp!">
+    {% endif %}
+    <div class="details">
+        <div class="row row-1">
+            <div class="detail">
+                <label for="grape">Grape</label>
+                <span id="grape">{{ wine.grape }}</span>
+            </div>
+        </div>
+        
+        <div class="row row-2">
+            <div class="detail">
+                <label for="region">Region</label>
+                <span id="region">{{ wine.region }}</span>
+            </div>
+
+            <div class="detail">
+                <label for="country_of_origin">Country</label>
+                <span id="country_of_origin">{{ wine.country_of_origin }}</span>
+            </div>
+        </div>
+
+        <div class="row row-1">
+            <div class="detail">
+                <label for="vintage">Vintage</label>
+                <span id="vintage">{{ wine.vintage }}</span>
+            </div>
+        </div>
+
+        <div class="row row-3">
+            <div class="detail">
+                <label for="body">Body</label>
+                <span id="body">{{ wine.get_body_display }}</span>
+            </div>
+            
+
+            <div class="detail">
+                <label for="tannin">Tannin</label>
+                <span id="tannin">{{ wine.get_tannin_display }}</span>
+            </div>
+
+            <div class="detail">
+                <label for="acidity">Acidity</label>
+                <span id="acidity">{{ wine.get_acidity_display }}</span>
+            </div>
+        </div>
+
+        <div class="row row-1">
+            <div class="detail">
+                <label for="btl_only">Availability</label>
+                <span id="btl_only">{{ wine.get_btl_only_display }}</span>
+            </div>
+        </div>
+
+        <div class="row row-2">
+            <div class="detail">
+                <label for="glass">Serve in</label>
+                <span id="glass">{{ wine.get_glass_display }}</span>
+            </div>
+        
+
+            <div class="detail">
+                <label for="coravin">Coravin</label>
+                <span id="coravin">{{ wine.get_coravin_display }}</span>
+            </div>
+        </div>
+
+
+    </div>
+
+        {% if wine.sommNotes %}
+        <!--
+        <div class="detail">
+            <label for="sommNotes">Extra Notes: </label>
+            <span id="sommNotes">{{ wine.sommNotes}}</span>
+        </div>-->
+        {% endif %}
+</div>
+
+
+{% endblock %}

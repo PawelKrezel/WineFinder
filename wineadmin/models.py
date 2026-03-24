@@ -32,11 +32,11 @@ class Wine(models.Model):
         ('high-acidity', 'High Acidity'),
     ]
     GLASS_CHOICES = [
-        ('Standard', 'Standard'),
-        ('Burgundy', 'Burgundy'),
-        ('Bordeaux', 'Bordeaux'),
-        ('Flute', 'Flute'),
-        ('Tst', 'Tasting glass')
+        ('Standard', 'Standard Glass'),
+        ('Burgundy', 'Burgundy Glass'),
+        ('Bordeaux', 'Bordeaux Glass'),
+        ('Flute', 'Flute Glass'),
+        ('Tst', 'Tasting Glass')
     ]
     CORAVIN_CHOICES = [
         ('Yes', 'Needs to be Coravined'),
@@ -44,7 +44,7 @@ class Wine(models.Model):
     ]
     BTL_ONLY_CHOICES = [
         ('Yes', 'Only by the Bottle'),
-        ('No', 'Available by the Glass/Carafe')
+        ('No', 'Available by the Glass/Carafe/Bottle')
     ]
     
     body = models.CharField(max_length=15,choices=BODY_CHOICES)
