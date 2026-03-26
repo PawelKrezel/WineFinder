@@ -1,4 +1,3 @@
-
 .details-main-container{
     background-image: linear-gradient(51deg,#261c14b6, #73695690);
     margin-left: auto;
@@ -69,6 +68,35 @@
 .detail:has(#sommNotes){
     text-align: justify;
     line-height: 1.4;
+}
+.map-scroll-wrapper{
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+}
+.map-scroll-wrapper::-webkit-scrollbar{
+    display: none;
+}
+#mapContainer{
+
+    width: 80vw;
+    background:none;    
+}
+@keyframes cellPulse {
+    0% {
+        background-color: #8c080829;
+    }
+    50% {
+        background-color: #8c0808;
+    }
+    100% {
+        background-color: #8c080829;
+    }
+}
+
+td:has(.highlight){
+    animation: cellPulse 1.5s infinite ease-in-out;
+    border-radius: 2px;
 }
 
 @media only screen and (max-width: 690px){

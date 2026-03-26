@@ -4,6 +4,7 @@
 
 {% block content %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'wineadmin/css/cellar-map-editable.css' %}">
 <link rel="stylesheet" href="{% static 'wineadmin/css/details.css' %}">
 
 <div class="details-main-container">
@@ -85,19 +86,31 @@
         {% if wine.sommNotes %}
         <div class="row row-1">
             <div class="detail">
-                <label for="sommNotes">Extra notes</label>
+                <label for="sommNotes">Extra Notes</label>
                 <span id="sommNotes">{{ wine.sommNotes }}</span>
             </div>
         </div>
         {% endif %}
 
+        {% if has_slots %}
+        <div class="row row-1">
+            <div class="detail">
+                <label>Location in the Wine Cellar</label>
+                    <div class="map-scroll-wrapper">{% include "cellar-map-base.html" %}</div>
+                    <script>
+                        var slotMap = {{ slot_map|safe }};
+                        var readOnlyMap = true;
+                    </script>
+                    <script src="{% static 'wineadmin/js/cellar-map-editable.js' %}"></script>
+            </div>
+        </div>
+        {% endif %}
+
+        
+
     <button onclick="history.back()" class="commonStyle commonStyleAsBlock row row-1">
         Go Back
-    
     </button>
     </div>
-
 </div>
-
-
 {% endblock %}

@@ -27,6 +27,7 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
             var title = cellID;
             var tooltipHTML = "";
             var tooltipUpOrDown = "tooltip-down";
+            var labelClass = "cellar-map-label";
 
             if(typeof slotMap !== "undefined"){
                 if(slotMap[cellID]){
@@ -46,16 +47,22 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
                     if(wine.image){
                     tooltipHTML += `<img src="${wine.image}" class="cellar-map-tooltip-img"></div>`;
                     }else{tooltipHTML += `</div>`}
+                if(readOnlyMap){
+                    labelClass = "cellar-map-label highlight";
+                    }
                 }
             }
 
             htmlCode += `<td class="shelfSlot" id="${cellID}" title="${title}">
-            <label for="input-${cellID}" class="cellar-map-label">
-                ${display}
-                ${tooltipHTML}
-            </label>
-            <input type="checkbox" name="slots" value="${cellID}" id="input-${cellID}" class="cellar-map-input">
-            </td>`;
+            <label for="input-${cellID}" class="${labelClass}">`;
+            if(!readOnlyMap){
+                htmlCode += `${display}${tooltipHTML}`;
+            }
+            htmlCode += `</label>`;
+            if(!readOnlyMap){
+                htmlCode += `<input type="checkbox" name="slots" value="${cellID}" id="input-${cellID}" class="cellar-map-input">`;
+            }            
+            htmlCode += `</td>`;
 
 
         }// html for non-slot cells (walls of the cellar) needs to be more simple
@@ -85,7 +92,10 @@ function drawCellar(){
     document.getElementById("g3-container").innerHTML = drawShelf(7, 25, "g3", "<br>", true, true);
     document.getElementById("g4-container").innerHTML = drawShelf(13, 25, "g4", "Curve Leading to the bar", true, true);
     document.getElementById("g5-container").innerHTML = drawShelf(1, 25, "g5", "<br>", true, true);
-    setEventListenersForAllCells();
+
+    if(typeof readOnlyMap === "undefined" || !readOnlyMap){
+        setEventListenersForAllCells();
+    }
 }
 drawCellar();
 

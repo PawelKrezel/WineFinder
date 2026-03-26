@@ -236,11 +236,12 @@ def wine_detail(request, wine_id):
     for slot in slots:
         slot_map[slot.id] = True  
 
+    has_slots = len(slot_map) > 0
     template = loader.get_template("search/details.html")
-
     context = {
         "wine": wine,
-        "slot_map": json.dumps(slot_map)
+        "slot_map": json.dumps(slot_map),
+        "has_slots": has_slots
     }
 
     return HttpResponse(template.render(context, request))
