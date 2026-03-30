@@ -17,6 +17,7 @@ html:has(#editable-wine-table-coravin:hover) .editable-wine-table-coravin,
 html:has(#editable-wine-table-btl-only:hover) .editable-wine-table-btl-only,
 html:has(#editable-wine-table-somm-notes:hover) .editable-wine-table-somm-notes,
 html:has(#editable-wine-table-image:hover) .editable-wine-table-image,
+html:has(#editable-wine-table-colour:hover) .editable-wine-table-colour,
 .row-editable-wine-table div:hover *{
     position: relative;
     z-index: 2;
@@ -47,6 +48,7 @@ html:has(#editable-wine-table-acidity:hover) .editable-wine-table-acidity,
 html:has(#editable-wine-table-glass:hover) .editable-wine-table-glass,
 html:has(#editable-wine-table-coravin:hover) .editable-wine-table-coravin,
 html:has(#editable-wine-table-btl-only:hover) .editable-wine-table-btl-only,
+html:has(#editable-wine-table-colour:hover) .editable-wine-table-colour,
 .row-editable-wine-table div:hover select{
     font-size: large;
     width: fit-content;

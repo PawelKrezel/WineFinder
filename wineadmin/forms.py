@@ -6,7 +6,7 @@ class new_wine_form(forms.ModelForm):
     class Meta:
         model = Wine
         fields = ["wine_name", "grape", "region", "country_of_origin", "vintage", "body", 
-                "tannin", "acidity", "glass", "coravin", "btl_only", "sommNotes"]
+                "tannin", "acidity", "glass", "coravin", "btl_only", "sommNotes", "colour"]
         
         #attributes for the form elements
         widgets = {
@@ -56,6 +56,7 @@ class new_wine_form(forms.ModelForm):
             "glass":forms.RadioSelect(attrs={"class":"commonStyle"}),
             "coravin":forms.RadioSelect(attrs={"class":"commonStyle"}),
             "btl_only":forms.RadioSelect(attrs={"class":"commonStyle"}),
+            "colour":forms.RadioSelect(attrs={"class":"commonStyle"}),
         }
 
         
@@ -69,3 +70,4 @@ class new_wine_form(forms.ModelForm):
         self.fields["glass"].choices = Wine.GLASS_CHOICES
         self.fields["coravin"].choices = Wine.CORAVIN_CHOICES
         self.fields["btl_only"].choices = Wine.BTL_ONLY_CHOICES
+        self.fields["colour"].choices = Wine.COLOUR_CHOICES

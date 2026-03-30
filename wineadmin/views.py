@@ -118,6 +118,7 @@ def update_wines(request):
                 wine.coravin = request.POST.get(f"coravin_{wine_id}")
                 wine.btl_only = request.POST.get(f"btl_only_{wine_id}")
                 wine.sommNotes = request.POST.get(f"sommNotes_{wine_id}")
+                wine.colour = request.POST.get(f"colour_{wine_id}")
 
                 # image field
                 if request.FILES.get(f"image_{wine_id}"):
@@ -178,8 +179,8 @@ def import_wines(request):
                 glass = item.get("glass", "⚠️ FAILED"),
                 coravin = item.get("coravin", "⚠️ FAILED"),
                 btl_only = item.get("btl_only", "⚠️ FAILED"),
-
-                sommNotes = item.get("sommNotes", "⚠️ FAILED")
+                sommNotes = item.get("sommNotes", "⚠️ FAILED"),
+                colour = item.get("colour", "⚠️ FAILED")
             )
 
             if "slots" in item:
@@ -222,6 +223,8 @@ def search(request):
             body__icontains=query
         ) | wines.filter(
             sommNotes__icontains=query
+        ) | wines.filter(
+            colour_icontains=query
         )
 
     template = loader.get_template("search/search.html")
@@ -287,7 +290,8 @@ def export_wines(request):
             "glass": wine.glass,
             "coravin": wine.coravin,
             "btl_only": wine.btl_only,
-            "sommNotes": wine.sommNotes or ""
+            "sommNotes": wine.sommNotes or "",
+            "colour":wine.colour
         }
 
         if include_slots:

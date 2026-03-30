@@ -28,6 +28,12 @@ acidity:
 glass:
 - Standard, Burgundy, Bordeaux, Flute, Tst
 
+colour:
+- Red
+- White
+- Rose
+- Orange
+
 Do not output anything outside these values.
 
 Never invent fields outside the schema.
@@ -43,12 +49,13 @@ Return ONLY a JSON array using this schema:
     "country_of_origin": "string",
     "vintage": 2020,
     "body": "light-body | medium-body | full-body",
-    "tannin": "no-tannin" | "light-tannin | medium-tannin | full-tannin",
+    "tannin": "no-tannin | light-tannin | medium-tannin | full-tannin",
     "acidity": "low-acidity | medium-acidity | high-acidity",
     "glass": "Standard | Burgundy | Bordeaux | Flute | Tst",
-    "coravin": "Yes" | "No",
-    "btl_only": "Yes" | "No",
-    "sommNotes": "string"
+    "coravin": "Yes | No",
+    "btl_only": "Yes | No",
+    "sommNotes": "string",
+    "colour": "Red | White | Rose | Orange"
   }
 ]
 
@@ -78,6 +85,10 @@ Set "btl_only" to "Yes" ONLY if:
 
 Otherwise set "btl_only" to "No".
 
+Set "glass" to "Tst" if:
+- The wine is available by the 75ml glass OR
+- It is a dessert wine/port/sherry 
+
 wine_name = producer or wine label (e.g. "Pulenta Estate")
 grape = grape variety (e.g. "Malbec", "Chardonnay")
 Do not combine them.
@@ -88,4 +99,4 @@ Do not invent complex tasting notes.
 Format the JSON output as human-readable (pretty-printed) with consistent indentation and line breaks. Do not compress it into a single line.
 Your response MUST be valid JSON parsable by standard JSON.parse().
 
-if possible, make it a downloadable file.
+If possible, make it a downloadable file.

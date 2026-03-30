@@ -35,6 +35,7 @@
             <h4 id="editable-wine-table-region">Region</h4>
             <h4 id="editable-wine-table-country">Country</h4>
             <h4 id="editable-wine-table-vintage">Vintage</h4>
+            <h4 id="editable-wine-table-colour">Colour</h4>
             <h4 id="editable-wine-table-body">Body</h4>
             <h4 id="editable-wine-table-tannin">Tannins</h4>
             <h4 id="editable-wine-table-acidity">Acidity</h4>
@@ -107,6 +108,14 @@
             min="0" 
             id="editable_id_vintage_{{ wine.id }}"
             value="{{ wine.vintage }}">
+        </div>
+        <div>
+            <select name="colour_{{ wine.id }}" class="commonStyle commonStyleAsBlock editable-wine-table-colour">
+                <option value="Red" {% if wine.colour == "Red" %}selected{% endif %}>Red</option>
+                <option value="White" {% if wine.colour == "White" %}selected{% endif %}>White</option>
+                <option value="Rose" {% if wine.colour == "Rose" %}selected{% endif %}>Rosé</option>
+                <option value="Orange" {% if wine.colour == "Orange" %}selected{% endif %}>Orange/Skin Contact</option>
+            </select>            
         </div>
         <div>
             <select name="body_{{ wine.id }}" class="commonStyle commonStyleAsBlock editable-wine-table-body">

@@ -47,6 +47,12 @@ class Wine(models.Model):
         ('Yes', 'Only by the Bottle'),
         ('No', 'Available by the Glass/Carafe/Bottle')
     ]
+    COLOUR_CHOICES = [
+        ('Red', 'Red'),
+        ('White', 'White'),
+        ('Rose', 'Rosé'),
+        ('Orange', 'Orange (skin contact)')
+    ]
     
     body = models.CharField(max_length=15,choices=BODY_CHOICES)
     tannin = models.CharField(max_length=15, choices=TANNIN_CHOICES)
@@ -54,6 +60,7 @@ class Wine(models.Model):
     glass = models.CharField(max_length=15, choices=GLASS_CHOICES)
     coravin = models.CharField(max_length=15, choices=CORAVIN_CHOICES)
     btl_only = models.CharField(max_length=15, choices=BTL_ONLY_CHOICES)
+    colour = models.CharField(max_length=15, choices=COLOUR_CHOICES)
 
     sommNotes = models.TextField(blank=True, null=True)
     imageURL = models.URLField(blank=True, null=True)
