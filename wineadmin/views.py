@@ -14,7 +14,7 @@ from django.db.models import Count, Q
 @login_required
 def wineadmin(request):
     form_new_wine = new_wine_form()
-    wines = Wine.objects.all()
+    wines = Wine.objects.all().order_by('vintage', 'wine_name')
     slots = Slot.objects.select_related("wine")
 
     slot_map = {}
@@ -222,11 +222,10 @@ def search(request):
         ) | wines.filter(
             body__icontains=query
         ) | wines.filter(
-            sommNotes__icontains=query
+            colour__icontains=query
         ) | wines.filter(
-            colour_icontains=query
+            sommNotes__icontains=query
         )
-
     template = loader.get_template("search/search.html")
 
     context = {
@@ -260,7 +259,7 @@ def wine_detail(request, wine_id):
 def export_wines(request):
 
     include_slots = request.GET.get("include_slots") == "true"
-    wines = Wine.objects.all()
+    wines = Wine.objects.all().order_by('vintage', 'wine_name')
     data = []
 
     wine_slots_map = {}

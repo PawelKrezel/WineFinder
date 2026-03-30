@@ -19,10 +19,15 @@
         <img src="{{ wine.imageURL }}" alt="Image of {{ wine }} was not loaded correctly. Womp womp!">
     {% endif %}
     <div class="details">
-        <div class="row row-1">
+        <div class="row row-2">
             <div class="detail">
                 <label for="grape">Grape</label>
                 <span id="grape">{{ wine.grape }}</span>
+            </div>
+
+            <div class="detail">
+                <label for="colour">Colour</label>
+                <span id="colour">{{ wine.colour }}</span>
             </div>
         </div>
         

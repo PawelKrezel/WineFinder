@@ -17,7 +17,7 @@
     <hr>
     {% for wine in wines %}
         <a href="{% url 'wine_detail' wine.id %}">
-            <div class="searchResultCard">
+            <div class="searchResultCard colourTag {{ wine.colour }}">
                 <div class="text-details">
                 <h3>{{ wine.wine_name }} <span class="secondaryDetails">({{ wine.vintage }})</span></h3>
                     <span class="mainDetails">
