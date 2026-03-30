@@ -78,9 +78,11 @@
     display: none;
 }
 #mapContainer{
-
     width: 80vw;
     background:none;    
+}
+#mapContainer::-webkit-scrollbar{
+    background-color: #261c145b;
 }
 @keyframes cellPulse {
     0% {

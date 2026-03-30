@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Wine, Slot
 import json
 from datetime import datetime
+from django.db.models import Count, Q
 
 @login_required
 def wineadmin(request):
@@ -196,7 +197,11 @@ def import_wines(request):
 def search(request):
     query = request.GET.get("query")
 
-    wines = Wine.objects.all()
+    wines = Wine.objects.all().annotate(
+        has_notes=Count('id', filter=Q(sommNotes__isnull=False) & ~Q(sommNotes="")),
+        has_image=Count('id', filter=Q(imageURL__isnull=False) & ~Q(imageURL="")),
+        slot_count=Count('slots')
+)
 
     if query:
         wines = wines.filter(
@@ -215,6 +220,8 @@ def search(request):
             acidity__icontains=query
         ) | wines.filter(
             body__icontains=query
+        ) | wines.filter(
+            sommNotes__icontains=query
         )
 
     template = loader.get_template("search/search.html")

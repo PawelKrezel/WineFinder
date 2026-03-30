@@ -18,14 +18,40 @@
     {% for wine in wines %}
         <a href="{% url 'wine_detail' wine.id %}">
             <div class="searchResultCard">
+                <div class="text-details">
                 <h3>{{ wine.wine_name }} <span class="secondaryDetails">({{ wine.vintage }})</span></h3>
-                <span class="mainDetails">
-                    <span title="grape variety">{{ wine.grape }}</span>
-                    <span class="from">from</span> 
-                    <span title="region">{{wine.region}}</span> 
-                    <span title="country">- {{wine.country_of_origin}}</span>
-                </span><br>
-                <span class="secondaryDetails">{{ wine.body }} | {{ wine.tannin }} | {{ wine.acidity }}</span>
+                    <span class="mainDetails">
+                        <span title="grape variety">{{ wine.grape }}</span>
+                        <span class="from">from</span> 
+                        <span title="region">{{wine.region}}</span> 
+                        <span title="country"> - {{wine.country_of_origin}}</span>
+                    </span><br>
+                    <span class="secondaryDetails">
+                        <span class="{{ wine.body }}"> {{ wine.body }} </span>
+                        <span class="{{ wine.tannin }}"> {{ wine.tannin }} </span>
+                        <span class="{{ wine.acidity }}"> {{ wine.acidity }} </span>
+                    </span>
+                </div>
+
+                <div class="tags">
+                    {% if wine.has_notes %}
+                        <span class="tag" title="Sommelier's Notes are available for {{ wine }}">
+                            <i class="fa-regular fa-comment-dots"></i>
+                        </span>
+                    {% endif %}
+
+                    {% if wine.has_image %}
+                        <span class="tag" title="Image has been uploaded for the bottle of {{ wine }}">
+                            <i class="fa-regular fa-camera"></i>
+                        </span>
+                    {% endif %}
+
+                    {% if wine.slot_count > 0 %}
+                        <span class="tag" title="{{ wine }} has been mapped out in the digital map of the wine cellar">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </span>
+                    {% endif %}
+                </div>
             </div>
         </a>
 

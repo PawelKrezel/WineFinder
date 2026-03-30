@@ -25,6 +25,27 @@ button{
     background-image: linear-gradient(51deg,#261c14ac, #73695684);
     padding: 0.5em;
     margin-bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+}
+.text-details{
+    flex: 1;
+    text-align: left;
+}
+.tags{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 0.6em;
+    white-space: nowrap;
+}
+.tag > i{
+    font-size: 2em;
+    font-weight:100;
+    border: 2px dashed white;
+    padding: 0.3em;
 }
 h3 .secondaryDetails{
     font-size: smaller;
@@ -32,12 +53,34 @@ h3 .secondaryDetails{
 .secondaryDetails{
     font-size: x-small;
 }
+.mainDetails{
+    white-space: normal; 
+    overflow-wrap: break-word;
+}
 .mainDetails .from{
     font-size: small;
 }
 .small-screen{
     display: none;
 }
+
+.secondaryDetails span{
+    padding: 0.25em 0.5em;
+    border-radius: 6px;
+    margin-right: 0.5em;
+}
+.light-body   { background-color: #c9a66b; }  
+.medium-body  { background-color: #a65e2e; }  
+.full-body    { background-color: #5a0f0f; }  
+
+.low-acidity     { background-color: #a67c52; }  /* soft caramel */
+.medium-acidity  { background-color: #4fc3f7; }  /* sky blue */
+.high-acidity    { background-color: #00e5ff; }  /* electric cyan */
+
+.light-tannin   { background-color: #cfa18d; }  
+.medium-tannin  { background-color: #8b5a2b; }  
+.full-tannin    { background-color: #3b1f1f; }  
+
 @media only screen and (max-width: 690px){
     .small-screen{
         display: inline-block;
