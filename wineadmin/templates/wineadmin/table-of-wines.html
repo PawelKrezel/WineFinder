@@ -117,6 +117,7 @@
         </div>
         <div>
             <select name="tannin_{{ wine.id }}" class="commonStyle commonStyleAsBlock editable-wine-table-tannin">
+            <option value="no-tannin" {% if wine.tannin == "no-tannin" %}selected{% endif %}>No Tannin / Very Low Tannin</option>
             <option value="light-tannin" {% if wine.tannin == "light-tannin" %}selected{% endif %}>Light Tannin</option>
             <option value="medium-tannin" {% if wine.tannin == "medium-tannin" %}selected{% endif %}>Medium Tannin</option>
             <option value="full-tannin" {% if wine.tannin == "full-tannin" %}selected{% endif %}>Full Tannin</option>

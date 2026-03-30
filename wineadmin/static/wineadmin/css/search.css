@@ -73,12 +73,13 @@ h3 .secondaryDetails{
 .medium-body  { background-color: #a65e2e; }  
 .full-body    { background-color: #5a0f0f; }  
 
-.low-acidity     { background-color: #a67c52; }  /* soft caramel */
-.medium-acidity  { background-color: #4fc3f7; }  /* sky blue */
-.high-acidity    { background-color: #00e5ff; }  /* electric cyan */
+.low-acidity     { background-color: #a67c52; }  
+.medium-acidity  { background-color: #4fc3f7; } 
+.high-acidity    { background-color: #00e5ff; }  
 
-.light-tannin   { background-color: #cfa18d; }  
-.medium-tannin  { background-color: #8b5a2b; }  
+.no-tannin   { background-color: #a98a8a; }  
+.light-tannin {background-color: #7a5a5a;}
+.medium-tannin  { background-color: #5a3a3a; }  
 .full-tannin    { background-color: #3b1f1f; }  
 
 @media only screen and (max-width: 690px){

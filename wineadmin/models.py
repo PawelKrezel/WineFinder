@@ -22,9 +22,10 @@ class Wine(models.Model):
         ('full-body', 'Full Body'),
     ]
     TANNIN_CHOICES = [
-    ('light-tannin', 'Light Tannin'),
-    ('medium-tannin', 'Medium Tannin'),
-    ('full-tannin', 'Full Tannin'),
+        ('no-tannin', 'No/Very Low Tannin'),
+        ('light-tannin', 'Light Tannin'),
+        ('medium-tannin', 'Medium Tannin'),
+        ('full-tannin', 'Full Tannin'),
     ]
     ACIDITY_CHOICES = [
         ('low-acidity', 'Low Acidity'),
