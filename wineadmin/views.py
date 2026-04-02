@@ -11,10 +11,20 @@ import json
 from datetime import datetime
 from django.db.models import Count, Q
 
+# Added for the iOS development. API needed 
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Wine
+from .serializers import WineAdminSerializer
+from django.shortcuts import get_object_or_404
+
+
 @login_required
 def wineadmin(request):
     form_new_wine = new_wine_form()
-    wines = Wine.objects.all().order_by('vintage', 'wine_name')
+    wines = Wine.objects.all().order_by('-vintage', 'wine_name')
     slots = Slot.objects.select_related("wine")
 
     slot_map = {}
@@ -237,7 +247,6 @@ def search(request):
 
 
 def wine_detail(request, wine_id):
-
     wine = Wine.objects.get(id=wine_id)
     slots = Slot.objects.filter(wine=wine)
     slot_map = {}
@@ -259,7 +268,7 @@ def wine_detail(request, wine_id):
 def export_wines(request):
 
     include_slots = request.GET.get("include_slots") == "true"
-    wines = Wine.objects.all().order_by('vintage', 'wine_name')
+    wines = Wine.objects.all().order_by('-vintage', 'wine_name')
     data = []
 
     wine_slots_map = {}
@@ -308,3 +317,53 @@ def export_wines(request):
         filename = f"wines_copy_as_of_{datetime.now().strftime('%Y-%m-%d_%H%M_no_slot_allocation')}.json"
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
     return response
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def api_wines(request):
+    print("FILES:", request.FILES)
+    print("DATA:", request.data)
+    if request.method == 'GET':
+        wines = Wine.objects.all().order_by('-vintage', 'wine_name')
+        serializer = WineAdminSerializer(wines, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = WineAdminSerializer(data=request.data)
+        
+        if serializer.is_valid():
+            wine = serializer.save()
+
+            if request.FILES.get("image"):
+                image_url = upload_image(request.FILES["image"])
+                wine.imageURL = image_url
+                wine.save()
+
+            return Response(WineAdminSerializer(wine).data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def api_wine_detail(request, wine_id):
+
+    wine = get_object_or_404(Wine, id=wine_id)
+
+    if request.method == 'PUT':
+        serializer = WineAdminSerializer(wine, data=request.data)
+
+        if serializer.is_valid():
+            wine = serializer.save()
+
+            if request.FILES.get("image"):
+                image_url = upload_image(request.FILES["image"])
+                wine.imageURL = image_url
+                wine.save()
+
+            return Response(WineAdminSerializer(wine).data)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        wine.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

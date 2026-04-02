@@ -8,6 +8,7 @@ cryptography==46.0.5
 dj-database-url==3.0.1
 Django==5.1.7
 django-storages==1.14.6
+djangorestframework==3.17.1
 firebase_admin==7.2.0
 google-api-core==2.30.0
 google-auth==2.48.0

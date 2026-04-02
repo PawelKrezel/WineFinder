@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from .views import api_wines, api_wine_detail
 
 urlpatterns = [
     path('', views.workInProgress, name='workInProgress'),
@@ -14,4 +15,6 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('wine/<uuid:wine_id>/', views.wine_detail, name='wine_detail'),
     path('export-wines/', views.export_wines, name='export_wines'),
+    path('api/wines/', api_wines, name='api_wines'),
+    path('api/wines/<uuid:wine_id>/', api_wine_detail, name='api_wine_detail'),
 ]
