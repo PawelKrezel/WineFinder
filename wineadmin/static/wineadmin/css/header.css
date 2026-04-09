@@ -7,7 +7,7 @@ header > *{
     display: inline-block;
     border-left: solid 1px #4a5d8cda;
     border-right: solid 1px #4a5d8cda;
-    padding-top: calc(env(safe-area-inset-top) + 0.5em);
+    padding-top: calc(env(safe-area-inset-top) + 0.75em);
     padding-bottom: 0.5em;
     padding-left: 0.5em;
     padding-right: 0.5em;
