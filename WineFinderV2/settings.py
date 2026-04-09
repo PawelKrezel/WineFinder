@@ -121,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_REDIRECT_URL = "wineadmin"
 LOGIN_URL = "login"
-LOGOUT_REDIRECT_URL = "workInProgress"
+LOGOUT_REDIRECT_URL = "search"
 
 
 # Internationalization

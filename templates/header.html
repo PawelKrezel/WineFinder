@@ -1,7 +1,17 @@
 {% if user.is_authenticated %}
-<p>Hello, {{request.user}}</p>
-<form method="POST" action="{%url 'logout' %}">
-    {% csrf_token %}
-    <button type="submit" class="commonStyle">Logout</button>
-</form>
+{% load static %}
+<link rel="stylesheet" href="{% static 'wineadmin/css/header.css' %}">
+<header>
+    <div onclick="this.querySelector('form').submit()">
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <span>logout: {{ request.user }}</span>
+        </form>
+    </div>
+    <a href="{% url 'wineadmin' %}"><div>Admin</div></a>
+    <a href="{% url 'search' %}"><div>Search</div></a>
+    <a href="{% url 'admin:index' %}"><div>Django Administration</div></a>
+
+    
+</header>
 {% endif %}

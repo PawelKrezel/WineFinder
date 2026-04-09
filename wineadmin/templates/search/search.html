@@ -6,7 +6,13 @@
 <link rel="stylesheet" href="{% static 'wineadmin/css/search.css' %}">
 
 <section id="main-container">
-    <h2>Search</h2>
+    {% if user.is_authenticated %}
+        <h2>Search</h2>
+    {% else %}
+        <a href="{% url 'login' %}">
+            <h2>Search the wine list</h2>
+        </a>
+    {% endif %}
 
     <form method="GET">
         <input type="text" name="query" placeholder="Search wine, grape, region..." value="{{ query|default:'' }}" class="commonStyle commonStyleAsBlock">
