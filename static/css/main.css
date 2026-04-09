@@ -109,4 +109,7 @@ commonStyle defines the overall colour scheme and borders of an element
     .row-5-entities{
         grid-template-columns: auto;
     }
+    html{
+        background-color: #725A43;
+    }
 }
