@@ -19,6 +19,7 @@ from rest_framework import status
 from .models import Wine
 from .serializers import WineAdminSerializer
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 
 @login_required
@@ -207,35 +208,117 @@ def import_wines(request):
 
 def search(request):
     query = request.GET.get("query")
+    query_lower = (query or "").lower()
+
+    FILTER_MAPPINGS = {
+    # --- BODY ---
+    "light body": "light-body",
+    "light bodied": "light-body",
+    "lght body": "light-body",
+    "lt body": "light-body",
+    "lght bodied": "light-body",
+    "lt bodied": "light-body",
+
+    "medium body": "medium-body",
+    "medium bodied": "medium-body",
+    "med body": "medium-body",
+    "med bodied": "medium-body",
+    "md bodied": "medium-body",
+    "md body": "medium-body",
+
+    "full body": "full-body",
+    "full bodied": "full-body",
+    "full bod": "full-body",
+    "full bodd": "full-body",
+    "fl bodd": "full-body",
+    "punchy": "full-body",
+
+    # --- TANNIN ---
+    "no tannin": "no-tannin",
+    "no tannins": "no-tannin",
+    "no tanin": "no-tannin",
+    "no tanins": "no-tannin",
+    "no tanns": "no-tannin",
+
+    "light tannin": "light-tannin",
+    "light tannins": "light-tannin",
+    "lght tannin": "light-tannin",
+    "lt tannin": "light-tannin",
+    "lght tannins": "light-tannin",
+    "lt tannins": "light-tannin",
+    "easy tannins": "light-tannin",
+    "minimal tannins": "light-tannin",
+
+    "medium tannin": "medium-tannin",
+    "medium tannins": "medium-tannin",
+    "med tannin": "medium-tannin",
+    "med tannins": "medium-tannin",
+    "md tannins": "medium-tannin",
+    "md tannin": "medium-tannin",
+
+    "full tannin": "full-tannin",
+    "full tannins": "full-tannin",
+    "high tannin": "full-tannin",
+    "high tannins": "full-tannin",
+    "strong tannins": "full-tannin",
+    "stronger tannins": "full-tannin",
+    "strong tann": "full-tannin",
+    "strong tanns": "full-tannin",
+    "stronger tanns": "full-tannin",
+
+    # --- ACIDITY ---
+    "low acidity": "low-acidity",
+    "low acid": "low-acidity",
+    "lo acidity": "low-acidity",
+    "no acidity": "low-acidity",
+    "light acidity": "low-acidity",
+    "lght acidity": "low-acidity",
+    "lighter acidity": "low-acidity",
+    "light acid": "low-acidity",
+
+    "medium acidity": "medium-acidity",
+    "medium acid": "medium-acidity",
+    "med acidity": "medium-acidity",
+    "med acid": "medium-acidity",
+    "md acidity": "medium-acidity",
+    "med acid": "medium-acidity",
+
+    "high acidity": "high-acidity",
+    "high acid": "high-acidity",
+    "hi acidity": "high-acidity",
+    "hi acid": "high-acidity"}
+
+    mapped_values = [
+        value for key, value in FILTER_MAPPINGS.items()
+        if key in query_lower
+        ]
 
     wines = Wine.objects.all().annotate(
         has_notes=Count('id', filter=Q(sommNotes__isnull=False) & ~Q(sommNotes="")),
         has_image=Count('id', filter=Q(imageURL__isnull=False) & ~Q(imageURL="")),
         slot_count=Count('slots')
-)
+    )
 
     if query:
-        wines = wines.filter(
-            wine_name__icontains=query
-        ) | wines.filter(
-            grape__icontains=query
-        ) | wines.filter(
-            region__icontains=query
-        ) | wines.filter(
-            country_of_origin__icontains=query
-        ) | wines.filter(
-            vintage__icontains=query
-        ) | wines.filter(
-            tannin__icontains=query
-        ) | wines.filter(
-            acidity__icontains=query
-        ) | wines.filter(
-            body__icontains=query
-        ) | wines.filter(
-            colour__icontains=query
-        ) | wines.filter(
-            sommNotes__icontains=query
-        )
+        filters = Q(wine_name__icontains=query) | \
+                Q(grape__icontains=query) | \
+                Q(region__icontains=query) | \
+                Q(country_of_origin__icontains=query) | \
+                Q(vintage__icontains=query) | \
+                Q(sommNotes__icontains=query) | \
+                Q(colour__icontains=query)
+
+        filters |= Q(body__icontains=query) | \
+                Q(tannin__icontains=query) | \
+                Q(acidity__icontains=query)
+
+        for value in mapped_values:
+            filters |= Q(body=value) | \
+                    Q(tannin=value) | \
+                    Q(acidity=value)
+
+        wines = wines.filter(filters)
+
     template = loader.get_template("search/search.html")
 
     context = {
