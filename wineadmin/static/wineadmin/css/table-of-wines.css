@@ -65,8 +65,11 @@ form#update-wines-form{
 .row-editable-wine-table:has(.editable-wine-table-delete-input:checked) * {
     background-image: linear-gradient(51deg,#8c08089c, #8c0808f3);
 }
-
-.imgTooltip input[type="file"]{
-    display: none;
+.imgTooltip{
+    position: relative;
+    display: block;
+    text-align: center;
 }
-
+.imgTooltipBody, .imgTooltipBody > *{
+    display:none;
+}
