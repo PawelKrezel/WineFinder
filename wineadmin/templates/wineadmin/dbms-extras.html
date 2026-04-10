@@ -1,53 +1,61 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'wineadmin/css/dbms-extras.css' %}">
 
-    <form method="POST" enctype="multipart/form-data" action="{% url 'import_wines' %}" id="dbms-extras">
+    <form method="POST" enctype="multipart/form-data" action="{% url 'import_wines' %}" id="dbms-extras" class="dsp-grid row-3-entities">
         {% csrf_token %}
 
-        <input type="file" name="wine_file" id="wine_file" accept=".json" required style="display: block;" placeholder="Upload the JSON file">
+        <div class="commonGradientBackground">
+            <h3>Append data to the DB</h3>
+            <input type="file" name="wine_file" id="wine_file" accept=".json" required style="display: block;" placeholder="Upload the JSON file">
 
-        <button type="submit" class="commonStyle commonStyleAsBlock">
-            Save Uploaded Wines
-        </button>
+            <button type="submit" class="commonStyle commonStyleAsBlock">
+                Save Uploaded Wines
+            </button>
+        </div>
 
-        <div id="ai-help-container">
-            <button id="ai-help-btn" class="commonStyle commonStyleAsBlock">AI tooltip</button>
+        <div class="commonGradientBackground">
+            <h3>Automated wine menu transcription</h3>
+            <div id="ai-help-container">
+                <button id="ai-help-btn" class="commonStyle commonStyleAsBlock">LLM tooltip</button>
 
-            <div id="ai-help-tooltip" class="ai-help-hidden">
+                <div id="ai-help-tooltip" class="ai-help-hidden">
 
-                <h3>Copy-paste AI prompt</h3>
-                <p>submit it to an LLM of your choice together with a photo/pdf of the wine menu</p><br>
-                <code id="prompt-content"></code>
+                    <h3>Copy-paste AI prompt</h3>
+                    <p>submit it to an LLM of your choice together with a photo/pdf of the wine menu</p><br>
+                    <code id="prompt-content"></code>
 
-                <div>
-                    <div id="copy-ai-prompt" class="commonStyle commonStyleAsBlock" onclick="copyAIPrompt()">
-                        Copy to clipboard
+                    <div>
+                        <div id="copy-ai-prompt" class="commonStyle commonStyleAsBlock" onclick="copyAIPrompt()">
+                            Copy to clipboard
+                        </div>
+
+                        <a href="https://claude.ai/" target="_blank"> 
+                            <div class="commonStyle commonStyleAsBlock" title="claude.ai (by Anthropic)">
+                                Recommended LLM
+                            </div>
+                        </a>
+
+                        <a href="https://classic.online-json.com/json-editor" target="_blank"> 
+                            <div class="commonStyle commonStyleAsBlock" title="(optional) JSON editor">
+                                JSON editor
+                            </div>
+                        </a>
                     </div>
 
-                    <a href="https://claude.ai/" target="_blank"> 
-                        <div class="commonStyle commonStyleAsBlock" title="claude.ai (by Anthropic)">
-                            Recommended LLM
-                        </div>
-                    </a>
-
-                    <a href="https://classic.online-json.com/json-editor" target="_blank"> 
-                        <div class="commonStyle commonStyleAsBlock" title="(optional) JSON editor">
-                            JSON editor
-                        </div>
-                    </a>
                 </div>
-
             </div>
         </div>
 
-        <a href="{% url 'export_wines' %}" class="commonStyle commonStyleAsBlock">
-            Export wines without slot allocation
-        </a>
+        <div class="commonGradientBackground">
+            <h3>Export data from the DB</h3>
+            <a href="{% url 'export_wines' %}" class="commonStyle commonStyleAsBlock">
+                Export wines without slot allocation
+            </a>
 
-    <a href="{% url 'export_wines' %}?include_slots=true" class="commonStyle commonStyleAsBlock">
-        Export wines + slots allocation data
-    </a>
-
+            <a href="{% url 'export_wines' %}?include_slots=true" class="commonStyle commonStyleAsBlock">
+                Export wines + slots allocation data
+            </a>
+        </div>
     </form>
 
 <script src="{% static 'wineadmin/js/dbms-extras.js'%}"></script>
