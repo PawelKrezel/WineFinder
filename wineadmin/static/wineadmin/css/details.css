@@ -84,6 +84,21 @@
 #mapContainer::-webkit-scrollbar{
     background-color: #261c145b;
 }
+.admin-redirect{
+    position: absolute;
+    z-index: 200;
+    top: 0.5em;
+    right: 0.5em;
+    border: dashed 1px #fff;
+    padding: 0.5em;
+    border-radius: calc(6px + 0.5em);
+}
+.admin-redirect i{
+    font-size: 2em;
+}
+.admin-redirect span{
+    font-size: x-small;
+}
 @keyframes cellPulse {
     0% {
         background-color: #8c080829;

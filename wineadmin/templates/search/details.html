@@ -12,6 +12,16 @@
         <div class="detail">
             <label for="name">Name</label>
             <span id="name"><h1>"{{ wine.wine_name }}"</h1></span>
+
+            {% if user.is_authenticated %}
+            <a href="{% url 'admin:wineadmin_wine_change' wine.id %}" target="_blank">
+                <div class="admin-redirect" title="redirect me to the django admin page for {{ wine }}">
+                    <i class="fa-solid fa-square-arrow-up-right"></i><br>
+                    <span>Quick edit</span>
+                </div>
+            </a>
+            {% endif %}
+
         </div>
     </div>
 
