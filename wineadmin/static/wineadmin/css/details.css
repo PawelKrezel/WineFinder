@@ -108,5 +108,8 @@ td:has(.highlight){
     .map-scroll-wrapper{
         scroll-behavior: unset;
     }
+    .details-main-container{
+        background-image: unset;
+    }
 
 }
