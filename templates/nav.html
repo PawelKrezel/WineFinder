@@ -1,7 +1,7 @@
 {% if user.is_authenticated %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'wineadmin/css/header.css' %}">
-<header>
+<link rel="stylesheet" href="{% static 'wineadmin/css/nav.css' %}">
+<nav>
     <div onclick="this.querySelector('form').submit()">
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
@@ -13,5 +13,5 @@
     <a href="{% url 'admin:index' %}"><div>Django Administration</div></a>
 
     
-</header>
+</nav>
 {% endif %}
