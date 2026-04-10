@@ -191,7 +191,8 @@ def import_wines(request):
                 coravin = item.get("coravin", "⚠️ FAILED"),
                 btl_only = item.get("btl_only", "⚠️ FAILED"),
                 sommNotes = item.get("sommNotes", "⚠️ FAILED"),
-                colour = item.get("colour", "⚠️ FAILED")
+                colour = item.get("colour", "⚠️ FAILED"),
+                imageURL = item.get("imageURL") or None
             )
 
             if "slots" in item:
@@ -382,7 +383,8 @@ def export_wines(request):
             "coravin": wine.coravin,
             "btl_only": wine.btl_only,
             "sommNotes": wine.sommNotes or "",
-            "colour":wine.colour
+            "colour":wine.colour,
+            "imageURL":wine.imageURL,
         }
 
         if include_slots:

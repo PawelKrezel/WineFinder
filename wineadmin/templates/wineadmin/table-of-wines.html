@@ -10,8 +10,10 @@
 
         <!-- extra controls -->
         <div class="editable-wine-table-controls">
-            <div>
-
+            <div style="text-align: left; padding-left: 1em;">
+                {% if wines|length > 6%}
+                    <button type="submit" class="commonStyle commonStyleAsBlock">Save Changes 💾</button>
+                {% endif %}
             </div>
             <!-- zoom setting -->
             <div title="hover your cursor over table items to make them bigger (disabled by default because its annoying)">

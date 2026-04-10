@@ -65,8 +65,6 @@ html:has(#editable-wine-table-somm-notes:hover) .editable-wine-table-somm-notes{
     right: 15vw;
     width: 25vw;
 }
-/* zooming for images */
-
 
 .imgTooltip:hover .imgTooltipBody{
     display: block;
