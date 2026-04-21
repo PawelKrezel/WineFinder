@@ -439,14 +439,26 @@ def api_wine_detail(request, wine_id):
 
         if serializer.is_valid():
             wine = serializer.save()
+            
+            #handling slot allocation
+            slot_ids = request.data.get("slots", [])
+            if slot_ids is not None:
+                Slot.objects.filter(wine=wine).update(wine=None)
+                for slot_id in slot_ids:
+                    try:
+                        slot = Slot.objects.get(id=slot_id)
+                        slot.wine = wine
+                        slot.save()
+                    except Slot.DoesNotExist:
+                        pass
 
+            #handling image upload
             if request.FILES.get("image"):
                 image_url = upload_image(request.FILES["image"])
                 wine.imageURL = image_url
                 wine.save()
 
             return Response(WineAdminSerializer(wine).data)
-
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
