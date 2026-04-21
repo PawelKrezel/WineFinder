@@ -2,8 +2,6 @@ from django.http import HttpResponse
 from django.template import loader
 from .forms import new_wine_form
 from django.shortcuts import redirect
-from django.urls import reverse
-from django.http import HttpResponseRedirect
 from .firebase_storage import upload_image
 from django.contrib.auth.decorators import login_required
 from .models import Wine, Slot
@@ -75,37 +73,12 @@ def new_wine(request):
 @login_required
 def dbms_tools(request):
     template = loader.get_template("wineadmin/dbms-extras.html")
-
     return HttpResponse(template.render({}, request))
 
 @login_required
 def wineadmin(request):
-    form_new_wine = new_wine_form()
-    wines = Wine.objects.all().order_by('-vintage', 'wine_name')
-    slots = Slot.objects.select_related("wine")
-
-    slot_map = {}
-
-    for slot in slots:
-        if slot.wine:
-            slot_map[slot.id] = {
-            "name": slot.wine.wine_name,
-            "grape": slot.wine.grape,
-            "vintage": slot.wine.vintage,
-            "region": slot.wine.region,
-            "country": slot.wine.country_of_origin,
-            "image": slot.wine.imageURL
-            }
-
     template = loader.get_template('wineadmin/admin-panel.html')
-
-    context = {
-        "form_new_wine":form_new_wine,
-        "wines":wines,
-        "slots":slots,
-        "slot_map": json.dumps(slot_map)
-    }
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render({},request))
 
 @login_required
 def add_new_wine(request):
@@ -121,36 +94,7 @@ def add_new_wine(request):
 
             wine.save()
             return redirect("new_wine")
-            
-    else:
-        form_new_wine = new_wine_form()
-
-    wines = Wine.objects.all()
-    slots = Slot.objects.select_related("wine")
-
-    slot_map = {}
-
-    for slot in slots:
-        if slot.wine:
-            slot_map[slot.id] = {
-            "name": slot.wine.wine_name,
-            "grape": slot.wine.grape,
-            "vintage": slot.wine.vintage,
-            "region": slot.wine.region,
-            "country": slot.wine.country_of_origin,
-            "image": slot.wine.imageURL
-            }
-
-    wines = Wine.objects.all()
-    template = loader.get_template('wineadmin/admin-panel.html')
-
-    context = {
-        "form_new_wine":form_new_wine,
-        "wines":wines,
-        "slots":slots,
-        "slot_map": json.dumps(slot_map)
-    }
-    return HttpResponse(template.render(context, request))
+    return redirect("new_wine")
 
 @login_required
 def update_wines(request):
@@ -375,7 +319,7 @@ def search(request):
     template = loader.get_template("search/search.html")
 
     context = {
-        "wines":wines,
+        "wines":wines.order_by('-vintage', 'wine_name'),
         "query":query
     }
     
