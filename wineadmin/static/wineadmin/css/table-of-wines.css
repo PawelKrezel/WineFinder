@@ -3,8 +3,8 @@ form#update-wines-form{
     margin-right: auto;
     width: 90%;
     text-align: center;
-    height: 70vh;
-    overflow-y: scroll;
+    margin-top: 5vw;
+    margin-bottom: 5vw;
 }
 
 .row-editable-wine-table{

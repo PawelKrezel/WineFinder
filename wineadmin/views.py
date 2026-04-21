@@ -21,6 +21,62 @@ from .serializers import WineAdminSerializer
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 
+# after refactoring
+@login_required
+def table_of_wines(request):
+    wines = Wine.objects.all().order_by('-vintage', 'wine_name')
+
+    template = loader.get_template('wineadmin/table-of-wines.html')
+    context = {
+        "wines": wines
+    }
+
+    return HttpResponse(template.render(context, request))
+
+@login_required
+def cellar_map_editable(request):
+
+    slots = Slot.objects.select_related("wine")
+    wines = Wine.objects.all().order_by('-vintage', 'wine_name')
+    slot_map = {}
+
+    for slot in slots:
+        if slot.wine:
+            slot_map[slot.id] = {
+                "name": slot.wine.wine_name,
+                "grape": slot.wine.grape,
+                "vintage": slot.wine.vintage,
+                "region": slot.wine.region,
+                "country": slot.wine.country_of_origin,
+                "image": slot.wine.imageURL
+            }
+
+    template = loader.get_template("wineadmin/cellar-map-editable.html")
+
+    context = {
+        "slots": slots,
+        "wines":wines,
+        "slot_map": json.dumps(slot_map)
+    }
+
+    return HttpResponse(template.render(context, request))
+
+@login_required
+def new_wine(request):
+
+    form_new_wine = new_wine_form()
+    template = loader.get_template('wineadmin/new-wine-form.html')
+    context = {
+        "form_new_wine": form_new_wine
+    }
+
+    return HttpResponse(template.render(context, request))
+
+@login_required
+def dbms_tools(request):
+    template = loader.get_template("wineadmin/dbms-extras.html")
+
+    return HttpResponse(template.render({}, request))
 
 @login_required
 def wineadmin(request):
@@ -51,10 +107,6 @@ def wineadmin(request):
     }
     return HttpResponse(template.render(context, request))
 
-def workInProgress(request):
-    template = loader.get_template("wineadmin/production-temp.html")
-    return HttpResponse(template.render())
-
 @login_required
 def add_new_wine(request):
     if request.method == "POST":
@@ -68,7 +120,7 @@ def add_new_wine(request):
                 wine.imageURL = image_url
 
             wine.save()
-            return redirect("wineadmin")
+            return redirect("new_wine")
             
     else:
         form_new_wine = new_wine_form()
@@ -137,7 +189,7 @@ def update_wines(request):
                     wine.imageURL = image_url
                 wine.save()
 
-    return HttpResponseRedirect(reverse("wineadmin") + "#headers-editable-wine-table")
+    return redirect("table_of_wines")
 
 @login_required
 def allocate_wine_slots(request):
@@ -162,7 +214,7 @@ def allocate_wine_slots(request):
 
             slot.save()
 
-    return HttpResponseRedirect(reverse("wineadmin") + "#mapContainer")
+    return redirect("cellar_map_editable")
 
 @login_required
 def import_wines(request):

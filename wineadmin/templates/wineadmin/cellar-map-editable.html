@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+{% block title %} Cellar Map Editor {% endblock %}
+
+{% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'wineadmin/css/cellar-map-editable.css' %}">
 <link rel="stylesheet" href="{% static 'wineadmin/css/cell-tooltip.css' %}" id="cell-tooltip-styles">
@@ -14,7 +18,7 @@
             <option value="empty-slots"> -- Empty Selected Slots -- </option>
             {% for wine in wines %}
                 <option value="{{ wine.id }}">
-                    {{ wine }}
+                    {{ wine.vintage }}  --- {{wine.wine_name}} {{wine.grape}} {{wine.country_of_origin}}
                 </option>
             {% endfor %}
         </select>
@@ -36,3 +40,5 @@
     var readOnlyMap = false;
 </script>
 <script src="{% static 'wineadmin/js/cellar-map-editable.js' %}"></script>
+<p>&nbsp;</p>
+{% endblock %}

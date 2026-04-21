@@ -1,9 +1,13 @@
+{% extends "base.html" %}
+{% block title %} Table of Wines {% endblock %}
+
+{% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'wineadmin/css/table-of-wines.css' %}">
 <link rel="stylesheet" href="{% static 'wineadmin/css/table-of-wines-zoom.css' %}" id="zoomStyles">
 
 
-<form method="POST" action="{% url 'update_wines' %}" enctype="multipart/form-data" autocomplete="off" id="update-wines-form" class="tucked-in">
+<form method="POST" action="{% url 'update_wines' %}" enctype="multipart/form-data" autocomplete="off" id="update-wines-form">
     {% csrf_token %}
     
     <header>
@@ -199,4 +203,6 @@
 <button type="submit" class="commonStyle commonStyleAsBlock">Save Changes 💾</button>
 </form>
 
+<p>&nbsp;</p>
+{% endblock %}
 

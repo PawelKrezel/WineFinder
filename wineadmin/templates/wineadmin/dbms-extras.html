@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+{% block title %} DBMS extras {% endblock %}
+
+{% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'wineadmin/css/dbms-extras.css' %}">
 
@@ -59,3 +63,5 @@
     </form>
 
 <script src="{% static 'wineadmin/js/dbms-extras.js'%}"></script>
+<p>&nbsp;</p>
+{% endblock %}

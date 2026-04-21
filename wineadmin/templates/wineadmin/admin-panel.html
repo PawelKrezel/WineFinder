@@ -4,26 +4,12 @@
 {% block content %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'wineadmin/css/admin-panel.css' %}">
-
-    <div onclick="dropDown('toggle-new-wine-form-main-wrapper');" class="commonStyle commonStyleAsBlock toggleWrapper">New Wine Form</div>
-    <div id="toggle-new-wine-form-main-wrapper" class="tucked-in">
-        {% include "wineadmin/new-wine-form.html" %}
+    <div class="admin-nav">
+        <a href="{% url 'new_wine' %}" class="commonStyle commonStyleAsBlock toggleWrapper">New Wine Form</a>
+        <a href="{% url 'table_of_wines' %}" class="commonStyle commonStyleAsBlock toggleWrapper">Table of Wines</a>
+        <a href="{% url 'cellar_map_editable' %}" class="commonStyle commonStyleAsBlock toggleWrapper">Wine Cellar Map</a>
+        <a href="{% url 'dbms_tools' %}" class="commonStyle commonStyleAsBlock toggleWrapper" title="Mido, stop laughing! DBMS means ''Database Management System'', I promie!">
+            DBMS Miscellaneous Tools</a>
     </div>
-
-    <div onclick="dropDown('update-wines-form');" class="commonStyle commonStyleAsBlock toggleWrapper">Table of Wines</div>
-    <!-- slightly different structure to solve the UI glitch -->
-    {% include "wineadmin/table-of-wines.html" %}  
-    
-    <div onclick="dropDown('wine-cellar-map-main-wrapper');" class="commonStyle commonStyleAsBlock toggleWrapper">Wine Cellar Map</div>
-    <div id="wine-cellar-map-main-wrapper" class="tucked-in">
-        {% include "wineadmin/cellar-map-editable.html" %}
-    </div>
-
-    <div onclick="dropDown('dbms-extras-main-wrapper');" class="commonStyle commonStyleAsBlock toggleWrapper">Miscellaneous DBMS tools</div>
-    <div id="dbms-extras-main-wrapper" class="tucked-in">
-        {% include "wineadmin/dbms-extras.html" %}
-    </div>
-    
-    <script src="{% static 'wineadmin/js/drop-down-sections.js'%}"></script>
 
 {% endblock %}
