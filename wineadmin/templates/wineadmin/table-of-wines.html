@@ -11,7 +11,6 @@
     {% csrf_token %}
     
     <header>
-
         <!-- extra controls -->
         <div class="editable-wine-table-controls">
             <div style="text-align: left; padding-left: 1em;">
@@ -57,7 +56,7 @@
 
     <!-- 'table' content -->
     {% for wine in wines %}
-    <div class="dsp-grid row-editable-wine-table">
+    <div class="dsp-grid row-editable-wine-table" id="wine-{{ wine.id }}">
         <div>
             <input type="text"
             title="Name"

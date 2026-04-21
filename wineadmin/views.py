@@ -93,7 +93,7 @@ def add_new_wine(request):
                 wine.imageURL = image_url
 
             wine.save()
-            return redirect("new_wine")
+            return redirect(f"/wine/{wine.id}/?created=true")
     return redirect("new_wine")
 
 @login_required
@@ -328,6 +328,7 @@ def search(request):
 
 def wine_detail(request, wine_id):
     wine = Wine.objects.get(id=wine_id)
+    created = request.GET.get("created") == "true"
     slots = Slot.objects.filter(wine=wine)
     slot_map = {}
 
@@ -339,7 +340,8 @@ def wine_detail(request, wine_id):
     context = {
         "wine": wine,
         "slot_map": json.dumps(slot_map),
-        "has_slots": has_slots
+        "has_slots": has_slots,
+        "created":created
     }
 
     return HttpResponse(template.render(context, request))

@@ -1,4 +1,4 @@
-form#update-wines-form{
+form#update-wines-form {
     margin-left: auto;
     margin-right: auto;
     width: 90%;
@@ -7,38 +7,43 @@ form#update-wines-form{
     margin-bottom: 5vw;
 }
 
-.row-editable-wine-table{
+.row-editable-wine-table {
     column-gap: 0;
     grid-template-columns: repeat(15, calc(100%/15));
     overflow: hidden;
     height: 3em;
     align-items: center;
 }
-.row-editable-wine-table select{
+
+.row-editable-wine-table select {
     appearance: none;
     text-align: center;
     text-align-last: center;
     cursor: pointer;
 }
-.row-editable-wine-table div{
+
+.row-editable-wine-table div {
     width: 100%;
     display: block;
 }
-.row-editable-wine-table div *{
+
+.row-editable-wine-table div * {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
     padding: 0.5em 0.2em 0.5em;
     font-size: x-small;
 }
-.row-editable-wine-table img{
+
+.row-editable-wine-table img {
     height: 3em;
-    width: auto;    
+    width: auto;
     margin-left: auto;
     margin-right: auto;
     transition-duration: 0.6s;
 }
-.editable-wine-table-controls{
+
+.editable-wine-table-controls {
     margin-left: auto;
     margin-right: auto;
     height: 2em;
@@ -46,30 +51,41 @@ form#update-wines-form{
     display: grid;
     grid-template-columns: 60% auto auto;
 }
-#update-wines-form header{
+
+#update-wines-form header {
     position: sticky;
-    top:0;
-    background-image: linear-gradient(51deg,#736956de, #261c14df);
+    top: 0;
+    background-image: linear-gradient(51deg, #736956de, #261c14df);
     padding-top: 1em;
     padding-bottom: 1em;
     z-index: 4;
 }
-.editable-wine-table-delete-input{
+
+.editable-wine-table-delete-input {
     display: none;
 }
-.editable-wine-table-delete-label{
+
+.editable-wine-table-delete-label {
     cursor: pointer;
     font-size: xx-large !important;
 }
+
 .row-editable-wine-table:has(.editable-wine-table-delete-input:checked),
 .row-editable-wine-table:has(.editable-wine-table-delete-input:checked) * {
-    background-image: linear-gradient(51deg,#8c08089c, #8c0808f3);
+    background-image: linear-gradient(51deg, #8c08089c, #8c0808f3);
 }
-.imgTooltip{
+
+.imgTooltip {
     position: relative;
     display: block;
     text-align: center;
 }
-.imgTooltipBody, .imgTooltipBody > *{
-    display:none;
+
+.imgTooltipBody,
+.imgTooltipBody>* {
+    display: none;
+}
+
+.row-editable-wine-table {
+    scroll-margin-top: 150px; 
 }

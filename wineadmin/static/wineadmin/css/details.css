@@ -99,6 +99,9 @@
 .admin-redirect span{
     font-size: x-small;
 }
+.success{
+    background-image: linear-gradient(51deg,#718c4ac3, #42572470);
+}
 @keyframes cellPulse {
     0% {
         background-color: #8c080829;

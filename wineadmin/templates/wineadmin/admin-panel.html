@@ -3,7 +3,6 @@
 
 {% block content %}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'wineadmin/css/admin-panel.css' %}">
     <div class="admin-nav">
         <a href="{% url 'new_wine' %}" class="commonStyle commonStyleAsBlock toggleWrapper">New Wine Form</a>
         <a href="{% url 'table_of_wines' %}" class="commonStyle commonStyleAsBlock toggleWrapper">Table of Wines</a>

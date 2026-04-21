@@ -104,6 +104,18 @@ commonStyle defines the overall colour scheme and borders of an element
 .commonGradientBackground{
     background-image: linear-gradient(51deg,#73695684, #261c14ac);
 }
+.toggleWrapper{
+    width: 95%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    background-color: #4a7e8cc3;
+}
+.toggleWrapper:hover{
+    background-color: #4a7e8c70;
+}
 
 @media only screen and (max-width: 690px){
     .row-1-entity, 

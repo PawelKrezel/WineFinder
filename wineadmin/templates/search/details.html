@@ -8,6 +8,21 @@
 <link rel="stylesheet" href="{% static 'wineadmin/css/details.css' %}">
 
 <div class="details-main-container">
+
+    {% if user.is_authenticated %}
+        {% if created %}
+        <div class="row row-1">
+            <div class="detail success">
+                <label for="success_message">Success Message</label>
+                <span id="success_message">
+                    <h1>Wine has been successfully added!</h1>
+                    <p>Go through details below to double check everything</p>
+                </span>
+            </div>
+        </div>
+        {% endif %}
+    {% endif %}
+
     <div class="row row-1">
         <div class="detail">
             <label for="name">Name</label>
@@ -120,12 +135,18 @@
             </div>
         </div>
         {% endif %}
-
-        
-
+    
+        {% if user.is_authenticated %}
+        <div class="row row-3">
+            <a href="{% url 'new_wine' %}" class="commonStyle commonStyleAsBlock toggleWrapper">Add Another Wine</a>
+            <a href="{% url 'table_of_wines' %}#wine-{{ wine.id }}" class="commonStyle commonStyleAsBlock toggleWrapper">Edit Wines</a>
+            <a href="{% url 'allocate_wine_slots' %}" class="commonStyle commonStyleAsBlock toggleWrapper">Cellar Map Editor</a>
+        </div>
+        {% endif %}         
     <button onclick="history.back()" class="commonStyle commonStyleAsBlock row row-1">
         Go Back
     </button>
+
     </div>
 </div>
 {% endblock %}
