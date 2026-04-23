@@ -55,6 +55,7 @@ html:has(#editable-wine-table-colour:hover) .editable-wine-table-colour,
     background-color: #718c4a
 }
 
+/* zoom for somm notes */
 html:has(#editable-wine-table-somm-notes:hover) .editable-wine-table-somm-notes,
 .row-editable-wine-table div:hover textarea{
     min-height: 4em;
@@ -66,6 +67,7 @@ html:has(#editable-wine-table-somm-notes:hover) .editable-wine-table-somm-notes{
     width: 25vw;
 }
 
+/* tooltip for editing images */
 .imgTooltip:hover .imgTooltipBody{
     display: block;
     position:absolute;

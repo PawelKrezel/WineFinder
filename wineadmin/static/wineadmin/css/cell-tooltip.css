@@ -1,3 +1,4 @@
+/* style for the tooltip which previews which wine is located in cell */
 .shelfSlot:hover .cellar-map-tooltip{
     display: block;
     position:absolute;
@@ -11,6 +12,7 @@
     z-index:999;
     font-size:small;
 }
+/* position will change depending on how high/low the tooltip is in the cellar map */
 .tooltip-up{
     bottom:-15%;
 }

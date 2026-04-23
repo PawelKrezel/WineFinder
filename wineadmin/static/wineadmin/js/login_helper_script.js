@@ -1,3 +1,5 @@
+// this script is used to apply styles to the login page
+
 let usrName = document.getElementById("id_username");
 let pswdField = document.getElementById("id_password");
 

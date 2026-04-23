@@ -1,6 +1,8 @@
 import uuid
 from firebase_admin import storage
 
+# function implemented with assistance of this tutorial:
+# https://imtipu.medium.com/firebase-storage-as-django-default-file-storage-613a9451a6a4
 def upload_image(file):
     bucket = storage.bucket()
 

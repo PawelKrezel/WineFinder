@@ -9,7 +9,7 @@ form#update-wines-form {
 
 .row-editable-wine-table {
     column-gap: 0;
-    grid-template-columns: repeat(15, calc(100%/15));
+    grid-template-columns: repeat(15, calc(100% /15));
     overflow: hidden;
     height: 3em;
     align-items: center;

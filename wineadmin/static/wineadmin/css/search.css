@@ -70,6 +70,8 @@ h3 .secondaryDetails{
     border-radius: 6px;
     margin-right: 0.5em;
 }
+/* colour schemes for WSET tags  */
+
 .light-body   { background-color: #c9a66b; }  
 .medium-body  { background-color: #a65e2e; }  
 .full-body    { background-color: #5a0f0f; }  
@@ -83,6 +85,7 @@ h3 .secondaryDetails{
 .medium-tannin  { background-color: #5a3a3a; }  
 .full-tannin    { background-color: #3b1f1f; }
 
+/* colour schemes for tags on the left side of the results card */
 .colourTag{
     border-left: solid 10px;
 }

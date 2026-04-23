@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Wine
 
-# This code was created with assistance of generative AI
+# This code was created with assistance of generative AI, OpenAI ChatGPT 5.3
 class WineAdminSerializer(serializers.ModelSerializer):
     slots = serializers.SerializerMethodField()
 

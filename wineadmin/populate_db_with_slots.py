@@ -17,6 +17,7 @@ cellar =[
     [8, 25, 6]
     ]
 
+# this is a single use script for initial population of the database with over a thousand slot entities
 def populate():
     count = 0
     for shelf in cellar:

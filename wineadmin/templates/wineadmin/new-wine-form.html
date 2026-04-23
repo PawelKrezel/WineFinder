@@ -165,6 +165,7 @@
                 document.getElementById("id_image").addEventListener("change", function() {
                     const file = this.files[0];
 
+                    // generates a live preview of an uploaded image
                     document.getElementById("new-wine-form-image-upload-label").textContent = "📸 Uploaded bottle image: ";
                     document.getElementById("new-wine-form-image-file-name").textContent = file ? file.name : "";
 

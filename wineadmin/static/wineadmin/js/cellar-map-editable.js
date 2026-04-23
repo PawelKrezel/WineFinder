@@ -1,18 +1,27 @@
+// slotMap expects context from Django 
 if(typeof slotMap === "undefined"){
     var slotMap = {};
 }
 
+// addRowNo - 'add row number'
 function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=true, addRowNo=false){
-    let htmlCode = `<table id="${shelfID}">`;
-    let msg = "";
+    
+    let htmlCode = `<table id="${shelfID}">`;// will be adding html tags to this var a lot
+    let msg = ""; // optional row number display
     let cellID = "";
+
+    // optional - adds header (eg "first shelf")
     if(addHeader){
         htmlCode += `<thead><tr><th colspan="${width}">${headerContent}</th></tr></thead>`;
     } htmlCode += `<tbody>`;
 
+    // nested loop to build a 2D grid
+    // y for rows, x for columns
     for (let y=1; y<=height; y++){
         htmlCode += `<tr>`;
         for (let x=1; x<=width; x++){
+
+            //adds row numbers only on the edges of the walls
             if(addRowNo){
                 if(x==1 || x == width){
                     msg = y;
@@ -26,7 +35,7 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
             var display = msg;
             var title = cellID;
             var tooltipHTML = "";
-            var tooltipUpOrDown = "tooltip-down";
+            var tooltipUpOrDown = "tooltip-down"; // which direction for the tooltip to go, solves UI glitch
             var labelClass = "cellar-map-label";
 
             if(typeof slotMap !== "undefined"){
@@ -36,8 +45,9 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
 
                     title = `${wine.name} @ ${cellID}`;
                     display = title.slice(0, 2);
-                    if (y>height/2){tooltipUpOrDown="tooltip-up"}
+                    if (y>height/2){tooltipUpOrDown="tooltip-up"} // if the cell is close to the floor, tooltip should aim up
                     
+                    // builds tooltip html 
                     tooltipHTML = `
                     <div class="cellar-map-tooltip ${tooltipUpOrDown}">
                         <strong>${wine.name}</strong><br>
@@ -45,10 +55,10 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
                         ${wine.region}, ${wine.country}<br>`;
 
                     if(wine.image){
-                    tooltipHTML += `<img src="${wine.image}" class="cellar-map-tooltip-img"></div>`;
+                    tooltipHTML += `<img src="${wine.image}" class="cellar-map-tooltip-img"></div>`; 
                     }else{tooltipHTML += `</div>`}
                 if(readOnlyMap){
-                    labelClass = "cellar-map-label highlight";
+                    labelClass = "cellar-map-label highlight"; // highlights occupied slots only if in read only view
                     }
                 }
             }
@@ -56,7 +66,7 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
             htmlCode += `<td class="shelfSlot" id="${cellID}" title="${title}">
             <label for="input-${cellID}" class="${labelClass}">`;
             if(!readOnlyMap){
-                htmlCode += `${display}${tooltipHTML}`;
+                htmlCode += `${display}${tooltipHTML}`; // if in editable view, wine initials and tooltip embeded in cell
             }
             htmlCode += `</label>`;
             if(!readOnlyMap){
@@ -79,6 +89,7 @@ function drawShelf(width, height, shelfID, headerContent=" <br> ", addHeader=tru
     return htmlCode;
 }
 
+// calls draw shelf one by one and passess relevant paramaters 
 function drawCellar(){
     document.getElementById("s1-container").innerHTML = drawShelf(9, 25, "s1", "First shelf");
     document.getElementById("s2-container").innerHTML = drawShelf(9, 25, "s2", "Second shelf");
@@ -97,8 +108,9 @@ function drawCellar(){
         setEventListenersForAllCells();
     }
 }
-drawCellar();
+drawCellar(); // calls function upon load
 
+// sets event listeners and highlights clicked cells, gets called in admin view only
 function setEventListenersForAllCells(){
 
     var inputs = document.getElementsByClassName("cellar-map-input");
@@ -120,6 +132,7 @@ function setEventListenersForAllCells(){
 
 }
 
+// logic for switching the tooltip on and off
 var tooltipEnabled = true;
 function toggleCellToolTip(){
     tooltipEnabled = !tooltipEnabled;

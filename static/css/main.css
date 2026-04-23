@@ -86,7 +86,7 @@ commonStyle defines the overall colour scheme and borders of an element
     grid-template-columns: auto auto auto auto auto;
 }
 
-/*Label behavior for txt fields - visible when filled */
+/*Label behavior for txt fields - visible when filled, hidden when empty */
 .dsp-grid > .dsp-grid > label{
     display: inline-block;
     transition-duration: 0.6s;
@@ -104,6 +104,7 @@ commonStyle defines the overall colour scheme and borders of an element
 .commonGradientBackground{
     background-image: linear-gradient(51deg,#73695684, #261c14ac);
 }
+/* will be used for styling admin navigation components */
 .toggleWrapper{
     width: 95%;
     display: block;
@@ -117,6 +118,7 @@ commonStyle defines the overall colour scheme and borders of an element
     background-color: #4a7e8c70;
 }
 
+/* modified styles for smaller screens */
 @media only screen and (max-width: 690px){
     .row-1-entity, 
     .row-2-entities, 

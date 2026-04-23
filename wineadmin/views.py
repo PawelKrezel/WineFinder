@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 from django.db.models import Count, Q
 
-# Added for the iOS development. API needed 
+# Added for the iOS development.
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -19,7 +19,6 @@ from .serializers import WineAdminSerializer
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 
-# after refactoring
 @login_required
 def table_of_wines(request):
     wines = Wine.objects.all().order_by('-vintage', 'wine_name')
@@ -100,7 +99,6 @@ def add_new_wine(request):
 def update_wines(request):
 
     if request.method == "POST":
-
         for key in request.POST:
             if key.startswith("wine_name_"):
                 wine_id = key.replace("wine_name_", "")
@@ -139,15 +137,15 @@ def update_wines(request):
 def allocate_wine_slots(request):
     
     if request.method == "POST":
-        wine_id = request.POST.get("wine_id")
-        slot_ids = request.POST.getlist("slots")
+        wine_id = request.POST.get("wine_id") # one wine selected from the drop down
+
+        slot_ids = request.POST.getlist("slots") # flag indicates if slots are being cleared with this request
         empty_code = "empty-slots"
 
         if wine_id != empty_code:
-            wine = Wine.objects.get(id=wine_id)
+            wine = Wine.objects.get(id=wine_id) # get wine id if we are not clearing cells
 
         for slot_id in slot_ids:
-
             slot = Slot.objects.get(id=slot_id)
 
             # Either assign wine to the slot or make it empty
@@ -157,7 +155,6 @@ def allocate_wine_slots(request):
                 slot.wine = wine
 
             slot.save()
-
     return redirect("cellar_map_editable")
 
 @login_required
@@ -171,8 +168,8 @@ def import_wines(request):
         except:
             return redirect("wineadmin")
         
+        # for each item in json, read data or flag as failed
         for item in data:
-
             wine = Wine.objects.create(
                 wine_name = item.get("wine_name", "⚠️ FAILED"),
                 grape = item.get("grape", "⚠️ FAILED"),
@@ -191,6 +188,7 @@ def import_wines(request):
                 imageURL = item.get("imageURL") or None
             )
 
+            # if item has slots, link them with that wine
             if "slots" in item:
                 slot_ids = item.get("slots", [])
 
@@ -207,6 +205,7 @@ def search(request):
     query = request.GET.get("query")
     query_lower = (query or "").lower()
 
+    # maps common phrases to accurate values expected in models.py
     FILTER_MAPPINGS = {
     # --- BODY ---
     "light body": "light-body",
@@ -285,17 +284,20 @@ def search(request):
     "hi acidity": "high-acidity",
     "hi acid": "high-acidity"}
 
+    # fuzzy keyword matching
     mapped_values = [
         value for key, value in FILTER_MAPPINGS.items()
         if key in query_lower
         ]
 
+    # anotations for displaying in search results UI
     wines = Wine.objects.all().annotate(
         has_notes=Count('id', filter=Q(sommNotes__isnull=False) & ~Q(sommNotes="")),
         has_image=Count('id', filter=Q(imageURL__isnull=False) & ~Q(imageURL="")),
         slot_count=Count('slots')
     )
 
+    # Main search filters
     if query:
         filters = Q(wine_name__icontains=query) | \
                 Q(grape__icontains=query) | \
@@ -305,15 +307,18 @@ def search(request):
                 Q(sommNotes__icontains=query) | \
                 Q(colour__icontains=query)
 
+        # also dierect matching against enum fields
         filters |= Q(body__icontains=query) | \
                 Q(tannin__icontains=query) | \
                 Q(acidity__icontains=query)
 
+        # applies mapped filters 
         for value in mapped_values:
             filters |= Q(body=value) | \
                     Q(tannin=value) | \
                     Q(acidity=value)
 
+        # applies all of those filters
         wines = wines.filter(filters)
 
     template = loader.get_template("search/search.html")
@@ -361,10 +366,8 @@ def export_wines(request):
         for slot in slots:
             if slot.wine:
                 wine_id = slot.wine.id
-
                 if wine_id not in wine_slots_map:
                     wine_slots_map[wine_id] = []
-
                 wine_slots_map[wine_id].append(slot.id)
 
     for wine in wines:
@@ -387,7 +390,6 @@ def export_wines(request):
 
         if include_slots:
             wine_data["slots"] = wine_slots_map.get(wine.id, [])
-
         data.append(wine_data)
 
     response = HttpResponse(
@@ -401,6 +403,8 @@ def export_wines(request):
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
     return response
 
+# Development of API views was done with assistance of generative AI
+# model used: OpenAI's ChatGPT 5.3
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def api_wines(request):

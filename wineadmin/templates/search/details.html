@@ -9,6 +9,7 @@
 
 <div class="details-main-container">
 
+    <!-- show confirmation UI after adding new wine -->
     {% if user.is_authenticated %}
         {% if created %}
         <div class="row row-1">
@@ -23,11 +24,13 @@
         {% endif %}
     {% endif %}
 
+    <!-- all relevant wine details below -->
     <div class="row row-1">
         <div class="detail">
             <label for="name">Name</label>
             <span id="name"><h1>"{{ wine.wine_name }}"</h1></span>
 
+            <!-- link to django edit form available for auth users only-->
             {% if user.is_authenticated %}
             <a href="{% url 'admin:wineadmin_wine_change' wine.id %}" target="_blank">
                 <div class="admin-redirect" title="redirect me to the django admin page for {{ wine }}">
@@ -122,6 +125,7 @@
         </div>
         {% endif %}
 
+        <!-- readapts the same principle as the editable cellar map from the admin view -->
         {% if has_slots %}
         <div class="row row-1">
             <div class="detail">
@@ -136,6 +140,7 @@
         </div>
         {% endif %}
     
+        <!-- extra admin links, for auth users only -->
         {% if user.is_authenticated %}
         <div class="row row-3">
             <a href="{% url 'new_wine' %}" class="commonStyle commonStyleAsBlock toggleWrapper">Add Another Wine</a>

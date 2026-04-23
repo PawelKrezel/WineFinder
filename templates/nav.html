@@ -1,6 +1,8 @@
 {% if user.is_authenticated %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'wineadmin/css/nav.css' %}">
+
+<!-- Navigation to relevant admin components for authenticated users -->
 <nav>
     <div onclick="this.querySelector('form').submit()">
         <form method="POST" action="{% url 'logout' %}">
@@ -10,8 +12,6 @@
     </div>
     <a href="{% url 'wineadmin' %}"><div>Admin</div></a>
     <a href="{% url 'search' %}"><div>Search</div></a>
-    <a href="{% url 'admin:index' %}"><div>Django Administration</div></a>
-
-    
+    <a href="{% url 'admin:index' %}"><div>Django Administration</div></a> 
 </nav>
 {% endif %}
